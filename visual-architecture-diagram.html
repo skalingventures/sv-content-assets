@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Operating Newspaper Pipeline — Skaling Ventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFFAF4;
+      --panel: #F2ECE2;
+      --surface: #E8E2D8;
+      --text-bright: #1F1F1F;
+      --text: #3A3836;
+      --muted: #5E5C58;
+      --accent: #89523B;
+      --accent-deep: #6E4230;
+      --accent-glow: rgba(137, 82, 59, 0.06);
+      --fog: #4E5C6A;
+      --ok: #2D5E2D;
+      --warn: #7A5828;
+      --bad: #8B2020;
+      --border: #7C766C;
+      --motif-rgb: 31, 31, 31;
+      --font-display: 'DM Sans', system-ui, sans-serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.6 var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 1000;
+      padding: 10px 18px; background: var(--accent); color: var(--bg);
+      font: 600 14px var(--font-body); border-radius: var(--radius);
+      text-decoration: none; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+    *:focus { outline: none; }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 32px 0 24px;
+      margin-bottom: 40px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -30px;
+      width: 400px; height: 400px;
+      background:
+        linear-gradient(32deg, transparent 49.5%, rgba(var(--motif-rgb), 0.06) 49.5%, rgba(var(--motif-rgb), 0.06) 50.5%, transparent 50.5%),
+        linear-gradient(148deg, transparent 49.5%, rgba(var(--motif-rgb), 0.04) 49.5%, rgba(var(--motif-rgb), 0.04) 50.5%, transparent 50.5%),
+        linear-gradient(85deg, transparent 49.5%, rgba(var(--motif-rgb), 0.03) 49.5%, rgba(var(--motif-rgb), 0.03) 50.5%, transparent 50.5%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      font: 600 10px/1 var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .headline {
+      font: 800 24px/1.2 var(--font-display);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--text-bright);
+    }
+    .subtitle {
+      font: 400 15px/1.5 var(--font-body);
+      color: var(--muted);
+      margin-top: 8px;
+      max-width: 600px;
+    }
+
+    .pipeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 0;
+      position: relative;
+    }
+
+    .stage-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .stage-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg);
+      z-index: 2;
+      flex-shrink: 0;
+      margin-top: 18px;
+    }
+    .stage-dot.active {
+      background: var(--accent);
+    }
+    .stage-connector {
+      width: 1px;
+      flex: 1;
+      background: var(--accent);
+      opacity: 0.3;
+    }
+    .stage:last-child .stage-connector {
+      display: none;
+    }
+
+    .stage-content {
+      padding: 12px 0 32px 0;
+    }
+    .stage-num {
+      font: 600 10px var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .stage-title {
+      font: 700 16px/1.3 var(--font-display);
+      color: var(--text-bright);
+      margin-bottom: 6px;
+    }
+    .stage-desc {
+      font: 400 13px/1.6 var(--font-body);
+      color: var(--text);
+      max-width: 520px;
+    }
+    .stage-artifacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .artifact-chip {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font: 500 11px var(--font-mono);
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      background: var(--panel);
+    }
+    .artifact-chip.output {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .judgment-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font: 600 10px var(--font-mono);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+    .judgment-badge.automated {
+      border: 1px solid var(--ok);
+      color: var(--ok);
+      background: rgba(45, 94, 45, 0.06);
+    }
+    .judgment-badge.human {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .colophon {
+      margin-top: 40px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+    }
+    .colophon::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 1px;
+      background: var(--accent);
+    }
+    .colophon-brand { font: 300 11px/1 var(--font-display); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .colophon-tagline { margin-top: 6px; font: italic 12px var(--font-body); color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .container { padding: 32px 16px; }
+      .stage { grid-template-columns: 48px 1fr; }
+      .headline { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main id="main-content">
+    <div class="container">
+
+      <div class="hero">
+        <div class="eyebrow">Operating Concept</div>
+        <h1 class="headline">The Newspaper Pipeline</h1>
+        <p class="subtitle">Six stages from raw feeds to a published operating artifact. Automation handles infrastructure; judgment handles editorial.</p>
+      </div>
+
+      <div class="pipeline">
+
+        <div class="stage">
+          <div class="stage-line">
+            <div class="stage-dot active"></div>
+            <div class="stage-connector"></div>
+          </div>
+          <div class="stage-content">
+            <div class="stage-num">Stage 01</div>
+            <div class="stage-title">Feed Aggregation</div>
+            <div class="stage-desc">A feed aggregator captures RSS feeds and email newsletters into a single queryable layer. The Readwise Reader API pulls everything that landed in your feed over the past 7 days.</div>
+            <div class="stage-artifacts">
+              <span class="artifact-chip">Readwise Reader API</span>
+              <span class="artifact-chip">RSS + Email</span>
+            </div>
+            <div class="judgment-badge automated">Automated</div>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-line">
+            <div class="stage-dot active"></div>
+            <div class="stage-connector"></div>
+          </div>
+          <div class="stage-content">
+            <div class="stage-num">Stage 02</div>
+            <div class="stage-title">Source Registry Match</div>
+            <div class="stage-desc">Every feed item is matched against a structured source registry (feed_registry.json) that classifies by name, priority (1/2/3), and editorial family (Macro, GTM, Deals, AI, VSaaS).</div>
+            <div class="stage-artifacts">
+              <span class="artifact-chip">feed_registry.json</span>
+              <span class="artifact-chip">Priority 1/2/3</span>
+              <span class="artifact-chip">Family tags</span>
+            </div>
+            <div class="judgment-badge automated">Automated</div>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-line">
+            <div class="stage-dot active"></div>
+            <div class="stage-connector"></div>
+          </div>
+          <div class="stage-content">
+            <div class="stage-num">Stage 03</div>
+            <div class="stage-title">Score &amp; Deduplicate</div>
+            <div class="stage-desc">Each candidate receives a signal weight (0&ndash;100) based on feed priority, word count, and content type. Duplicates are merged. The pool is capped to 50 candidates.</div>
+            <div class="stage-artifacts">
+              <span class="artifact-chip">Signal weight 0-100</span>
+              <span class="artifact-chip">HIGH / MED / LOW</span>
+              <span class="artifact-chip output">50 candidates</span>
+            </div>
+            <div class="judgment-badge automated">Automated</div>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-line">
+            <div class="stage-dot"></div>
+            <div class="stage-connector"></div>
+          </div>
+          <div class="stage-content">
+            <div class="stage-num">Stage 04</div>
+            <div class="stage-title">Editorial Selection &amp; Synthesis</div>
+            <div class="stage-desc">Apply the editorial rules: hard gate (behavior change in 3&ndash;12 months?), balance rule (coverage across families), no duplicates, no vibes. Select 10&ndash;12 signals. Synthesize into stances, decisions, and system patches.</div>
+            <div class="stage-artifacts">
+              <span class="artifact-chip">Hard gate</span>
+              <span class="artifact-chip">Balance rule</span>
+              <span class="artifact-chip output">10-12 signals</span>
+              <span class="artifact-chip output">Stances</span>
+              <span class="artifact-chip output">Decisions</span>
+              <span class="artifact-chip output">System patches</span>
+            </div>
+            <div class="judgment-badge human">Judgment Layer</div>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-line">
+            <div class="stage-dot active"></div>
+            <div class="stage-connector"></div>
+          </div>
+          <div class="stage-content">
+            <div class="stage-num">Stage 05</div>
+            <div class="stage-title">Render to HTML</div>
+            <div class="stage-desc">The structured output (JSON blocks + prose) is rendered to a purpose-built HTML artifact with sticky navigation, signal filtering, expandable detail cards, and brand-compliant design tokens.</div>
+            <div class="stage-artifacts">
+              <span class="artifact-chip">template.html</span>
+              <span class="artifact-chip">JSON render contract</span>
+              <span class="artifact-chip output">newspaper.html</span>
+            </div>
+            <div class="judgment-badge automated">Automated</div>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-line">
+            <div class="stage-dot active"></div>
+          </div>
+          <div class="stage-content">
+            <div class="stage-num">Stage 06</div>
+            <div class="stage-title">Deploy &amp; Review</div>
+            <div class="stage-desc">The HTML artifact is deployed to the operating dashboard. Published editions accumulate into a stance track record&mdash;auditable evidence of where you were right, wrong, and why.</div>
+            <div class="stage-artifacts">
+              <span class="artifact-chip output">Published artifact</span>
+              <span class="artifact-chip output">Stance track record</span>
+            </div>
+            <div class="judgment-badge automated">Automated</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="colophon">
+        <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Skaling Ventures" style="width:28px; height:20px; margin-bottom:12px;">
+          <path d="M5 38 L30 6 L55 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.5"/>
+          <path d="M12 38 L30 14 L48 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.7"/>
+          <path d="M19 38 L30 22 L41 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.9"/>
+          <line x1="5" y1="38" x2="55" y2="38" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+        </svg>
+        <div class="colophon-brand">Skaling Ventures</div>
+        <div class="colophon-tagline">For the Love of the Game</div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

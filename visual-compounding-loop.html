@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Compounding Judgment Loop — Skaling Ventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFFAF4;
+      --panel: #F2ECE2;
+      --surface: #E8E2D8;
+      --text-bright: #1F1F1F;
+      --text: #3A3836;
+      --muted: #5E5C58;
+      --accent: #89523B;
+      --accent-deep: #6E4230;
+      --accent-glow: rgba(137, 82, 59, 0.06);
+      --fog: #4E5C6A;
+      --ok: #2D5E2D;
+      --border: #7C766C;
+      --motif-rgb: 31, 31, 31;
+      --font-display: 'DM Sans', system-ui, sans-serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.6 var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 1000;
+      padding: 10px 18px; background: var(--accent); color: var(--bg);
+      font: 600 14px var(--font-body); border-radius: var(--radius);
+      text-decoration: none; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+    *:focus { outline: none; }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 32px 0 24px;
+      margin-bottom: 40px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -30px;
+      width: 400px; height: 400px;
+      background:
+        linear-gradient(32deg, transparent 49.5%, rgba(var(--motif-rgb), 0.06) 49.5%, rgba(var(--motif-rgb), 0.06) 50.5%, transparent 50.5%),
+        linear-gradient(148deg, transparent 49.5%, rgba(var(--motif-rgb), 0.04) 49.5%, rgba(var(--motif-rgb), 0.04) 50.5%, transparent 50.5%),
+        linear-gradient(85deg, transparent 49.5%, rgba(var(--motif-rgb), 0.03) 49.5%, rgba(var(--motif-rgb), 0.03) 50.5%, transparent 50.5%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      font: 600 10px/1 var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .headline {
+      font: 800 24px/1.2 var(--font-display);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--text-bright);
+    }
+    .subtitle {
+      font: 400 15px/1.5 var(--font-body);
+      color: var(--muted);
+      margin-top: 8px;
+      max-width: 600px;
+    }
+
+    .loop-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    .loop-svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .loop-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .loop-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .loop-card-num {
+      font: 600 10px var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .loop-card-title {
+      font: 700 15px/1.3 var(--font-display);
+      color: var(--text-bright);
+      margin-bottom: 6px;
+    }
+    .loop-card-desc {
+      font: 400 13px/1.6 var(--font-body);
+      color: var(--text);
+    }
+    .loop-card-output {
+      margin-top: 8px;
+      font: 500 11px var(--font-mono);
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+
+    .compound-section {
+      margin-top: 40px;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+    .compound-title {
+      font: 700 16px/1.3 var(--font-display);
+      color: var(--text-bright);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    .compound-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .compound-cell {
+      text-align: center;
+      padding: 16px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .compound-num {
+      font: 800 28px/1 var(--font-display);
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .compound-label {
+      font: 500 11px var(--font-mono);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .compound-sub {
+      font: 400 12px/1.4 var(--font-body);
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    .colophon {
+      margin-top: 40px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+    }
+    .colophon::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 1px;
+      background: var(--accent);
+    }
+    .colophon-brand { font: 300 11px/1 var(--font-display); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .colophon-tagline { margin-top: 6px; font: italic 12px var(--font-body); color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .container { padding: 32px 16px; }
+      .loop-detail { grid-template-columns: 1fr; }
+      .compound-grid { grid-template-columns: 1fr; }
+      .headline { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main id="main-content">
+    <div class="container">
+
+      <div class="hero">
+        <div class="eyebrow">Operating Concept</div>
+        <h1 class="headline">The Compounding Loop</h1>
+        <p class="subtitle">Each revolution makes the next one sharper. After 12 weeks, you have an auditable track record of stances, decisions, and system improvements.</p>
+      </div>
+
+      <div class="loop-container">
+        <svg class="loop-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer circle -->
+          <circle cx="250" cy="250" r="200" stroke="#89523B" stroke-width="1" fill="none" opacity="0.15"/>
+          <circle cx="250" cy="250" r="160" stroke="#89523B" stroke-width="1" fill="none" opacity="0.08"/>
+
+          <!-- Directional arc arrows -->
+          <path d="M 250 50 A 200 200 0 0 1 450 250" stroke="#89523B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 450 250 A 200 200 0 0 1 250 450" stroke="#89523B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 250 450 A 200 200 0 0 1 50 250" stroke="#89523B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 50 250 A 200 200 0 0 1 250 50" stroke="#89523B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#89523B"/>
+            </marker>
+          </defs>
+
+          <!-- Stage nodes -->
+          <!-- 1. SIGNALS (top) -->
+          <circle cx="250" cy="50" r="28" fill="#FFFAF4" stroke="#89523B" stroke-width="1.5"/>
+          <text x="250" y="45" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="11" fill="#89523B" letter-spacing="0.06em">01</text>
+          <text x="250" y="58" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="8" fill="#3A3836" letter-spacing="0.04em">SIGNALS</text>
+
+          <!-- 2. STANCES (right) -->
+          <circle cx="450" cy="250" r="28" fill="#FFFAF4" stroke="#89523B" stroke-width="1.5"/>
+          <text x="450" y="245" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="11" fill="#89523B" letter-spacing="0.06em">02</text>
+          <text x="450" y="258" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="8" fill="#3A3836" letter-spacing="0.04em">STANCES</text>
+
+          <!-- 3. DECISIONS (bottom) -->
+          <circle cx="250" cy="450" r="28" fill="#FFFAF4" stroke="#89523B" stroke-width="1.5"/>
+          <text x="250" y="445" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="11" fill="#89523B" letter-spacing="0.06em">03</text>
+          <text x="250" y="458" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="8" fill="#3A3836" letter-spacing="0.04em">DECISIONS</text>
+
+          <!-- 4. PATCHES (left) -->
+          <circle cx="50" cy="250" r="28" fill="#FFFAF4" stroke="#89523B" stroke-width="1.5"/>
+          <text x="50" y="245" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="11" fill="#89523B" letter-spacing="0.06em">04</text>
+          <text x="50" y="258" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="8" fill="#3A3836" letter-spacing="0.04em">PATCHES</text>
+
+          <!-- Center: REVIEW -->
+          <circle cx="250" cy="250" r="44" fill="#89523B" opacity="0.08"/>
+          <circle cx="250" cy="250" r="44" fill="none" stroke="#89523B" stroke-width="1"/>
+          <text x="250" y="245" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="9" fill="#89523B" letter-spacing="0.06em">REVIEW</text>
+          <text x="250" y="260" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="400" font-size="9" fill="#5E5C58">audit + calibrate</text>
+
+          <!-- Connecting lines to center -->
+          <line x1="250" y1="78" x2="250" y2="206" stroke="#89523B" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 4"/>
+          <line x1="422" y1="250" x2="294" y2="250" stroke="#89523B" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 4"/>
+          <line x1="250" y1="422" x2="250" y2="294" stroke="#89523B" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 4"/>
+          <line x1="78" y1="250" x2="206" y2="250" stroke="#89523B" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 4"/>
+
+          <!-- Edge labels -->
+          <text x="370" y="130" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#5E5C58" transform="rotate(0)">form positions</text>
+          <text x="370" y="380" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#5E5C58">choose differently</text>
+          <text x="130" y="380" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#5E5C58">encode as rules</text>
+          <text x="130" y="130" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#5E5C58">improve sources</text>
+        </svg>
+      </div>
+
+      <div class="loop-detail">
+        <div class="loop-card">
+          <div class="loop-card-num">01 Signals</div>
+          <div class="loop-card-title">Compress the World</div>
+          <div class="loop-card-desc">Select 10&ndash;12 signals from your curated source registry. Apply the hard gate: if it doesn't change behavior in 3&ndash;12 months, it's out.</div>
+          <div class="loop-card-output">Output &rarr; Signal Ledger</div>
+        </div>
+        <div class="loop-card">
+          <div class="loop-card-num">02 Stances</div>
+          <div class="loop-card-title">Take a Position</div>
+          <div class="loop-card-desc">Form stances with explicit evidence ("Because...") and behavioral implications ("Therefore..."). Track them across weeks.</div>
+          <div class="loop-card-output">Output &rarr; Stance Board</div>
+        </div>
+        <div class="loop-card">
+          <div class="loop-card-num">03 Decisions</div>
+          <div class="loop-card-title">Choose Differently</div>
+          <div class="loop-card-desc">Identify 3 decisions where this week's evidence changes the optimal choice. Document options, recommendations, and reversal conditions.</div>
+          <div class="loop-card-output">Output &rarr; Decision Upgrades</div>
+        </div>
+        <div class="loop-card">
+          <div class="loop-card-num">04 Patches</div>
+          <div class="loop-card-title">Encode as Rules</div>
+          <div class="loop-card-desc">Instrument 2 system changes with metric, owner, cadence, and pass/fail threshold. This is where the newspaper becomes infrastructure.</div>
+          <div class="loop-card-output">Output &rarr; System Patches</div>
+        </div>
+      </div>
+
+      <div class="compound-section">
+        <div class="compound-title">After 12 Weeks</div>
+        <div class="compound-grid">
+          <div class="compound-cell">
+            <div class="compound-num">48</div>
+            <div class="compound-label">Stances</div>
+            <div class="compound-sub">with evidence trails</div>
+          </div>
+          <div class="compound-cell">
+            <div class="compound-num">36</div>
+            <div class="compound-label">Decisions</div>
+            <div class="compound-sub">auditable track record</div>
+          </div>
+          <div class="compound-cell">
+            <div class="compound-num">24</div>
+            <div class="compound-label">System Patches</div>
+            <div class="compound-sub">with pass/fail results</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="colophon">
+        <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Skaling Ventures" style="width:28px; height:20px; margin-bottom:12px;">
+          <path d="M5 38 L30 6 L55 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.5"/>
+          <path d="M12 38 L30 14 L48 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.7"/>
+          <path d="M19 38 L30 22 L41 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.9"/>
+          <line x1="5" y1="38" x2="55" y2="38" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+        </svg>
+        <div class="colophon-brand">Skaling Ventures</div>
+        <div class="colophon-tagline">For the Love of the Game</div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
