@@ -221,8 +221,8 @@
 
     <ol class="highlights">
       <li><strong>Sarah Mitchell ($875K, 87 customers) is your top rep by both volume and coverage</strong>, while James Martinez closes at $5,286 AOV &mdash; 2x the team median &mdash; suggesting deep project-based selling that could be modeled. Three reps with below-median AOV (Thompson, Foster, Williams) represent <strong>$472K in coachable upside</strong>. <a href="#sales">See Sales Team &rarr;</a></li>
-      <li><strong>20 high-value buyers have gone silent for 90+ days</strong>, including Premier Design Partners ($64K, 145 days dormant) and Coastal Elite Showroom ($58K, 341 days), representing <strong>$487K in prior GMV</strong>. 291 customers placed their first-ever eCat order this year &mdash; with field reps driving 61% of new customer acquisition. <a href="#customers">See Customer Intelligence &rarr;</a></li>
-      <li><strong>327 SKUs (16.8%) are out of stock</strong>, including your #1 all-time seller (AC-4728-NA, Coastal Collection, $389K lifetime demand, 2,800 units on backorder). Your top 10 out-of-stock items represent <strong>$918K in historical demand</strong> that cannot currently be fulfilled. <a href="#product">See Product &amp; Inventory &rarr;</a></li>
+      <li><strong>20 high-value buyers have gone silent for 90+ days</strong>, including Premier Design Partners ($64K, 145 days dormant) and Coastal Elite Showroom ($58K, 341 days), representing <strong>$487K in prior GMV</strong>. Two additional active accounts (Heritage Furniture Co, Artisan Interiors LLC) show <strong>2.2&ndash;2.3x reorder slowdowns</strong> &mdash; leading indicators they&rsquo;re heading toward dormancy within 60&ndash;90 days if unchecked. 291 customers placed their first-ever eCat order this year &mdash; with field reps driving 61% of new customer acquisition. <a href="#customers">See Customer Intelligence &rarr;</a></li>
+      <li><strong>327 SKUs (16.8%) are out of stock</strong>, including your #1 all-time seller (AC-4728-NA, $389K lifetime demand, 2,800 units on backorder). <strong>142 new introductions show a 68x per-item sell-through gap</strong> &mdash; Coastal Breeze ($2,625/item) vs. Industrial Craft ($38/item) &mdash; and 3 accelerating items are on track to stockout if not replenished. <a href="#product">See Product &amp; Inventory &rarr;</a></li>
       <li><strong>Channel balance is working as designed</strong> &mdash; iPad handles 51% of orders at $1,370 AOV while Online Ordering handles 49% at $728 AOV. eCat captures 23% of total business by GMV, with <strong>2.6x higher AOV</strong> than ERP-wide ($1,058 vs. $407). <a href="#commerce">See Commerce Analytics &rarr;</a></li>
       <li><strong>Kit Items data is 42 days stale</strong> while Options were refreshed 4 days ago &mdash; a configuration gap affecting 191 kit-based orders per year. All other core data (products, customers, inventory) is current as of April 1, 2026. <a href="#platform">See Platform &amp; Utilization &rarr;</a></li>
       <li><strong>Private Storefront traffic has declined 27%</strong> vs. prior period despite healthy engagement metrics (7.9-minute sessions, 14.7% bounce rate) &mdash; this may signal paused marketing or a positive shift toward direct ordering channels. <a href="#portal">See Portal Engagement &rarr;</a></li>
@@ -506,6 +506,33 @@
     </div>
 
     <div class="subsection">
+      <h3 class="subsection-title">Reorder Velocity &amp; Early Warning</h3>
+
+      <table>
+        <thead><tr><th>Customer</th><th>Orders (LTM)</th><th>Avg Days Between</th><th>Current (90d)</th><th>Prior (90d)</th><th>Trend</th></tr></thead>
+        <tbody>
+          <tr class="row-highlight"><td><strong>Premier Home Furnishings</strong></td><td>93</td><td>3.9 days</td><td>4.1 days</td><td>3.8 days</td><td><span class="badge badge-ok">Stable</span></td></tr>
+          <tr class="row-highlight"><td><strong>Coastal Design Group</strong></td><td>73</td><td>5.0 days</td><td>5.2 days</td><td>4.8 days</td><td><span class="badge badge-ok">Stable</span></td></tr>
+          <tr class="row-highlight"><td><strong>Metropolitan Interiors</strong></td><td>70</td><td>5.2 days</td><td>5.0 days</td><td>5.4 days</td><td><span class="badge badge-ok">Improving</span></td></tr>
+          <tr><td>Elite Showroom Partners</td><td>61</td><td>6.0 days</td><td>7.8 days</td><td>5.2 days</td><td><span class="badge badge-warn">Slowing</span></td></tr>
+          <tr><td>Signature Living Spaces</td><td>59</td><td>6.2 days</td><td>6.4 days</td><td>6.0 days</td><td><span class="badge badge-ok">Stable</span></td></tr>
+          <tr class="row-warn"><td><strong>Heritage Furniture Co</strong></td><td>58</td><td>6.3 days</td><td>11.2 days</td><td>4.8 days</td><td><span class="badge badge-danger">&#9660; Slowing 2.3x</span></td></tr>
+          <tr class="row-warn"><td><strong>Artisan Interiors LLC</strong></td><td>26</td><td>14.0 days</td><td>22.5 days</td><td>10.1 days</td><td><span class="badge badge-danger">&#9660; Slowing 2.2x</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout alert">
+        <div class="callout-title">2 Active Customers Slowing Significantly</div>
+        <strong>Heritage Furniture Co</strong> has gone from ordering every 4.8 days to every 11.2 days &mdash; a 2.3x slowdown. They&rsquo;re still active (58 LTM orders, $124K GMV), but this trajectory puts them on a path to the dormant list within 60&ndash;90 days if unchecked. <strong>Artisan Interiors LLC</strong> shows a similar pattern (10.1 &rarr; 22.5 days). These are leading indicators &mdash; these accounts haven&rsquo;t gone quiet yet, but they&rsquo;re heading there. Assign reps for proactive outreach now, before they cross the 90-day dormancy threshold.
+      </div>
+
+      <div class="callout insight">
+        <div class="callout-title">Velocity Benchmark</div>
+        Your most active customers order every 4&ndash;6 days. Customers whose reorder cadence exceeds 14 days show <strong>3x higher lapsing risk</strong> based on platform-wide patterns. Monitor any customer whose cadence doubles quarter-over-quarter.
+      </div>
+    </div>
+
+    <div class="subsection">
       <h3 class="subsection-title">Geographic Performance</h3>
 
       <table>
@@ -631,6 +658,53 @@
           </tbody>
         </table>
       </details>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">New Introduction Performance</h3>
+
+      <div class="callout insight">
+        <div class="callout-title">How Are Your New Intros Performing?</div>
+        142 products are flagged as new introductions across 8 collections. Performance varies <strong>68x</strong> between the best and worst collections by per-item sell-through &mdash; a spread that&rsquo;s invisible without this cross-reference.
+      </div>
+
+      <table>
+        <thead><tr><th>Collection</th><th>New Items</th><th>Total Sales</th><th>Qty Sold</th><th>Sales / Item</th><th>Assessment</th></tr></thead>
+        <tbody>
+          <tr class="row-highlight"><td><strong>Coastal Breeze</strong></td><td>18</td><td><strong>$47,250</strong></td><td>62</td><td>$2,625</td><td><span class="badge badge-ok">Strong</span></td></tr>
+          <tr class="row-highlight"><td><strong>Modern Edge</strong></td><td>12</td><td><strong>$31,890</strong></td><td>41</td><td>$2,658</td><td><span class="badge badge-ok">Strong</span></td></tr>
+          <tr><td>Transitional Living</td><td>9</td><td>$14,220</td><td>28</td><td>$1,580</td><td><span class="badge badge-ok">Solid</span></td></tr>
+          <tr><td>Organic Home</td><td>15</td><td>$9,870</td><td>22</td><td>$658</td><td><span class="badge badge-warn">Moderate</span></td></tr>
+          <tr><td>Contemporary Luxe</td><td>11</td><td>$5,340</td><td>14</td><td>$485</td><td><span class="badge badge-warn">Below Average</span></td></tr>
+          <tr class="row-danger"><td><strong>Heritage Classic</strong></td><td>32</td><td><strong>$2,150</strong></td><td>5</td><td><strong>$67</strong></td><td><span class="badge badge-danger">Needs Attention</span></td></tr>
+          <tr class="row-danger"><td><strong>Industrial Craft</strong></td><td>24</td><td><strong>$920</strong></td><td>3</td><td><strong>$38</strong></td><td><span class="badge badge-danger">Needs Attention</span></td></tr>
+          <tr><td>Glamour Collection</td><td>21</td><td>$3,680</td><td>8</td><td>$175</td><td><span class="badge badge-warn">Early Stage</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout alert">
+        <div class="callout-title">Two Large Introductions with Near-Zero Sell-Through</div>
+        <strong>Heritage Classic</strong> (32 new items, $67/item) and <strong>Industrial Craft</strong> (24 new items, $38/item) together represent the largest new introduction sets by item count &mdash; but have generated only $3,070 combined. This 68x gap vs. the top performers (Coastal Breeze at $2,625/item) demands investigation: Is this a product-market fit issue, a rep awareness issue, or simply a timing issue? If these collections have been available for 3+ months, escalate to merchandising for review.
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Product Velocity Signals</h3>
+
+      <table>
+        <thead><tr><th></th><th>Item</th><th>Category</th><th>Recent 90d</th><th>Prior 90d</th><th>Velocity</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--ok);font-weight:700">&#9650;</td><td><strong>AC-5892-GR</strong></td><td>Lighting</td><td>48 units</td><td>29 units</td><td><span class="badge badge-ok">+66% Accelerating</span></td></tr>
+          <tr><td style="color:var(--ok);font-weight:700">&#9650;</td><td><strong>AC-8834-WH</strong></td><td>Outdoor</td><td>31 units</td><td>18 units</td><td><span class="badge badge-ok">+72% Accelerating</span></td></tr>
+          <tr><td style="color:var(--ok);font-weight:700">&#9650;</td><td><strong>AC-3102-NA</strong></td><td>Upholstery</td><td>67 units</td><td>42 units</td><td><span class="badge badge-ok">+60% Accelerating</span></td></tr>
+          <tr><td style="color:var(--danger);font-weight:700">&#9660;</td><td><strong>AC-6701-BK</strong></td><td>Furniture</td><td>8 units</td><td>34 units</td><td><span class="badge badge-danger">&minus;76% Declining</span></td></tr>
+          <tr><td style="color:var(--danger);font-weight:700">&#9660;</td><td><strong>AC-2245-SL</strong></td><td>Accessories</td><td>12 units</td><td>41 units</td><td><span class="badge badge-danger">&minus;71% Declining</span></td></tr>
+          <tr><td style="color:var(--danger);font-weight:700">&#9660;</td><td><strong>AC-9918-CR</strong></td><td>Lighting</td><td>5 units</td><td>22 units</td><td><span class="badge badge-danger">&minus;77% Declining</span></td></tr>
+        </tbody>
+      </table>
+      <p style="font: 400 12px/1.5 var(--fd); color: var(--text-muted); margin-top: 8px;">
+        Accelerating items should be flagged for inventory replenishment before stockout (AC-5892-GR is already out of stock &mdash; see Supply Chain Alert above). Declining items may warrant clearance pricing or repositioning.
+      </p>
     </div>
 
     <div class="subsection">
