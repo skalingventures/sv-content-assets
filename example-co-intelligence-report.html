@@ -656,7 +656,7 @@
     <summary>
       <h2 class="section-title">Product &amp; Inventory Intelligence</h2>
       <div class="section-sub">1,951 active SKUs &middot; 97% catalog completeness &middot; 16.8% out of stock</div>
-      <div class="section-contents">Top Sellers Out of Stock &middot; New Introduction Performance &middot; Product Velocity Signals &middot; Catalog Completeness</div>
+      <div class="section-contents">Top Sellers Out of Stock &middot; New Introduction Performance &middot; Product Velocity Signals &middot; Catalog Completeness &middot; What&rsquo;s Selling</div>
       <span class="expand-hint">&#9662; Click to expand</span>
     </summary>
   <section class="section" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
@@ -779,6 +779,46 @@
         97% completeness is a best-in-class outcome. The 57 incomplete items should be prioritized for correction &mdash; products with complete assets convert at ~30% higher rates. Completing these items could generate <strong>$15K&ndash;$30K in incremental annual GMV</strong>.
       </div>
     </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">What&rsquo;s Selling</h3>
+      <div class="callout insight">
+        <div class="callout-title">Coastal Collection dominates</div>
+        <strong>$2.56M (34% of eCat GMV)</strong> across 2,548 orders. All-time ERP sales for Coastal: $18.6M. Upholstery ($2.25M) and Lighting ($1.67M) are your top categories. Only 257 items (13%) have never been ordered via eCat &mdash; excellent catalog engagement.
+      </div>
+
+      <details>
+        <summary>Category breakdown (7 categories)</summary>
+        <table>
+          <thead><tr><th>Category</th><th>Orders</th><th>GMV</th><th>Customers</th><th>Value/Order</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Upholstery</strong></td><td>2,086</td><td><strong>$2,254,176</strong></td><td>722</td><td>$1,081</td></tr>
+            <tr><td><strong>Lighting</strong></td><td>1,556</td><td><strong>$1,666,682</strong></td><td>638</td><td>$1,071</td></tr>
+            <tr><td><strong>Furniture</strong></td><td>1,343</td><td><strong>$1,253,094</strong></td><td>584</td><td>$933</td></tr>
+            <tr><td>Accessories</td><td>1,782</td><td>$1,054,782</td><td>653</td><td>$592</td></tr>
+            <tr><td>Bedding</td><td>867</td><td>$669,513</td><td>366</td><td>$772</td></tr>
+            <tr><td>Outdoor</td><td>486</td><td>$478,052</td><td>239</td><td>$984</td></tr>
+            <tr><td>Rugs</td><td>401</td><td>$241,257</td><td>191</td><td>$602</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details>
+        <summary>Collection breakdown (7 collections)</summary>
+        <table>
+          <thead><tr><th>Collection</th><th>Items</th><th>Orders</th><th>GMV</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td><strong>Coastal Collection</strong></td><td>247</td><td>2,548</td><td><strong>$2,562,542</strong></td></tr>
+            <tr><td>Modern Collection</td><td>139</td><td>1,426</td><td>$1,161,488</td></tr>
+            <tr><td>Transitional</td><td>123</td><td>1,209</td><td>$841,509</td></tr>
+            <tr><td>Organic Collection</td><td>115</td><td>989</td><td>$849,549</td></tr>
+            <tr><td>Contemporary</td><td>110</td><td>1,051</td><td>$770,879</td></tr>
+            <tr><td>Traditional</td><td>97</td><td>887</td><td>$685,131</td></tr>
+            <tr><td>Glamorous</td><td>90</td><td>744</td><td>$667,982</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
   </section>
   </details>
 
@@ -865,23 +905,66 @@
   <details class="section-collapse light" id="platform">
     <summary>
       <h2 class="section-title">Platform &amp; Feature Utilization</h2>
-      <div class="section-sub">Data freshness &middot; Catalog organization &middot; Feature depth</div>
-      <div class="section-contents">Data Freshness &middot; Catalog Organization &middot; Feature Adoption vs. Peers &middot; What&rsquo;s Selling</div>
+      <div class="section-sub">Data freshness &middot; Import health &middot; Configuration alerts &middot; Catalog organization</div>
+      <div class="section-contents">Data Freshness &amp; Import Health &middot; Configuration Alerts &middot; Catalog Organization</div>
       <span class="expand-hint">&#9662; Click to expand</span>
     </summary>
   <section class="section section-light" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
 
     <div class="subsection">
-      <h3 class="subsection-title">Data Freshness</h3>
+      <h3 class="subsection-title">Data Freshness &amp; Import Health</h3>
       <table>
-        <thead><tr><th>Entity</th><th>Last Updated</th><th>Status</th></tr></thead>
+        <thead><tr><th>Entity</th><th>Last Updated</th><th>Age</th><th>Severity</th></tr></thead>
         <tbody>
-          <tr><td>Products / Customers / Inventory</td><td>Apr 1, 2026</td><td><span class="badge badge-ok">Fresh</span></td></tr>
-          <tr><td>Options / Categories / Collections</td><td>Mar 27, 2026</td><td><span class="badge badge-ok">Fresh</span></td></tr>
-          <tr><td>Price Levels</td><td>Mar 4, 2026</td><td><span class="badge badge-ok">Fresh</span></td></tr>
-          <tr class="row-warn"><td><strong>Kit Items</strong></td><td>Feb 18, 2026</td><td><span class="badge badge-warn">42 days &mdash; refresh needed</span></td></tr>
+          <tr><td>Products / Customers / Inventory</td><td>Apr 1, 2026</td><td>0 days</td><td><span class="badge badge-ok">Fresh</span></td></tr>
+          <tr><td>Options / Categories / Collections</td><td>Mar 27, 2026</td><td>5 days</td><td><span class="badge badge-ok">Fresh</span></td></tr>
+          <tr><td>Price Levels</td><td>Mar 4, 2026</td><td>28 days</td><td><span class="badge badge-ok">Monitor</span></td></tr>
+          <tr class="row-warn"><td><strong>Kit Items</strong></td><td>Feb 18, 2026</td><td>42 days</td><td><span class="badge badge-warn">Warning</span></td></tr>
+          <tr class="row-danger"><td><strong>Sales Quotas</strong></td><td>Aug 20, 2025</td><td>7 months</td><td><span class="badge badge-danger">Critical</span></td></tr>
         </tbody>
       </table>
+
+      <div class="callout alert">
+        <div class="callout-title">2 Entities Require Admin Attention</div>
+        <ul>
+          <li><strong>Kit Items (42 days stale):</strong> With 2,086 kit items and 191 kit-based orders in the LTM period, stale kit data creates risk of configuration and pricing errors. Options were refreshed March 27 &mdash; a 37-day gap between kit items and options can cause mismatches. Schedule an immediate refresh.</li>
+          <li><strong>Sales Quotas (7 months stale):</strong> If budget tracking is active in Sales Portal, reps are seeing outdated targets. If budget tracking is not in use, consider disabling the feature to avoid confusion.</li>
+        </ul>
+      </div>
+
+      <details>
+        <summary>Import Pipeline Health (6 months)</summary>
+        <table>
+          <thead><tr><th>Month</th><th>Imports</th><th>Errors</th><th>Trend</th></tr></thead>
+          <tbody>
+            <tr><td>Mar 2026</td><td>74 (partial)</td><td>0</td><td><span class="badge badge-ok">On track</span></td></tr>
+            <tr><td>Feb 2026</td><td>98</td><td>0</td><td><span class="badge badge-ok">Stable</span></td></tr>
+            <tr><td>Jan 2026</td><td>119</td><td>0</td><td><span class="badge badge-ok">Stable</span></td></tr>
+            <tr><td>Dec 2025</td><td>111</td><td>0</td><td><span class="badge badge-ok">Stable</span></td></tr>
+            <tr><td>Nov 2025</td><td>175</td><td>0</td><td><span class="badge badge-info">High</span></td></tr>
+            <tr><td>Oct 2025</td><td>225</td><td>0</td><td><span class="badge badge-info">High</span></td></tr>
+          </tbody>
+        </table>
+        <p style="font: 400 12px/1.5 var(--fd); color: var(--text-muted); margin-top: 8px;">
+          Import pipeline is healthy &mdash; zero errors across all 6 months. Volume declined from the Oct&ndash;Nov peak (225 &rarr; 98&ndash;119) but import payloads remain clean. This is a stable, well-maintained data pipeline.
+        </p>
+      </details>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Configuration Alerts</h3>
+      <table>
+        <thead><tr><th>Feature</th><th>Status</th><th>Issue</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr class="row-danger"><td><strong>Sales Quotas</strong></td><td><span class="badge badge-danger">Stale</span></td><td>Enabled with 15,950 rows, but data is 7 months old. Reps may see outdated budget targets in Sales Portal.</td><td>Re-import current quota data or disable if not in use</td></tr>
+          <tr class="row-warn"><td><strong>Portal Analytics (Clicky)</strong></td><td><span class="badge badge-warn">Not Established</span></td><td>Demand-side visibility (visitor geography, traffic sources, content performance) is unavailable. Would diagnose the &minus;27% portal traffic decline.</td><td>Enable Clicky to unlock portal intelligence</td></tr>
+          <tr class="row-warn"><td><strong>Kit Items &times; Options Gap</strong></td><td><span class="badge badge-warn">Drift</span></td><td>Options refreshed Mar 27; Kit Items last refreshed Feb 18. 37-day gap risks pricing inconsistencies on configured products (191 kit orders/year).</td><td>Refresh kit items within 48 hours of any options update</td></tr>
+        </tbody>
+      </table>
+      <div class="callout insight">
+        <div class="callout-title">Why This Matters</div>
+        Enabled-but-stale features create noise &mdash; outdated targets confuse reps, missing analytics blind decision-making, and configuration drift causes order errors. Resolving these 3 items eliminates the most common sources of admin escalation and support tickets.
+      </div>
     </div>
 
     <div class="subsection">
@@ -897,46 +980,6 @@
       <p style="font: 400 12px/1.6 var(--fd); color: var(--text-muted); margin-top: 8px;">
         1,121 product options configured (30 with pricing addends). 2,086 kit items driving 191 kit-based orders in the LTM period. 2,687 customers (40% of ERP base) have saved favorites across 1,548 unique items (79% of catalog).
       </p>
-    </div>
-
-    <div class="subsection">
-      <h3 class="subsection-title">What&rsquo;s Selling</h3>
-      <div class="callout insight">
-        <div class="callout-title">Coastal Collection dominates</div>
-        <strong>$2.56M (34% of eCat GMV)</strong> across 2,548 orders. All-time ERP sales for Coastal: $18.6M. Upholstery ($2.25M) and Lighting ($1.67M) are your top categories. Only 257 items (13%) have never been ordered via eCat &mdash; excellent catalog engagement.
-      </div>
-
-      <details>
-        <summary>Category breakdown (7 categories)</summary>
-        <table>
-          <thead><tr><th>Category</th><th>Orders</th><th>GMV</th><th>Customers</th><th>Value/Order</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Upholstery</strong></td><td>2,086</td><td><strong>$2,254,176</strong></td><td>722</td><td>$1,081</td></tr>
-            <tr><td><strong>Lighting</strong></td><td>1,556</td><td><strong>$1,666,682</strong></td><td>638</td><td>$1,071</td></tr>
-            <tr><td><strong>Furniture</strong></td><td>1,343</td><td><strong>$1,253,094</strong></td><td>584</td><td>$933</td></tr>
-            <tr><td>Accessories</td><td>1,782</td><td>$1,054,782</td><td>653</td><td>$592</td></tr>
-            <tr><td>Bedding</td><td>867</td><td>$669,513</td><td>366</td><td>$772</td></tr>
-            <tr><td>Outdoor</td><td>486</td><td>$478,052</td><td>239</td><td>$984</td></tr>
-            <tr><td>Rugs</td><td>401</td><td>$241,257</td><td>191</td><td>$602</td></tr>
-          </tbody>
-        </table>
-      </details>
-
-      <details>
-        <summary>Collection breakdown (7 collections)</summary>
-        <table>
-          <thead><tr><th>Collection</th><th>Items</th><th>Orders</th><th>GMV</th></tr></thead>
-          <tbody>
-            <tr class="row-highlight"><td><strong>Coastal Collection</strong></td><td>247</td><td>2,548</td><td><strong>$2,562,542</strong></td></tr>
-            <tr><td>Modern Collection</td><td>139</td><td>1,426</td><td>$1,161,488</td></tr>
-            <tr><td>Transitional</td><td>123</td><td>1,209</td><td>$841,509</td></tr>
-            <tr><td>Organic Collection</td><td>115</td><td>989</td><td>$849,549</td></tr>
-            <tr><td>Contemporary</td><td>110</td><td>1,051</td><td>$770,879</td></tr>
-            <tr><td>Traditional</td><td>97</td><td>887</td><td>$685,131</td></tr>
-            <tr><td>Glamorous</td><td>90</td><td>744</td><td>$667,982</td></tr>
-          </tbody>
-        </table>
-      </details>
     </div>
 
   </section>
