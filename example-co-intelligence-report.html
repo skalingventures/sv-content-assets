@@ -139,7 +139,7 @@
     .coaching-action { font: 500 13px/1.5 var(--fd); color: var(--text); margin-bottom: 6px; }
     .coaching-impact { display: inline-block; font: 500 12px/1 var(--fm); color: var(--ok); background: var(--ok-bg); border: 1px solid var(--ok-border); padding: 5px 10px; border-radius: 5px; }
 
-    /* ── Progressive disclosure ── */
+    /* ── Progressive disclosure (subsection-level) ── */
     details { margin: 12px 0; }
     details > summary { display: flex; align-items: center; gap: 8px; font: 500 13px/1 var(--fd); color: var(--accent-deep); cursor: pointer; list-style: none; padding: 10px 14px; user-select: none; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; transition: all .15s; }
     details > summary::-webkit-details-marker { display: none; }
@@ -149,6 +149,24 @@
     details[open] > summary { border-radius: 6px 6px 0 0; border-bottom-color: transparent; background: var(--accent-glow); }
     details > summary::after { content: 'click to expand'; margin-left: auto; font: 400 10px/1 var(--fm); color: var(--text-muted); letter-spacing: .02em; }
     details[open] > summary::after { content: 'click to collapse'; }
+
+    /* ── Section-level collapse ── */
+    details.section-collapse { margin: 0 0 32px; border: none; background: none; }
+    details.section-collapse > summary { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px 32px; cursor: pointer; transition: all .15s; }
+    details.section-collapse > summary::before { content: none; }
+    details.section-collapse > summary::after { content: none; }
+    details.section-collapse > summary:hover { border-color: var(--accent-border); box-shadow: 0 2px 8px rgba(196,122,74,.08); }
+    details.section-collapse > summary .section-title { margin-bottom: 4px; padding-bottom: 0; border-bottom: none; }
+    details.section-collapse > summary .section-sub { margin-bottom: 0; }
+    details.section-collapse > summary .section-contents { font: 400 12px/1.4 var(--fd); color: var(--text-muted); margin-top: 6px; }
+    details.section-collapse > summary .expand-hint { display: inline-block; margin-top: 10px; font: 500 10px/1 var(--fm); letter-spacing: .04em; text-transform: uppercase; color: var(--accent); opacity: .7; transition: opacity .12s; }
+    details.section-collapse > summary:hover .expand-hint { opacity: 1; }
+    details.section-collapse[open] > summary { border-radius: var(--r) var(--r) 0 0; border-bottom-color: var(--border-light); background: var(--surface); }
+    details.section-collapse[open] > summary .expand-hint { display: none; }
+    details.section-collapse > .section { margin-bottom: 0; border-top: none; border-radius: 0 0 var(--r) var(--r); }
+    details.section-collapse.light > summary { background: var(--panel); }
+    details.section-collapse.light[open] > summary { background: var(--panel); }
+    details.section-collapse.light > .section { background: var(--panel); }
 
     /* ── Peer card ── */
     .peer-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 20px 24px; }
@@ -295,9 +313,14 @@
   </section>
 
   <!-- ═══ SALES TEAM PERFORMANCE ═══ -->
-  <section class="section" id="sales">
-    <h2 class="section-title">Sales Team Performance</h2>
-    <div class="section-sub">24 active reps &middot; 3,518 iPad orders &middot; $4.82M iPad GMV</div>
+  <details class="section-collapse" id="sales">
+    <summary>
+      <h2 class="section-title">Sales Team Performance</h2>
+      <div class="section-sub">24 active reps &middot; 3,518 iPad orders &middot; $4.82M iPad GMV</div>
+      <div class="section-contents">Rep Activity Ladder &middot; Online Ordering by Type &middot; Coaching Opportunities &middot; Behavioral Scorecard</div>
+      <span class="expand-hint">&#9662; Click to expand</span>
+    </summary>
+  <section class="section" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
 
     <div class="metrics">
       <div class="metric">
@@ -423,11 +446,17 @@
       </div>
     </details>
   </section>
+  </details>
 
   <!-- ═══ CUSTOMER & BUYER INTELLIGENCE ═══ -->
-  <section class="section" id="customers">
-    <h2 class="section-title">Customer &amp; Buyer Intelligence</h2>
-    <div class="section-sub">1,287 active buyers &middot; 6,638 ERP accounts &middot; 19.4% digital penetration</div>
+  <details class="section-collapse" id="customers">
+    <summary>
+      <h2 class="section-title">Customer &amp; Buyer Intelligence</h2>
+      <div class="section-sub">1,287 active buyers &middot; 6,638 ERP accounts &middot; 19.4% digital penetration</div>
+      <div class="section-contents">Dormant Accounts &middot; Reorder Velocity &amp; Early Warning &middot; Regional Product Intelligence &middot; New Customer Acquisition</div>
+      <span class="expand-hint">&#9662; Click to expand</span>
+    </summary>
+  <section class="section" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
 
     <div class="metrics">
       <div class="metric">
@@ -620,11 +649,17 @@
       </table>
     </details>
   </section>
+  </details>
 
   <!-- ═══ PRODUCT & INVENTORY ═══ -->
-  <section class="section" id="product">
-    <h2 class="section-title">Product &amp; Inventory Intelligence</h2>
-    <div class="section-sub">1,951 active SKUs &middot; 97% catalog completeness &middot; 16.8% out of stock</div>
+  <details class="section-collapse" id="product">
+    <summary>
+      <h2 class="section-title">Product &amp; Inventory Intelligence</h2>
+      <div class="section-sub">1,951 active SKUs &middot; 97% catalog completeness &middot; 16.8% out of stock</div>
+      <div class="section-contents">Top Sellers Out of Stock &middot; New Introduction Performance &middot; Product Velocity Signals &middot; Catalog Completeness</div>
+      <span class="expand-hint">&#9662; Click to expand</span>
+    </summary>
+  <section class="section" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
 
     <div class="metrics">
       <div class="metric">
@@ -745,11 +780,17 @@
       </div>
     </div>
   </section>
+  </details>
 
   <!-- ═══ COMMERCE ANALYTICS ═══ -->
-  <section class="section" id="commerce">
-    <h2 class="section-title">Commerce Analytics</h2>
-    <div class="section-sub">$7.24M GMV &middot; 6,842 orders &middot; 51:49 iPad-to-Online split</div>
+  <details class="section-collapse" id="commerce">
+    <summary>
+      <h2 class="section-title">Commerce Analytics</h2>
+      <div class="section-sub">$7.24M GMV &middot; 6,842 orders &middot; 51:49 iPad-to-Online split</div>
+      <div class="section-contents">Channel Attribution &middot; Top Buyers &amp; Concentration &middot; Monthly Trends</div>
+      <span class="expand-hint">&#9662; Click to expand</span>
+    </summary>
+  <section class="section" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
 
     <div class="subsection">
       <h3 class="subsection-title">Channel Attribution</h3>
@@ -818,11 +859,17 @@
       </table>
     </details>
   </section>
+  </details>
 
   <!-- ═══ PLATFORM HEALTH + FEATURE UTILIZATION ═══ -->
-  <section class="section section-light" id="platform">
-    <h2 class="section-title">Platform &amp; Feature Utilization</h2>
-    <div class="section-sub">Data freshness &middot; Catalog organization &middot; Feature depth</div>
+  <details class="section-collapse light" id="platform">
+    <summary>
+      <h2 class="section-title">Platform &amp; Feature Utilization</h2>
+      <div class="section-sub">Data freshness &middot; Catalog organization &middot; Feature depth</div>
+      <div class="section-contents">Data Freshness &middot; Catalog Organization &middot; Feature Adoption vs. Peers &middot; What&rsquo;s Selling</div>
+      <span class="expand-hint">&#9662; Click to expand</span>
+    </summary>
+  <section class="section section-light" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
 
     <div class="subsection">
       <h3 class="subsection-title">Data Freshness</h3>
@@ -893,11 +940,16 @@
     </div>
 
   </section>
+  </details>
 
   <!-- ═══ PORTAL ENGAGEMENT ═══ -->
-  <section class="section section-light" id="portal">
-    <h2 class="section-title">Portal Engagement</h2>
-    <div class="section-sub">Private Storefront traffic &amp; session quality</div>
+  <details class="section-collapse light" id="portal">
+    <summary>
+      <h2 class="section-title">Portal Engagement</h2>
+      <div class="section-sub">Private Storefront traffic &amp; session quality</div>
+      <span class="expand-hint">&#9662; Click to expand</span>
+    </summary>
+  <section class="section section-light" style="margin-bottom:0;border-top:none;border-radius:0 0 var(--r) var(--r);">
 
     <div class="metrics">
       <div class="metric">
@@ -926,6 +978,7 @@
       Session quality is strong (7.9 min, 14.7% bounce), but visitor volume dropped 27%. This could reflect reduced marketing activity, seasonal Q1 slowdown, or customers shifting from browsing to direct ordering &mdash; which would be a positive signal. Worth reviewing recent email and newsletter campaigns to rule out paused outreach as the cause.
     </div>
   </section>
+  </details>
 
 
   <!-- ═══ FOOTER ═══ -->
@@ -961,6 +1014,18 @@
   }, { threshold: 0 });
   stickyObs.observe(sentinel);
 
+  function openAndScroll(target) {
+    if (!target) return;
+    if (target.tagName === 'DETAILS' && !target.open) {
+      target.open = true;
+    }
+    var parent = target.closest('details.section-collapse');
+    if (parent && !parent.open) {
+      parent.open = true;
+    }
+    setTimeout(function(){ target.scrollIntoView({ behavior:'smooth', block:'start' }); }, 50);
+  }
+
   var links = document.querySelectorAll('.toc-strip a');
   var ids = [];
   links.forEach(function(a){
@@ -985,7 +1050,15 @@
     l.addEventListener('click', function(e){
       e.preventDefault();
       var t = document.querySelector(this.getAttribute('href'));
-      if(t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+      openAndScroll(t);
+    });
+  });
+
+  document.querySelectorAll('.highlights a[href^="#"], .priority-title a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var t = document.querySelector(this.getAttribute('href'));
+      openAndScroll(t);
     });
   });
 })();
