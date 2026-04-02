@@ -177,9 +177,9 @@
     .peer-compare { font: 400 11px/1 var(--fm); color: var(--ok); margin-top: 2px; }
 
     /* ── TOC (inline strip, sticky) ── */
-    .toc-strip { position: sticky; top: 0; z-index: 100; display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 0; margin-bottom: 28px; background: var(--bg); border-bottom: 1px solid var(--border); transition: box-shadow .2s; }
+    .toc-strip { position: sticky; top: 0; z-index: 100; display: flex; flex-wrap: nowrap; gap: 5px; padding: 12px 0; margin-bottom: 28px; background: var(--bg); border-bottom: 1px solid var(--border); transition: box-shadow .2s; }
     .toc-strip.stuck { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-    .toc-strip a { display: inline-block; padding: 5px 12px; font: 500 11px/1 var(--fd); color: var(--text-secondary); text-decoration: none; background: var(--panel); border: 1px solid var(--border-light); border-radius: 20px; transition: all .12s; white-space: nowrap; }
+    .toc-strip a { display: inline-block; padding: 4px 10px; font: 500 10.5px/1 var(--fd); color: var(--text-secondary); text-decoration: none; background: var(--panel); border: 1px solid var(--border-light); border-radius: 20px; transition: all .12s; white-space: nowrap; }
     .toc-strip a:hover { color: var(--accent); background: var(--accent-glow); border-color: var(--accent-border); }
     .toc-strip a.active { color: var(--accent-deep); font-weight: 600; background: var(--accent-glow); border-color: var(--accent-border); }
 
