@@ -1,0 +1,1382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agentic Commercial Truth Layer — SuperCat Strategy Thesis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1F1F1F;
+      --panel: #282726;
+      --panel-raised: #32312F;
+      --surface: #32312F;
+      --text-bright: #FFFAF4;
+      --text: #E8E2D8;
+      --muted: #A49E92;
+      --accent: #D08B68;
+      --accent-deep: #89523B;
+      --accent-glow: rgba(137, 82, 59, 0.14);
+      --accent-bright: #D49470;
+      --fog: #A3B1C0;
+      --fog-dim: rgba(163, 177, 192, 0.08);
+      --ok: #78AC78;
+      --ok-dim: rgba(120, 172, 120, 0.10);
+      --ok-border: rgba(120, 172, 120, 0.28);
+      --warn: #C4956A;
+      --warn-dim: rgba(196, 149, 106, 0.10);
+      --warn-border: rgba(196, 149, 106, 0.28);
+      --bad: #DC807C;
+      --bad-dim: rgba(220, 128, 124, 0.10);
+      --bad-border: rgba(220, 128, 124, 0.28);
+      --sage: #8E9E82;
+      --border: #807E7A;
+      --border-subtle: rgba(255,255,255,.06);
+      --motif-rgb: 137, 82, 59;
+      --font-display: 'DM Sans', system-ui, sans-serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+
+    body {
+      background: var(--bg);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px 128px;
+      color: var(--text);
+      font: 15px/1.65 var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a.skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 1000;
+      padding: 10px 18px; background: var(--accent); color: var(--bg);
+      font: 600 14px var(--font-body); border-radius: var(--radius); text-decoration: none;
+      transition: top 0.2s;
+    }
+    a.skip-link:focus { top: 16px; }
+
+    *:focus { outline: none; }
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      body { scroll-behavior: auto; }
+    }
+
+    .page {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* ── NAV BAR ── */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin: 0 -16px 16px;
+      padding: 0 16px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: box-shadow .2s ease;
+    }
+    .nav-bar.stuck { box-shadow: 0 4px 20px rgba(0,0,0,.5); }
+    .nav-inner {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      height: 48px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      padding-right: 16px;
+      margin-right: 4px;
+      border-right: 1px solid var(--border-subtle);
+    }
+    .nav-brand svg { width: 24px; height: 17px; flex-shrink: 0; }
+    .nav-brand h1 {
+      font: 300 10px/1 var(--font-display);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .toc-scroll {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex: 1;
+      min-width: 0;
+    }
+    .toc-scroll::-webkit-scrollbar { display: none; }
+    .toc-scroll a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 11px;
+      font: 500 11.5px/1 var(--font-body);
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color .15s ease;
+    }
+    .toc-scroll a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 11px; right: 11px;
+      height: 2px; border-radius: 1px;
+      background: transparent;
+      transition: background .15s ease;
+    }
+    .toc-scroll a:hover { color: var(--text-bright); }
+    .toc-scroll a.active { color: var(--accent-bright); }
+    .toc-scroll a.active::after { background: var(--accent); }
+    .toc-sep {
+      display: flex; align-items: center; flex-shrink: 0; padding: 0 4px;
+    }
+    .toc-sep::before {
+      content: ''; display: block; width: 1px; height: 14px;
+      background: var(--border-subtle);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--panel-raised) 50%, var(--surface) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px 28px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -40px;
+      width: 500px; height: 500px;
+      background:
+        linear-gradient(32deg, transparent 49.5%, rgba(var(--motif-rgb), 0.08) 49.5%, rgba(var(--motif-rgb), 0.08) 50.5%, transparent 50.5%),
+        linear-gradient(148deg, transparent 49.5%, rgba(var(--motif-rgb), 0.05) 49.5%, rgba(var(--motif-rgb), 0.05) 50.5%, transparent 50.5%),
+        linear-gradient(85deg, transparent 49.5%, rgba(var(--motif-rgb), 0.04) 49.5%, rgba(var(--motif-rgb), 0.04) 50.5%, transparent 50.5%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+    .hero-eyebrow {
+      font: 600 10px var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: inline-block;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--accent-deep);
+    }
+    .hero h2 {
+      font: 800 28px/1.2 var(--font-display);
+      letter-spacing: -0.01em;
+      color: var(--text-bright);
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font: 400 15px/1.6 var(--font-body);
+      color: var(--text);
+      max-width: 720px;
+    }
+    .hero-date {
+      margin-top: 16px;
+      font: 400 11px var(--font-mono);
+      color: var(--muted);
+    }
+
+    /* ── THESIS CALLOUT ── */
+    .thesis-block {
+      background: linear-gradient(135deg, rgba(var(--motif-rgb), 0.10), rgba(var(--motif-rgb), 0.04));
+      border: 1px solid var(--accent-deep);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 18px 22px;
+      margin: 16px 0 20px;
+      font: 500 15px/1.6 var(--font-body);
+      color: var(--text-bright);
+    }
+    .thesis-block em {
+      color: var(--accent-bright);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ── SECTION CARDS ── */
+    .sec {
+      background: var(--panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 10px;
+      overflow: hidden;
+      scroll-margin-top: 72px;
+      transition: border-color .12s ease, box-shadow .12s ease;
+    }
+    .sec:hover { border-color: rgba(255,255,255,.08); }
+    .sec.open { border-color: rgba(255,255,255,.08); box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: background .1s ease;
+      user-select: none;
+      position: relative;
+    }
+    .sec-head:hover { background: rgba(255,255,255,.04); }
+    .sec-head::after {
+      content: '\25B8';
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 11px;
+      transition: transform .12s ease;
+      flex-shrink: 0;
+    }
+    .sec.open .sec-head::after { transform: rotate(90deg); }
+    .sec-num {
+      font: 600 11px var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+    .sec-title {
+      font: 600 15px/1.3 var(--font-display);
+      color: var(--text-bright);
+    }
+    .sec-body {
+      display: none;
+      padding: 0 20px 20px;
+    }
+    .sec.open .sec-body { display: block; }
+
+    /* ── CONTENT TYPOGRAPHY ── */
+    .sec-body h3 {
+      font: 700 14px/1.3 var(--font-display);
+      color: var(--text-bright);
+      margin: 24px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      position: relative;
+    }
+    .sec-body h3::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 48px; height: 1px;
+      background: var(--accent);
+    }
+    .sec-body h4 {
+      font: 600 13px/1.3 var(--font-display);
+      color: var(--accent-bright);
+      margin: 20px 0 8px;
+    }
+    .sec-body p {
+      margin: 10px 0;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .sec-body strong { color: var(--text-bright); font-weight: 600; }
+    .sec-body em { color: var(--accent-bright); font-style: normal; }
+
+    /* ── TABLES ── */
+    .tbl-wrap {
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-subtle);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th {
+      background: var(--surface);
+      font: 600 10px var(--font-mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: left;
+      padding: 10px 14px;
+      white-space: nowrap;
+    }
+    td {
+      padding: 9px 14px;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    tr:hover td { background: rgba(255,255,255,.02); }
+    td:first-child { color: var(--text-bright); font-weight: 500; }
+
+    /* ── DASHBOARD STRIP ── */
+    .dash-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .dash-cell {
+      background: var(--panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      transition: border-color .12s ease, transform .12s ease;
+    }
+    .dash-cell:hover { border-color: rgba(255,255,255,.08); transform: translateY(-1px); }
+    .dash-cell .label {
+      font: 500 9px var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .dash-cell .value {
+      font: 700 18px/1.1 var(--font-display);
+      color: var(--text-bright);
+    }
+    .dash-cell .sub {
+      font: 400 11px var(--font-mono);
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .dash-cell.accent { border-color: rgba(var(--motif-rgb), 0.3); }
+    .dash-cell.accent .value { color: var(--accent-bright); }
+
+    /* ── WEDGE CARDS ── */
+    .wedge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .wedge-card {
+      background: var(--panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      transition: border-color .12s ease;
+    }
+    .wedge-card:hover { border-color: rgba(255,255,255,.08); }
+    .wedge-card .wedge-num {
+      font: 600 10px var(--font-mono);
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .wedge-card .wedge-name {
+      font: 600 14px/1.3 var(--font-display);
+      color: var(--text-bright);
+      margin-bottom: 8px;
+    }
+    .wedge-card .wedge-desc {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .wedge-card .wedge-leverage {
+      font: 500 11px var(--font-mono);
+      color: var(--ok);
+      padding: 4px 8px;
+      background: var(--ok-dim);
+      border: 1px solid var(--ok-border);
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    /* ── TIER BADGE ── */
+    .tier-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font: 600 10px var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .tier-badge.t1 { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid var(--accent-deep); }
+    .tier-badge.t2 { background: var(--ok-dim); color: var(--ok); border: 1px solid var(--ok-border); }
+    .tier-badge.t3 { background: var(--fog-dim); color: var(--fog); border: 1px solid rgba(163,177,192,.2); }
+    .tier-badge.t4 { background: rgba(255,255,255,.04); color: var(--muted); border: 1px solid var(--border-subtle); }
+
+    /* ── PHASE TIMELINE ── */
+    .phase-timeline {
+      margin: 16px 0;
+    }
+    .phase-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+    .phase-item:last-child { border-bottom: none; }
+    .phase-label {
+      font: 700 11px var(--font-mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      padding-top: 2px;
+    }
+    .phase-content .phase-title {
+      font: 600 14px/1.3 var(--font-display);
+      color: var(--text-bright);
+      margin-bottom: 6px;
+    }
+    .phase-content .phase-desc {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 6px;
+    }
+    .phase-content .phase-sc {
+      font: 500 12px var(--font-mono);
+      color: var(--ok);
+    }
+
+    /* ── BLOCKQUOTE ── */
+    blockquote {
+      background: linear-gradient(135deg, rgba(var(--motif-rgb), 0.08), rgba(var(--motif-rgb), 0.03));
+      border: 1px solid var(--accent-deep);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font: 500 14px/1.55 var(--font-body);
+      color: var(--text-bright);
+    }
+
+    /* ── NESTED DETAILS ── */
+    .sec-body details {
+      margin: 10px 0;
+      background: var(--panel-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .sec-body details[open] { background: var(--surface); }
+    .sec-body summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font: 500 13px var(--font-body);
+      color: var(--text-bright);
+      transition: background .1s ease;
+    }
+    .sec-body summary::-webkit-details-marker { display: none; }
+    .sec-body summary::after {
+      content: '▸'; margin-left: auto; color: var(--muted);
+      font-size: 11px; transition: transform .15s ease;
+    }
+    .sec-body details[open] summary::after { transform: rotate(90deg); }
+    .sec-body summary:hover { background: rgba(255,255,255,.04); }
+    .sec-body .detail-body { padding: 0 16px 14px; }
+
+    /* ── BELIEVE / VALIDATE ── */
+    .bv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .bv-col {
+      background: var(--panel-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .bv-col h4 {
+      font: 700 11px var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .bv-col.believe h4 { color: var(--ok); }
+    .bv-col.validate h4 { color: var(--warn); }
+    .bv-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    .bv-col li {
+      position: relative;
+      padding: 6px 0 6px 16px;
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .bv-col li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 13px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .bv-col.believe li::before { background: var(--ok); }
+    .bv-col.validate li::before { background: var(--warn); }
+
+    /* ── LIST STYLES ── */
+    .sec-body ul {
+      padding-left: 18px;
+      margin: 8px 0;
+    }
+    .sec-body ul li {
+      margin: 6px 0;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    /* ── COLOPHON ── */
+    .colophon {
+      margin-top: 40px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+      text-align: center;
+      position: relative;
+    }
+    .colophon::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 1px;
+      background: var(--accent);
+    }
+    .colophon-brand {
+      font: 300 11px/1 var(--font-display);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .colophon-tagline {
+      margin-top: 6px;
+      font: italic 12px var(--font-body);
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .dash-strip { grid-template-columns: 1fr 1fr; }
+      .wedge-grid { grid-template-columns: 1fr; }
+      .bv-grid { grid-template-columns: 1fr; }
+      .phase-item { grid-template-columns: 1fr; gap: 4px; }
+      .hero h2 { font-size: 22px; }
+    }
+    @media (max-width: 600px) {
+      .dash-strip { grid-template-columns: 1fr; }
+      .page { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <main id="main-content" class="page">
+
+    <!-- NAV -->
+    <nav class="nav-bar" aria-label="Section navigation">
+      <div class="nav-inner">
+        <div class="nav-brand">
+          <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Skaling Ventures">
+            <path d="M5 38 L30 6 L55 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.5"/>
+            <path d="M12 38 L30 14 L48 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.7"/>
+            <path d="M19 38 L30 22 L41 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.9"/>
+            <line x1="5" y1="38" x2="55" y2="38" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+          </svg>
+          <h1>Skaling Ventures</h1>
+        </div>
+        <div class="toc-scroll">
+          <a href="#hero">Thesis</a>
+          <a href="#s-summary">Summary</a>
+          <a href="#s-evidence">Evidence</a>
+          <div class="toc-sep"></div>
+          <a href="#s-timing">Timing</a>
+          <a href="#s-advantage">Advantage</a>
+          <a href="#s-stack">Wedge Stack</a>
+          <div class="toc-sep"></div>
+          <a href="#s-arch">Architecture</a>
+          <a href="#s-econ">Economics</a>
+          <a href="#s-gtm">GTM Sequence</a>
+          <div class="toc-sep"></div>
+          <a href="#s-research">Research</a>
+          <a href="#s-believe">Believe / Validate</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-eyebrow">Strategy Thesis</div>
+      <h2>SuperCat as the Agentic Commercial Truth Layer for Home Furnishings</h2>
+      <p class="hero-sub">A strategy and execution thesis grounded in public market evidence, operating reality, and structural advantage. Synthesized from market-level research, public filings, federal data, and SuperCat's embedded position across ~118 active customer instances.</p>
+      <p class="hero-date">Prepared April 10, 2026</p>
+    </section>
+
+    <!-- CORE THESIS -->
+    <div class="thesis-block">
+      The home furnishings market does not need a generic sales copilot. It needs a <em>commercial truth layer</em> — an agentic system that turns messy product reality into structured, orderable, channel-ready commercial truth, then orchestrates the downstream revenue workflows that depend on it. SuperCat already holds the catalog, processes the orders, instruments the reps and dealers. The question is not whether the opportunity exists. The question is how fast SuperCat converts its embedded position into <em>the revenue operating layer</em> for the category.
+    </div>
+
+    <!-- S1: EXECUTIVE SUMMARY -->
+    <section class="sec open" id="s-summary">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Executive Summary</span>
+      </div>
+      <div class="sec-body">
+        <div class="dash-strip">
+          <div class="dash-cell accent">
+            <div class="label">Sectoral Output</div>
+            <div class="value">$108.6B</div>
+            <div class="sub">NAICS 4232 · 2024</div>
+          </div>
+          <div class="dash-cell accent">
+            <div class="label">Labor Compensation</div>
+            <div class="value">$11.25B</div>
+            <div class="sub">113,400 jobs</div>
+          </div>
+          <div class="dash-cell">
+            <div class="label">Comp / Job Growth</div>
+            <div class="value">+10.3%</div>
+            <div class="sub">2022–2024</div>
+          </div>
+          <div class="dash-cell">
+            <div class="label">Base-Case Capacity</div>
+            <div class="value">$643M</div>
+            <div class="sub">Annual labor pool</div>
+          </div>
+          <div class="dash-cell">
+            <div class="label">Revenue Lift (100bps)</div>
+            <div class="value">$1.09B</div>
+            <div class="sub">On $108.6B base</div>
+          </div>
+        </div>
+
+        <p>The U.S. furniture and home furnishing merchant-wholesaler layer generated <strong>$108.57B of sectoral output</strong> in 2024, employed roughly <strong>113,400 workers</strong>, and carried <strong>$11.25B of labor compensation</strong>. Between 2022 and 2024, output fell 6.6% and employment fell 4.9%, while labor compensation per job rose 10.3%. A classic productivity squeeze.</p>
+        <p>Public-company proxies confirm SG&A intensity from 15.1% (Flexsteel) to 26.8% (La-Z-Boy wholesale), with a weighted average of ~23.4%. The channel is structurally complex: 366 La-Z-Boy Galleries, 500+ Comfort Studios, 87 Bassett stores, 30+ independent rep organizations, 142 Ethan Allen design centers, High Point Market at 11.5M+ sq ft with ~75,000 attendees.</p>
+        <p><strong>SuperCat already sits inside this system</strong> — ~118 active customer instances, production catalog data, order flow, rep telemetry, cross-instance analytics in BigQuery. The gap between SuperCat's current product and the commercial truth layer is measured in extensions and intelligence, not foundational rebuilds.</p>
+        <p>Base-case modeling suggests first-wave agentic systems could create <strong>~$643M of annual labor capacity</strong> in the U.S. wholesale layer alone (range: $325M–$1.14B). A 50–100 basis-point sales lift equals <strong>$543M–$1.09B of incremental revenue</strong>.</p>
+      </div>
+    </section>
+
+    <!-- S2: WHAT THE PUBLIC RECORD PROVES -->
+    <section class="sec" id="s-evidence">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">02</span>
+        <span class="sec-title">What the Public Record Proves</span>
+      </div>
+      <div class="sec-body">
+
+        <h3>A real, measurable revenue labor layer exists</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th scope="col">Metric</th><th scope="col">2024 Value</th></tr></thead>
+            <tbody>
+              <tr><td>Sectoral output (NAICS 4232)</td><td>$108.57B</td></tr>
+              <tr><td>Employment</td><td>~113,400 jobs</td></tr>
+              <tr><td>Labor compensation</td><td>$11.25B</td></tr>
+              <tr><td>Output per job</td><td>~$957,376</td></tr>
+              <tr><td>Labor comp per job</td><td>~$99,195</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Output fell 6.6%, employment fell 4.9%, but labor compensation rose 4.8% — pushing comp per job up 10.3%. When loaded cost per worker rises while volume contracts, <strong>coordination compression</strong> becomes the dominant value lever.</p>
+
+        <h3>SG&A intensity is structurally high</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Company</th><th scope="col">Line</th><th scope="col">Sales ($M)</th><th scope="col">SG&A / Sales</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Flexsteel</td><td>FY2025 consolidated</td><td>441.1</td><td>15.1%</td></tr>
+              <tr><td>Bassett</td><td>FY2024 wholesale</td><td>207.5</td><td>20.6%</td></tr>
+              <tr><td>Hooker</td><td>FY2025 consolidated</td><td>397.5</td><td>25.2%</td></tr>
+              <tr><td>La-Z-Boy</td><td>FY2025 wholesale</td><td>1,056.9</td><td>26.8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Hooker's breakdown reveals the composition: showroom expense, sales and design commissions, administrative support (executive mgmt, IT, HR, finance), and dealer-facing materials. The revenue layer is a <strong>blended labor system</strong> of selling, preparing, supporting, coordinating, and rescuing orders.</p>
+
+        <h3>Channel complexity is structural</h3>
+        <p><strong>Bassett:</strong> 87 branded stores, 30+ independent rep organizations, 1,000+ open-market accounts. Custom upholstery = 64.8% of wholesale mix. 60% of wholesale sales through branded store network.</p>
+        <p><strong>La-Z-Boy:</strong> 366 Furniture Galleries, 500+ Comfort Studios, 500+ branded spaces, broad independent dealer base. Customer mix: ~60% proprietary, 10% major dealers, 30% other independents.</p>
+        <p><strong>Ethan Allen:</strong> 142 company-operated design centers, 45 independent design centers, interior designers, technology, logistics. Still measures wholesale backlog in weeks.</p>
+        <p><strong>High Point Market:</strong> 11.5M+ sq ft, ~75,000 attendees, ~2,000 exhibitors. <strong>Las Vegas Market:</strong> 3,500+ brands twice yearly.</p>
+
+        <h3>Product complexity is operational, not cosmetic</h3>
+        <p>Bassett advertises 600+ fabrics, 50 leathers, 50+ wood finishes, multiple arm/back/base combinations, sofa lengths from 52 to 108 inches. Ethan Allen states not every fabric or customization works for every application. That is <strong>orderability logic</strong> — not merchandising copy.</p>
+        <p>Bassett implemented a PIM system in fiscal 2022 to standardize product data. Hooker disclosed ERP go-lives that disrupted shipping and hurt profitability. GS1 US publishes guidance because exchanging product images and attributes is hard enough to require cross-industry standards. The hard problem is the <strong>transformation, governance, and propagation of commercial truth</strong>.</p>
+      </div>
+    </section>
+
+    <!-- S3: TIMING -->
+    <section class="sec" id="s-timing">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">03</span>
+        <span class="sec-title">Why Timing Compounds the Case</span>
+      </div>
+      <div class="sec-body">
+        <p>Freddie Mac's PMMS: <strong>6.37% 30-year fixed</strong> as of April 9, 2026. Existing-home sales up month-over-month but still <strong>–1.4% YoY</strong>. Pending home sales up 1.8% MoM but <strong>–0.8% YoY</strong>. Neither crash nor clean recovery — the kind of demand environment where every missed follow-up, slow quote, and unresolved exception costs real revenue.</p>
+        <p>Hooker tied soft results to weak market conditions. Ethan Allen pointed to a weak housing market and tariff uncertainty. Flexsteel cited U.S.–Mexico trade policy changes. Las Vegas Market now includes a "Navigate Tariffs" section.</p>
+        <blockquote>In a pressured market, labor productivity and decision velocity become more valuable, not less. The operators who compress coordination will capture share — and that capture accelerates when macro conditions improve.</blockquote>
+      </div>
+    </section>
+
+    <!-- S4: SUPERCAT'S STRUCTURAL ADVANTAGE -->
+    <section class="sec" id="s-advantage">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">04</span>
+        <span class="sec-title">SuperCat's Structural Advantage</span>
+      </div>
+      <div class="sec-body">
+        <p>This section does not exist in any outside-in market analysis. It is the inside-out view — and it is the reason SuperCat's path to the commercial truth layer is credibly shorter than anyone else's.</p>
+
+        <h3>SuperCat already holds the catalog</h3>
+        <p>SuperCat is vertical B2B SaaS for furniture, lighting, and home decor manufacturers. The production database spans:</p>
+        <div class="dash-strip">
+          <div class="dash-cell">
+            <div class="label">Products</div>
+            <div class="value">Catalog</div>
+            <div class="sub">Attributes, options, pricing, images, config</div>
+          </div>
+          <div class="dash-cell">
+            <div class="label">Orders</div>
+            <div class="value">Commerce</div>
+            <div class="sub">iPad + online ordering, state, invoicing</div>
+          </div>
+          <div class="dash-cell">
+            <div class="label">Reps & Users</div>
+            <div class="value">Activity</div>
+            <div class="sub">Logins, mobile sites, behavioral telemetry</div>
+          </div>
+          <div class="dash-cell">
+            <div class="label">Inventory</div>
+            <div class="value">Real-time</div>
+            <div class="sub">Positions, imports, sync, data versions</div>
+          </div>
+          <div class="dash-cell">
+            <div class="label">Portals</div>
+            <div class="value">48 tracked</div>
+            <div class="sub">Buyer portals, enrollment, smart stacks</div>
+          </div>
+        </div>
+        <p>This is not a CRM adjacent to the workflow. This is <strong>the system through which the commercial motion actually happens</strong>.</p>
+
+        <h3>~118 active instances create a cross-category intelligence layer</h3>
+        <p>Cross-instance analytics in BigQuery: 12 views, 3 tables, scheduled queries. Three segments: Catalog-Focused, Commerce-Active, Platform-Embedded. 42 value moments across 8 domains. Operator prompts for customer reports, portfolio risk, segment health, rep performance. No greenfield entrant has this data spine.</p>
+
+        <h3>The product-truth wedge is partially built</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th scope="col">Wedge Function</th><th scope="col">SuperCat Current State</th></tr></thead>
+            <tbody>
+              <tr><td>Product ingestion & normalization</td><td>Active: ERP imports, data versions, import events tracked per instance</td></tr>
+              <tr><td>Variant & configuration management</td><td>Active: options, smart stacks, kits, contract pricing</td></tr>
+              <tr><td>Catalog syndication</td><td>Active: portal publishing, multi-channel delivery</td></tr>
+              <tr><td>Pricing & availability</td><td>Active: inventory sync, pricing data, lead-time info</td></tr>
+              <tr><td>Change propagation</td><td>Partial: data version tracking exists; automated propagation is the gap</td></tr>
+              <tr><td>Catalog QA & governance</td><td>Partial: instance health metrics exist; systematic governance is net-new</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The distance from current product to commercial truth layer: <strong>extensions and intelligence</strong>, not foundational rebuilds.</p>
+
+        <h3>The data exhaust is the moat</h3>
+        <p>Every order, login, product browse, quote, and portal visit is a commercial event that trains the system. Cross-instance benchmarks, pattern recognition, and recommendation engines grow with every customer. The moat is not the connector layer — it is the <strong>canonical commercial schema, the rule layer, the review loop, and the propagation logic</strong>.</p>
+      </div>
+    </section>
+
+    <!-- S5: THE COMMERCIAL TRUTH STACK -->
+    <section class="sec" id="s-stack">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">05</span>
+        <span class="sec-title">The Commercial Truth Stack: Full Wedge Architecture</span>
+      </div>
+      <div class="sec-body">
+
+        <h3>Three labor layers, three agentic profiles</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Labor Layer</th><th scope="col">Typical Work</th><th scope="col">Agentic Role</th><th scope="col">Priority</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Product truth & catalog ops</td><td>Data normalization, config logic, catalog assembly, pricing governance, channel publication, asset pairing, change propagation</td><td>Automate and structure the commercial substrate — the root wedge</td><td style="color:var(--accent-bright)">Highest</td></tr>
+              <tr><td>Revenue service & orchestration</td><td>Quotes, config, availability, order-state, substitutions, claims, dealer support, follow-up, exception resolution</td><td>Orchestrate and compress the work — the most painful daily labor</td><td style="color:var(--ok)">High</td></tr>
+              <tr><td>Relationship selling & territory intelligence</td><td>Territory mgmt, account reviews, designer conversations, negotiations, visits, escalations, market-event prep, whitespace</td><td>Copilot: prep, summarization, drafting, recommendation, CRM capture</td><td style="color:var(--fog)">Med-High</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TIER I -->
+        <span class="tier-badge t1">Tier I — Root Wedges</span>
+        <p>These wedges create the substrate. Downstream workflows may demo faster, but root wedges remove the translation burden that silently taxes every downstream workflow.</p>
+        <div class="wedge-grid">
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 01</div>
+            <div class="wedge-name">Product Ingestion & Normalization Agent</div>
+            <div class="wedge-desc">Ingest ERP exports, spreadsheets, PDFs, price books, imagery, swatch metadata. Map to canonical schema. Extract attributes/variants. Flag conflicts. Produce confidence-scored output for review.</div>
+            <span class="wedge-leverage">SC: Import events, data versions in production</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 02</div>
+            <div class="wedge-name">Variant & Configuration Intelligence Agent</div>
+            <div class="wedge-desc">Turn product breadth into machine-readable orderability: valid combinations, finish availability, component compatibility, material constraints, dimensional logic, lead-time implications.</div>
+            <span class="wedge-leverage">SC: Options, smart stacks, kits, contract pricing</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 03</div>
+            <div class="wedge-name">Catalog Syndication & Assortment Agent</div>
+            <div class="wedge-desc">Publish the right subset of product truth — with the right assets and restrictions — into dealer portals, rep packets, market materials, and e-commerce surfaces.</div>
+            <span class="wedge-leverage">SC: 48 portals, multi-channel delivery, enrollment</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 04</div>
+            <div class="wedge-name">Pricing & Availability Truth Agent</div>
+            <div class="wedge-desc">Merge normalized product data with price books, promotions, freight logic, lead times, inventory, and customer terms. Answer: can this be sold to this account now, at this price, with this promise?</div>
+            <span class="wedge-leverage">SC: Inventory sync, pricing data in production</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 05</div>
+            <div class="wedge-name">Change Propagation & Launch Orchestration Agent</div>
+            <div class="wedge-desc">New collections, discontinued finishes, material subs, delayed components, tariff-driven price moves — trigger structured downstream updates, not ad hoc email chains.</div>
+            <span class="wedge-leverage">SC: Data version tracking = change detection substrate</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 06</div>
+            <div class="wedge-name">Catalog QA & Governance Agent</div>
+            <div class="wedge-desc">Continuously scan for stale prices, missing attributes, broken compatibility logic, orphaned assets, channel mismatches. Prevent silent data rot.</div>
+            <span class="wedge-leverage">SC: Instance health metrics, catalog completeness scores</span>
+          </div>
+        </div>
+
+        <!-- TIER II -->
+        <span class="tier-badge t2">Tier II — Revenue Service & Orchestration</span>
+        <p>The most painful daily workflows. Highest labor consumption, clearest near-term ROI. Works dramatically better when upstream product truth is trustworthy.</p>
+        <div class="wedge-grid">
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 07</div>
+            <div class="wedge-name">Quote-to-Order Desk Agent</div>
+            <div class="wedge-desc">Transform customer intent into valid configured quotes/orders — with attachments, approval routing, commercial terms, and handoff packets. Assemble pricing and availability. Flag missing inputs.</div>
+            <span class="wedge-leverage">Score: Labor 5 · Revenue 5 · Data 4 = 23</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 08</div>
+            <div class="wedge-name">Order Exception & Backlog Resolution Agent</div>
+            <div class="wedge-desc">Monitor open orders, identify holds/delays, surface causes, propose substitutes or split shipments, draft communications, coordinate across rep, dealer, service, and operations.</div>
+            <span class="wedge-leverage">Score: Labor 5 · Revenue 4 · Data 4 = 22</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 09</div>
+            <div class="wedge-name">Rep Prep, Follow-Up & CRM Capture Agent</div>
+            <div class="wedge-desc">Pre-call briefs, account dossiers, note summarization, follow-up drafts, structured CRM capture. The copilot layer that makes every conversation more prepared and every handoff cleaner.</div>
+            <span class="wedge-leverage">Score: Labor 4 · Revenue 5 · Data 4 = 22</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 10</div>
+            <div class="wedge-name">Market-Event Operator Agent</div>
+            <div class="wedge-desc">Before/after High Point, Las Vegas, and regional events: prioritize accounts, prepare itineraries, capture notes, trigger follow-up, request samples, convert bursts of interaction into orderly queues.</div>
+            <span class="wedge-leverage">Score: Labor 4 · Revenue 4 · Data 4 = 21</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 11</div>
+            <div class="wedge-name">Dealer Onboarding & Enablement Agent</div>
+            <div class="wedge-desc">Coordinate launch bundles for new accounts: access, line sheets, assets, display guidance, training, commercial terms, first-order support. Answer policy questions, reduce service load.</div>
+            <span class="wedge-leverage">Score: Labor 3 · Revenue 4 · Data 4 = 19</span>
+          </div>
+        </div>
+
+        <!-- TIER III -->
+        <span class="tier-badge t3">Tier III — Territory Intelligence & Growth</span>
+        <p>Recommend actions and prioritize opportunities. Materially stronger once upstream truth is structured.</p>
+        <div class="wedge-grid">
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 12</div>
+            <div class="wedge-name">Territory & Account Coverage Agent</div>
+            <div class="wedge-desc">Weekly briefs, whitespace detection, dormant account activation, next-best-product recommendations, account-specific action proposals. Find assortment gaps between what's offered and what's carried.</div>
+            <span class="wedge-leverage">Score: Labor 3 · Revenue 5 · Data 3 = 19</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 13</div>
+            <div class="wedge-name">Product Launch & Sample Coordination Agent</div>
+            <div class="wedge-desc">Automate launch packets, line sheet generation, sample allocation, introduction sequencing for new product introductions.</div>
+            <span class="wedge-leverage">Score: Labor 4 · Revenue 3 · Data 4 = 18</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 14</div>
+            <div class="wedge-name">Pricing, Promo & Freight Guidance Agent</div>
+            <div class="wedge-desc">Freight changes, pricing rules, discounts, tariff questions — ensure every rep and dealer gets the same correct answer, every time.</div>
+            <span class="wedge-leverage">Score: Labor 3 · Revenue 4 · Data 4 = 18</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 15</div>
+            <div class="wedge-name">Claims, Returns & Warranty Triage Agent</div>
+            <div class="wedge-desc">Route, categorize, and draft responses for the most common service-friction patterns. Reduce status-request overhead.</div>
+            <span class="wedge-leverage">Score: Labor 4 · Revenue 3 · Data 4 = 18</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 16</div>
+            <div class="wedge-name">Reorder & Open-Order Nudging Agent</div>
+            <div class="wedge-desc">Proactive outbound at the right moment — based on order history, seasonality, and account patterns. Keep deals from quietly stalling.</div>
+            <span class="wedge-leverage">Score: Labor 3 · Revenue 4 · Data 3 = 17</span>
+          </div>
+        </div>
+
+        <!-- TIER IV -->
+        <span class="tier-badge t4">Tier IV — Intelligence & Optimization</span>
+        <div class="wedge-grid">
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 17</div>
+            <div class="wedge-name">Forecast & Backlog Intelligence</div>
+            <div class="wedge-desc">Synthesize orders, backlog, follow-up activity, and commercial context into forecasts with reasons and confidence bands. Best after upstream data discipline improves.</div>
+            <span class="wedge-leverage">SC: Cross-instance analytics, 42 value moments</span>
+          </div>
+          <div class="wedge-card">
+            <div class="wedge-num">WEDGE 18</div>
+            <div class="wedge-name">CRM Hygiene & Analytics</div>
+            <div class="wedge-desc">Useful, rarely strategic as first wedge. More often a by-product of stronger workflows than a market-entry thesis on its own.</div>
+            <span class="wedge-leverage">By-product of Tiers I–III</span>
+          </div>
+        </div>
+
+        <details>
+          <summary>Full Priority Matrix (18 wedges)</summary>
+          <div class="detail-body">
+            <div class="tbl-wrap">
+              <table>
+                <thead>
+                  <tr><th scope="col">#</th><th scope="col">Wedge</th><th scope="col">Spend</th><th scope="col">Revenue</th><th scope="col">Proof Speed</th><th scope="col">Friction</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Product ingestion / normalization</td><td>High</td><td>High</td><td>Medium</td><td>Medium</td></tr>
+                  <tr><td>2</td><td>Variant / configuration intelligence</td><td>High</td><td>High</td><td>Medium</td><td>Med-High</td></tr>
+                  <tr><td>3</td><td>Catalog syndication / assortment</td><td>Med-High</td><td>High</td><td>Medium</td><td>Medium</td></tr>
+                  <tr><td>4</td><td>Pricing / availability truth</td><td>High</td><td>High</td><td>Medium</td><td>High</td></tr>
+                  <tr><td>5</td><td>Change propagation / launch orch.</td><td>Medium</td><td>Med-High</td><td>Medium</td><td>Medium</td></tr>
+                  <tr><td>6</td><td>Catalog QA / governance</td><td>Medium</td><td>Medium</td><td>High</td><td>Low-Med</td></tr>
+                  <tr><td>7</td><td>Quote-to-order desk</td><td>High</td><td>High</td><td>High</td><td>Medium</td></tr>
+                  <tr><td>8</td><td>Order exceptions / backlog</td><td>High</td><td>High</td><td>High</td><td>Medium</td></tr>
+                  <tr><td>9</td><td>Rep prep / follow-up / CRM</td><td>Medium</td><td>Med-High</td><td>High</td><td>Low-Med</td></tr>
+                  <tr><td>10</td><td>Market-event operator</td><td>Medium</td><td>Med-High</td><td>High</td><td>Low-Med</td></tr>
+                  <tr><td>11</td><td>Dealer onboarding / activation</td><td>Medium</td><td>Medium</td><td>Medium</td><td>Medium</td></tr>
+                  <tr><td>12</td><td>Territory / account coverage</td><td>Medium</td><td>Medium</td><td>Medium</td><td>Medium</td></tr>
+                  <tr><td>13</td><td>Product launch / line sheet coord.</td><td>Medium</td><td>Medium</td><td>Medium</td><td>Medium</td></tr>
+                  <tr><td>14</td><td>Pricing / promo / freight guidance</td><td>Medium</td><td>Medium</td><td>Med-High</td><td>Medium</td></tr>
+                  <tr><td>15</td><td>Claims / returns / warranty triage</td><td>Medium</td><td>Low-Med</td><td>High</td><td>Low</td></tr>
+                  <tr><td>16</td><td>Reorder / open-order nudging</td><td>Low-Med</td><td>Medium</td><td>Medium</td><td>Low-Med</td></tr>
+                  <tr><td>17</td><td>Forecast / backlog intelligence</td><td>Medium</td><td>Med-High</td><td>Low-Med</td><td>Medium</td></tr>
+                  <tr><td>18</td><td>CRM hygiene / analytics</td><td>Low-Med</td><td>Low-Med</td><td>High</td><td>Low</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- S6: ARCHITECTURE -->
+    <section class="sec" id="s-arch">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">06</span>
+        <span class="sec-title">Architecture: Deterministic Rails, Probabilistic Agents</span>
+      </div>
+      <div class="sec-body">
+        <blockquote>The right mental model is not AI replacing structure. It is AI operating on top of structure.</blockquote>
+
+        <h3>What stays deterministic</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th scope="col">System</th><th scope="col">Role</th></tr></thead>
+            <tbody>
+              <tr><td>ERP item masters, customer records, order status</td><td>Source of truth for transactional data</td></tr>
+              <tr><td>Inventory and availability systems</td><td>Real-time position and lead-time data</td></tr>
+              <tr><td>Price tables, freight rules, contractual terms</td><td>Deterministic commercial logic</td></tr>
+              <tr><td>Configuration rules, assortment policies, channel restrictions</td><td>Approved business logic</td></tr>
+              <tr><td>Official assets: images, tear sheets, swatch data, price books</td><td>Canonical brand artifacts</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>What the probabilistic layer does</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th scope="col">Capability</th><th scope="col">Description</th></tr></thead>
+            <tbody>
+              <tr><td>Extract & normalize</td><td>Pull attributes from messy artifacts, map to canonical model, suggest missing values, detect conflicts</td></tr>
+              <tr><td>Apply & validate</td><td>Apply config rules, detect invalid combinations, propose substitutions, route exceptions to humans</td></tr>
+              <tr><td>Assemble & syndicate</td><td>Pair assets to products, generate line sheets, keep downstream materials synchronized</td></tr>
+              <tr><td>Answer commercially</td><td>Can this be sold to this account now, at this price, with this promise?</td></tr>
+              <tr><td>Orchestrate workflows</td><td>Compress quote assembly, exception resolution, follow-up into fewer touches</td></tr>
+              <tr><td>Copilot the human</td><td>Pre-call prep, post-call capture, market-event planning, territory briefings</td></tr>
+              <tr><td>Recommend actions</td><td>Next-best assortment, reorder nudging, dormant activation, growth intelligence</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>SuperCat's architecture advantage</h3>
+        <p>SuperCat already implements this pattern through its MCP layer — LLM-friendly APIs exposing org settings, products, customers, options, users, inventories, orders, mobile sites, permissions, and pricing diagnostics. The production database is the deterministic spine. BigQuery, Mixpanel, HelpScout, and Clicky provide the intelligence substrate.</p>
+
+        <h3>The read-first, write-later principle</h3>
+        <p>Early value requires the ability to <strong>read what exists, normalize it, structure it, review it, and expose trustworthy answers</strong>. Write-back becomes attractive once the transformation layer is stable and auditable. The connector is necessary. It is not the thesis.</p>
+      </div>
+    </section>
+
+    <!-- S7: ECONOMICS -->
+    <section class="sec" id="s-econ">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">07</span>
+        <span class="sec-title">Synthetic Economics</span>
+      </div>
+      <div class="sec-body">
+
+        <h3>Labor capacity model</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Scenario</th><th scope="col">Rev-Facing Share</th><th scope="col">Repeatable %</th><th scope="col">Compressible %</th><th scope="col">Annual Pool</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Conservative</td><td>35.0%</td><td>55.0%</td><td>15.0%</td><td style="color:var(--text-bright);font-weight:700">$325M</td></tr>
+              <tr><td>Base</td><td>40.0%</td><td>65.0%</td><td>22.0%</td><td style="color:var(--accent-bright);font-weight:700">$643M</td></tr>
+              <tr><td>Upside</td><td>45.0%</td><td>75.0%</td><td>30.0%</td><td style="color:var(--text-bright);font-weight:700">$1.14B</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12px;color:var(--muted)">Built on 2024 labor compensation of $11.25B in NAICS 4232.</p>
+
+        <h3>Revenue impact model</h3>
+        <div class="dash-strip">
+          <div class="dash-cell accent">
+            <div class="label">50 bps sales lift</div>
+            <div class="value">~$543M</div>
+            <div class="sub">GP: $109M–$163M</div>
+          </div>
+          <div class="dash-cell accent">
+            <div class="label">100 bps sales lift</div>
+            <div class="value">~$1.09B</div>
+            <div class="sub">GP: $217M–$326M</div>
+          </div>
+        </div>
+        <p>The most powerful framing is not labor substitution. It is <strong>labor compression plus revenue lift</strong>: fewer touches, faster answers, cleaner order packets, more rep coverage, better follow-up. Root wedges release value across multiple downstream pools at once.</p>
+
+        <h3>Per-workflow field model</h3>
+        <blockquote>Annual wedge value ≈ (event volume × minutes per event × loaded labor cost) + margin protected + revenue leakage recovered + conversion lift + cycle-time compression</blockquote>
+
+        <details>
+          <summary>Order-of-magnitude sensitivity</summary>
+          <div class="detail-body">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th scope="col">Productivity Release</th><th scope="col">Annual Value</th></tr></thead>
+                <tbody>
+                  <tr><td>1% of sector labor comp</td><td>$112.5M</td></tr>
+                  <tr><td>2%</td><td>$225.0M</td></tr>
+                  <tr><td>5%</td><td>$562.4M</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- S8: GTM SEQUENCE -->
+    <section class="sec" id="s-gtm">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">08</span>
+        <span class="sec-title">Go-to-Market Sequencing</span>
+      </div>
+      <div class="sec-body">
+
+        <h3>Five phases — grounded in SuperCat's position</h3>
+        <div class="phase-timeline">
+          <div class="phase-item">
+            <div class="phase-label">Phase 1</div>
+            <div class="phase-content">
+              <div class="phase-title">Read and Normalize</div>
+              <div class="phase-desc">Ingest exports, PDFs, price books, images, swatch metadata. Build a canonical product model. Expose confidence and review state. Fastest path to truth without brittle write depth.</div>
+              <div class="phase-sc">SC: Data version tracking, import events, instance health in production</div>
+            </div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-label">Phase 2</div>
+            <div class="phase-content">
+              <div class="phase-title">Make Orderability Explicit</div>
+              <div class="phase-desc">Encode configuration logic, assortment constraints, channel publication rules. Produce structured catalog outputs. Turn catalog from display artifact into operating model.</div>
+              <div class="phase-sc">SC: Options, smart stacks, kits, contract pricing, enrollment in production</div>
+            </div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-label">Phase 3</div>
+            <div class="phase-content">
+              <div class="phase-title">Attach Pricing, Availability & Execution</div>
+              <div class="phase-desc">Layer in lead times, inventory signals, customer terms, freight logic, approvals. Enable quote-to-order and reliable commercial answers.</div>
+              <div class="phase-sc">SC: Inventory sync, pricing data, order management in production</div>
+            </div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-label">Phase 4</div>
+            <div class="phase-content">
+              <div class="phase-title">Orchestrate Downstream Workflows</div>
+              <div class="phase-desc">Automate exception queues, rep enablement, market-week follow-up, dealer activation, territory briefs. Monetize the truth layer across all revenue workflows.</div>
+              <div class="phase-sc">SC: Rep activity, portal commerce, customer/order data = substrate</div>
+            </div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-label">Phase 5</div>
+            <div class="phase-content">
+              <div class="phase-title">Move into Intelligence</div>
+              <div class="phase-desc">Forecasting, risk detection, backlog reasoning, whitespace analysis, account opportunity models. Most credible once upstream data spine is clean.</div>
+              <div class="phase-sc">SC: Cross-instance analytics, segment benchmarking, 42 value moments defined</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Three-wave narrative</h3>
+        <p><strong>Wave 1 — Orchestrate the revenue-service desk.</strong> Quote packets, configuration support, availability, order status, exceptions, dealer follow-up. Where labor hours burn, frustration lives, and ROI appears.</p>
+        <p><strong>Wave 2 — Copilot the rep and account manager.</strong> Pre-call prep, post-call capture, market-event planning, territory briefings, account review support, whitespace detection. Make humans faster, better prepared, less burdened by glue work.</p>
+        <p><strong>Wave 3 — Add revenue intelligence.</strong> Whitespace detection, next-best assortment, launch prioritization, reorder nudging, forecast reasoning. Over time, the agent takes on more autonomous routing inside bounded workflows.</p>
+
+        <h3>Alignment with SuperCat's tier structure</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Tier</th><th scope="col">Current Packaging</th><th scope="col">Agentic Extension</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T1: Catalog Essentials</td><td>Product catalog, basic portal</td><td>Product truth agents (ingestion, normalization, QA)</td></tr>
+              <tr><td>T2: Commerce Professional</td><td>Ordering, rep tools, enrollment</td><td>Revenue orchestration (quote-to-order, exceptions, dealer enablement)</td></tr>
+              <tr><td>T3: Commerce Enterprise</td><td>Full commerce, advanced features</td><td>Intelligence agents (territory, forecasting, copilot, market-week)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Agentic capabilities extend the existing value ladder. ACV expands through capability depth, not just seat count.</p>
+      </div>
+    </section>
+
+    <!-- S9: RESEARCH PROGRAM -->
+    <section class="sec" id="s-research">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">09</span>
+        <span class="sec-title">Primary Research Program</span>
+      </div>
+      <div class="sec-body">
+        <p>SuperCat's existing customer base makes this research program dramatically more efficient than starting cold: ~118 active instances, production data on actual order volumes and rep behavior, CS relationships for warm access, HelpScout ticket history revealing where customers struggle.</p>
+
+        <h3>Who to interview</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Group</th><th scope="col">What to Learn</th><th scope="col">Signals</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Revenue leaders</td><td>Coverage gaps, cycle time, rep productivity, revenue leakage</td><td>Whitespace, approval bottlenecks, channel conflict, event follow-up</td></tr>
+              <tr><td>Sales ops / CS / dealer support</td><td>What consumes time, what breaks, what's tribal knowledge</td><td>Quote assembly, price/avail answers, rework, exception queues</td></tr>
+              <tr><td>Merchandising / catalog ops</td><td>How product data is created, cleaned, changed, published</td><td>Variant logic, asset pairing, launch choreography, PIM maturity</td></tr>
+              <tr><td>IT / enterprise systems</td><td>Where truth lives, what integrations exist, which writes are risky</td><td>ERP exports, stewardship, source-system brittleness</td></tr>
+              <tr><td>Independent reps / dealers</td><td>What info they can't get quickly, what slows selling</td><td>Catalog usability, lead-time trust, substitute discovery</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Questions that unlock workflow truth</h3>
+        <ul>
+          <li>How many quote requests arrive in a typical week?</li>
+          <li>How many touches does a clean order require versus a messy one?</li>
+          <li>What are the top three reasons orders reopen?</li>
+          <li>How much rep time goes to prep/follow-up versus live selling?</li>
+          <li>What work spikes before and after High Point or Las Vegas Market?</li>
+          <li>What information do people gather manually from multiple systems before answering a customer?</li>
+          <li>How does product data reach the catalog? How many people touch it? How many systems?</li>
+          <li>What happens when a price changes, a finish is discontinued, or a new collection launches?</li>
+        </ul>
+
+        <h3>Research sequence</h3>
+        <div class="phase-timeline">
+          <div class="phase-item">
+            <div class="phase-label">Phase 1</div>
+            <div class="phase-content">
+              <div class="phase-title">Discovery Interviews</div>
+              <div class="phase-desc">20–30 people across manufacturers, reps, CS/order desk, sales leaders, marketing, dealer principals. Output: workflow map with event counts and pain points.</div>
+            </div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-label">Phase 2</div>
+            <div class="phase-content">
+              <div class="phase-title">Artifact Capture</div>
+              <div class="phase-desc">Anonymized quote packets, line sheets, order-exception emails, backlog reports, rep prep docs, market follow-up sequences. Output: concrete workflow corpus.</div>
+            </div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-label">Phase 3</div>
+            <div class="phase-content">
+              <div class="phase-title">Time-and-Motion with Design Partners</div>
+              <div class="phase-desc">With 2–3 SuperCat customers: measure touches/quote, turnaround time, reopen rates, rep selling time, backlog aging, avoidable escalations. Output: credible baseline and ROI case.</div>
+            </div>
+          </div>
+          <div class="phase-item">
+            <div class="phase-label">Phase 4</div>
+            <div class="phase-content">
+              <div class="phase-title">Narrow Pilot</div>
+              <div class="phase-desc">Tightly bounded pilot in one workflow cluster, with human approval and clear guardrails. Output: evidence on cycle time, adoption, and trust.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Pilot metrics — seven numbers to watch</h3>
+        <div class="dash-strip">
+          <div class="dash-cell"><div class="label">Turnaround</div><div class="value">Cycle ↓</div></div>
+          <div class="dash-cell"><div class="label">Touches</div><div class="value">Per Q/O ↓</div></div>
+          <div class="dash-cell"><div class="label">First Response</div><div class="value">SLA ↓</div></div>
+          <div class="dash-cell"><div class="label">Reopen Rate</div><div class="value">Quality ↑</div></div>
+          <div class="dash-cell"><div class="label">Rep Selling %</div><div class="value">Time ↑</div></div>
+          <div class="dash-cell"><div class="label">Backlog Age</div><div class="value">Velocity ↑</div></div>
+          <div class="dash-cell"><div class="label">Whitespace</div><div class="value">Capture ↑</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S10: BELIEVE / VALIDATE -->
+    <section class="sec" id="s-believe">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <span class="sec-num">10</span>
+        <span class="sec-title">Believe Now, Validate Next</span>
+      </div>
+      <div class="sec-body">
+        <div class="bv-grid">
+          <div class="bv-col believe">
+            <h4>Believe Now</h4>
+            <ul>
+              <li>This market has a real agentic opportunity large enough to matter — the public evidence is sufficient</li>
+              <li><strong>Product truth is the root wedge</strong> — upstream normalization, configuration intelligence, and catalog operability before downstream sales copilot features</li>
+              <li><strong>Revenue-service orchestration is the most painful daily work</strong> — and it becomes dramatically more automatable once product truth is structured</li>
+              <li>Rep productivity matters, but <strong>rep replacement is the wrong near-term frame</strong> — copilot the human, compress the coordination</li>
+              <li><strong>SuperCat's embedded position is structural advantage</strong> — ~118 instances, catalog data, order flow, rep telemetry, cross-instance analytics. No greenfield entrant starts here.</li>
+            </ul>
+          </div>
+          <div class="bv-col validate">
+            <h4>Validate Next</h4>
+            <ul>
+              <li>Which workflow has the highest event volume and pain among target accounts?</li>
+              <li>Which customer type feels the pain most sharply and controls budget fastest?</li>
+              <li>Which data sources are clean enough to support deterministic guardrails?</li>
+              <li>How does product data actually flow from ERP to catalog — and where does it break?</li>
+              <li>What is the real time cost of a quote, an order exception, a market-week follow-up cycle?</li>
+              <li>Can SuperCat deliver a Phase 1 read-and-normalize agent against existing customer data within a single design-partner engagement?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="thesis-block" style="margin-top: 24px;">
+          The public evidence is sufficient to justify a market-wide agentic thesis. The market does not look like a place where the biggest prize is a clever AI feature tucked into existing software. It looks like a place where the biggest prize is <em>owning the revenue work layer itself</em>.<br><br>
+          SuperCat is not starting from zero. It is starting from the catalog, the order, the rep, the portal, and the dealer. The catalog is the commercial operating system. <em>SuperCat already holds the keys.</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOPHON -->
+    <div class="colophon">
+      <div class="colophon-brand">Skaling Ventures</div>
+      <div class="colophon-tagline">For the Love of the Game</div>
+    </div>
+
+  </main>
+
+  <script>
+    function toggleSec(head) {
+      var sec = head.parentElement;
+      sec.classList.toggle('open');
+    }
+
+    // Sticky nav shadow
+    var nav = document.querySelector('.nav-bar');
+    if (nav) {
+      var observer = new IntersectionObserver(function(entries) {
+        nav.classList.toggle('stuck', !entries[0].isIntersecting);
+      }, { threshold: [1], rootMargin: '-1px 0px 0px 0px' });
+      observer.observe(nav);
+    }
+
+    // TOC active state
+    var tocLinks = document.querySelectorAll('.toc-scroll a');
+    var sections = [];
+    tocLinks.forEach(function(a) {
+      var id = a.getAttribute('href');
+      if (id && id.startsWith('#')) {
+        var el = document.getElementById(id.slice(1));
+        if (el) sections.push({ link: a, el: el });
+      }
+    });
+
+    function updateToc() {
+      var scrollY = window.scrollY + 80;
+      var active = null;
+      for (var i = sections.length - 1; i >= 0; i--) {
+        if (sections[i].el.offsetTop <= scrollY) { active = sections[i]; break; }
+      }
+      tocLinks.forEach(function(a) { a.classList.remove('active'); });
+      if (active) active.link.classList.add('active');
+    }
+    window.addEventListener('scroll', updateToc, { passive: true });
+    updateToc();
+
+    // TOC click -> open section + scroll
+    tocLinks.forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var id = this.getAttribute('href');
+        var target = document.getElementById(id.slice(1));
+        if (target) {
+          var sec = target.closest('.sec');
+          if (sec && !sec.classList.contains('open')) sec.classList.add('open');
+          var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
