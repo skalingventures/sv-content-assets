@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CEO Weekly Brief — Showcase Edition | Skaling Ventures</title>
+  <meta name="description" content="A sterilized showcase of the CEO Weekly Brief — the synthesis layer that reads every operator and produces one executive view.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#1F1F1F;--panel:#282726;--surface:#32312F;
+      --text-bright:#FFFAF4;--text:#E8E2D8;--muted:#A49E92;
+      --accent:#D08B68;--accent-deep:#89523B;--accent-glow:rgba(137,82,59,.14);--accent-bright:#D49470;
+      --fog:#A3B1C0;
+      --ok:#78AC78;--ok-dim:rgba(120,172,120,.10);--ok-border:rgba(120,172,120,.28);
+      --warn:#C4956A;--warn-dim:rgba(196,149,106,.10);--warn-border:rgba(196,149,106,.28);
+      --bad:#DC807C;--bad-dim:rgba(220,128,124,.10);--bad-border:rgba(220,128,124,.28);
+      --border:#807E7A;
+      --motif-rgb:137,82,59;
+      --ease:cubic-bezier(.23,1,.32,1);
+      --radius:10px;--radius-lg:14px;
+      --font-body:'DM Sans',system-ui,sans-serif;
+      --font-display:'DM Sans',system-ui,sans-serif;
+      --font-serif:'DM Serif Display',Georgia,serif;
+      --font-mono:'IBM Plex Mono',ui-monospace,monospace
+    }
+    *{box-sizing:border-box;margin:0}
+    body{background:var(--bg);color:var(--text);font:400 15px/1.6 var(--font-body);-webkit-font-smoothing:antialiased}
+    body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px 128px}
+
+    /* ── Atmosphere ── */
+    .page-atmosphere{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .page-atmosphere::before{content:'';position:absolute;top:-20%;right:-10%;width:500px;height:500px;background:linear-gradient(32deg,transparent 49.5%,rgba(var(--motif-rgb),.035) 49.5%,rgba(var(--motif-rgb),.035) 50.5%,transparent 50.5%),linear-gradient(148deg,transparent 49.5%,rgba(var(--motif-rgb),.022) 49.5%,rgba(var(--motif-rgb),.022) 50.5%,transparent 50.5%),linear-gradient(85deg,transparent 49.5%,rgba(var(--motif-rgb),.015) 49.5%,rgba(var(--motif-rgb),.015) 50.5%,transparent 50.5%)}
+    .page-glow-mid{position:absolute;top:30%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(var(--motif-rgb),.04) 0%,transparent 70%)}
+    .page-glow-low{position:absolute;top:75%;left:30%;width:500px;height:500px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(var(--motif-rgb),.03) 0%,transparent 70%)}
+
+    .scroll-progress{position:fixed;top:0;left:0;height:1px;background:linear-gradient(90deg,var(--accent),var(--accent-bright));width:0%;z-index:9999;pointer-events:none}
+
+    /* ── Showcase Banner ── */
+    .showcase-banner{background:linear-gradient(135deg,#89523B 0%,#7A4832 100%);padding:14px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1);position:relative;z-index:2}
+    .showcase-banner-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+    .sb-badge{font:600 9px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,250,244,.5);padding:3px 10px;border:1px solid rgba(255,250,244,.2);border-radius:999px}
+    .sb-text{font:400 13px var(--font-body);color:rgba(255,250,244,.85)}
+    .sb-text a{color:#FFFAF4;text-decoration:underline;text-underline-offset:2px}
+
+    /* ── Nav Bar ── */
+    .nav-bar{position:sticky;top:0;z-index:100;background:rgba(31,31,31,.92);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border-bottom:1px solid var(--border);transition:box-shadow .22s var(--ease)}
+    .nav-bar.stuck{box-shadow:0 4px 20px rgba(0,0,0,.5)}
+    .nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:stretch;height:44px;padding:0 28px}
+    .nav-home{display:flex;align-items:center;justify-content:center;width:36px;flex-shrink:0;color:var(--accent);text-decoration:none;transition:color .22s var(--ease)}
+    .nav-home:hover{color:var(--accent-bright)}
+    .nav-home svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .nav-title{display:flex;align-items:center;gap:6px;padding:0 14px 0 10px;border-right:1px solid var(--border);flex-shrink:0;font:700 9px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+    .nav-date{font-weight:400;color:var(--muted);letter-spacing:.04em;text-transform:none}
+    .toc-scroll{display:flex;flex-wrap:nowrap;align-items:stretch;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex:1;min-width:0}
+    .toc-scroll::-webkit-scrollbar{display:none}
+    .toc-scroll a{position:relative;display:flex;align-items:center;padding:0 10px;font:500 11px/1 var(--font-body);color:var(--muted);text-decoration:none;white-space:nowrap;flex-shrink:0;transition:color .22s var(--ease)}
+    .toc-scroll a::after{content:'';position:absolute;bottom:-1px;left:10px;right:10px;height:2px;border-radius:1px;background:transparent;transition:background .22s var(--ease)}
+    .toc-scroll a:hover{color:var(--text-bright)}
+    .toc-scroll a.active{color:var(--accent-bright)}
+    .toc-scroll a.active::after{background:var(--accent)}
+    .toc-sep{display:flex;align-items:center;flex-shrink:0;padding:0 3px}
+    .toc-sep::before{content:'';display:block;width:1px;height:14px;background:var(--border)}
+
+    /* ── Page Container ── */
+    .page{max-width:1080px;margin:0 auto;padding:0 28px 24px;position:relative;z-index:1}
+
+    /* ── Hero ── */
+    .hero{text-align:center;padding:48px 0 40px;position:relative}
+    .hero-brand{font:300 11px/1 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+    .hero-title{font:800 36px/1.15 var(--font-display);text-transform:uppercase;letter-spacing:.02em;color:var(--text-bright);margin:12px 0 16px}
+    .hero-bar{width:36px;height:2px;background:var(--accent);margin:0 auto 14px;border-radius:1px}
+    .hero-date{font:400 12px var(--font-mono);color:var(--muted)}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.3}
+    .hero .motif{position:absolute;top:-60px;right:-30px;width:400px;height:400px;pointer-events:none;background:linear-gradient(32deg,transparent 49.5%,rgba(var(--motif-rgb),.06) 49.5%,rgba(var(--motif-rgb),.06) 50.5%,transparent 50.5%),linear-gradient(148deg,transparent 49.5%,rgba(var(--motif-rgb),.04) 49.5%,rgba(var(--motif-rgb),.04) 50.5%,transparent 50.5%),linear-gradient(85deg,transparent 49.5%,rgba(var(--motif-rgb),.03) 49.5%,rgba(var(--motif-rgb),.03) 50.5%,transparent 50.5%)}
+
+    /* ── Section Accordion ── */
+    .sec{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:14px;scroll-margin-top:72px;position:relative;transition:border-color .22s var(--ease),box-shadow .22s var(--ease),transform .22s var(--ease)}
+    .sec:hover{border-color:var(--accent-deep)}
+    .sec.open{box-shadow:0 8px 32px rgba(0,0,0,.28),0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(var(--motif-rgb),.04);border-color:var(--accent-deep);transform:translateY(-1px)}
+    .sec-head{display:flex;align-items:baseline;gap:10px;padding:20px 24px;cursor:pointer;position:relative;user-select:none;transition:background .15s}
+    .sec-head:hover{background:rgba(255,255,255,.02)}
+    .sec-head::before{content:'';position:absolute;left:0;top:16px;width:3px;height:24px;border-radius:0 2px 2px 0;background:var(--accent);opacity:0;transition:opacity .25s var(--ease)}
+    .sec.open .sec-head::before{opacity:1}
+    .sec-head::after{content:'▸';position:absolute;right:20px;top:20px;font-size:11px;color:var(--muted);transition:transform .12s ease,color .12s ease}
+    .sec.open .sec-head::after{transform:rotate(90deg);color:var(--accent)}
+    .sec-head-rule{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--border)}
+    .sec-head-accent{position:absolute;bottom:0;left:24px;width:0;height:1px;background:var(--accent);transition:width .4s var(--ease)}
+    .sec.open .sec-head-accent{width:56px}
+    .sec-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+    .sec.open .sec-body{max-height:12000px}
+    .sec-inner{padding:24px 28px 28px}
+    .sec-watermark{position:absolute;top:14px;right:16px;width:20px;height:14px;opacity:0;transition:opacity .3s var(--ease);color:var(--accent)}
+    .sec.open .sec-watermark{opacity:.06}
+    .st{font:700 14px/1.2 var(--font-body);letter-spacing:.02em;text-transform:uppercase;color:var(--text-bright)}
+    .sh-sub{font:400 10px var(--font-mono);color:var(--muted)}
+
+    /* ── Executive Summary Callout ── */
+    .exec-callout{background:linear-gradient(135deg,rgba(var(--motif-rgb),.08),rgba(var(--motif-rgb),.03));border:1px solid var(--accent-deep);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:18px 20px;margin-bottom:20px;font:400 15px/1.65 var(--font-body);color:var(--text)}
+
+    /* ── Three Things ── */
+    .three-things{display:grid;gap:8px;margin-top:16px}
+    .tt-label{font:600 9px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+    .tt-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;transition:border-color .22s var(--ease)}
+    .tt-card:hover{border-color:var(--accent-deep)}
+    .tt-num{font:600 18px/1 var(--font-body);color:var(--accent);margin-bottom:6px}
+    .tt-title{font:600 14px/1.3 var(--font-body);color:var(--text-bright);margin-bottom:4px}
+    .tt-body{font:400 13px/1.5 var(--font-body);color:var(--text)}
+    .tt-source{font:500 10px var(--font-mono);color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+
+    /* ── Metrics Strip ── */
+    .dash-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px}
+    .dash-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;transition:border-color .22s var(--ease),transform .22s var(--ease)}
+    .dash-cell:hover{border-color:var(--accent-deep);transform:translateY(-1px)}
+    .dash-cell .label{font:500 10px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+    .dash-cell .value{font:600 17px/1.2 var(--font-body);color:var(--text-bright)}
+    .dash-cell .delta{font:400 11px var(--font-mono);color:var(--muted);margin-top:2px}
+    .dash-cell.status-ok{border-color:var(--ok-border)}.dash-cell.status-ok .value{color:var(--ok)}
+    .dash-cell.status-warn{border-color:var(--warn-border)}.dash-cell.status-warn .value{color:var(--warn)}
+    .dash-cell.status-bad{border-color:var(--bad-border)}.dash-cell.status-bad .value{color:var(--bad)}
+
+    /* ── Cross-Functional Cards ── */
+    .domain-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden}
+    .domain-card[open]{background:var(--surface);border-color:var(--accent-deep)}
+    .domain-card summary{cursor:pointer;list-style:none;padding:14px 16px;display:flex;align-items:center;gap:10px;font:600 14px var(--font-body);color:var(--text-bright);transition:background .22s var(--ease)}
+    .domain-card summary:hover{background:rgba(255,255,255,.02)}
+    .domain-card summary::-webkit-details-marker{display:none}
+    .domain-card summary::after{content:'▸';margin-left:auto;color:var(--muted);font-size:11px;transition:transform .12s ease}
+    .domain-card[open] summary::after{transform:rotate(90deg)}
+    .domain-card .dc-body{padding:0 16px 16px;font:400 14px/1.6 var(--font-body);color:var(--text)}
+    .domain-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+    /* ── Action Table ── */
+    .action-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+    .action-table th{text-align:left;font:600 9px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--border)}
+    .action-table td{padding:10px 14px;font-size:13px;color:var(--text);border-bottom:1px solid rgba(128,126,122,.2);vertical-align:top}
+    .action-table tbody tr{transition:background .22s var(--ease)}
+    .action-table tbody tr:hover{background:rgba(255,255,255,.02)}
+    .action-table tr:last-child td{border-bottom:none}
+    .action-table td:first-child{font:500 13px var(--font-mono);color:var(--accent);width:28px;text-align:center}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;font:500 10px var(--font-mono);letter-spacing:.04em;text-transform:uppercase}
+    .badge-rev{background:var(--warn-dim);color:var(--warn);border:1px solid var(--warn-border)}
+    .badge-sup{background:var(--bad-dim);color:var(--bad);border:1px solid var(--bad-border)}
+    .badge-grow{background:var(--ok-dim);color:var(--ok);border:1px solid var(--ok-border)}
+    .badge-prod{background:rgba(163,177,192,.10);color:var(--fog);border:1px solid rgba(163,177,192,.28)}
+    .badge-strat{background:var(--accent-glow);color:var(--accent);border:1px solid rgba(var(--motif-rgb),.28)}
+
+    /* ── Truth Alerts ── */
+    .truth-alert{background:var(--bad-dim);border:1px solid var(--bad-border);border-left:3px solid var(--bad);border-radius:0 var(--radius) var(--radius) 0;padding:14px 18px;margin-bottom:10px}
+    .truth-alert-label{font:600 9px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--bad);margin-bottom:4px}
+    .truth-alert-text{font:400 14px/1.6 var(--font-body);color:var(--text)}
+
+    /* ── Stance Cards ── */
+    .stance-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:8px;transition:border-color .22s var(--ease)}
+    .stance-card:hover{border-color:var(--accent-deep)}
+    .stance-type{font:600 9px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+    .stance-type.updated{color:var(--accent)}
+    .stance-type.continues{color:var(--ok)}
+    .stance-type.watch{color:var(--warn)}
+    .stance-text{font:400 14px/1.6 var(--font-body);color:var(--text)}
+
+    /* ── Colophon ── */
+    .colophon{margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;position:relative}
+    .colophon::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:48px;height:1px;background:var(--accent)}
+    .colophon-mark{display:flex;justify-content:center;margin-bottom:10px}
+    .colophon-brand{font:300 11px/1 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+    .colophon-tagline{margin-top:6px;font:italic 12px var(--font-body);color:var(--muted)}
+
+    /* ── Showcase Footer ── */
+    .showcase-footer{background:var(--panel);border-top:1px solid var(--border);padding:40px 20px;text-align:center;position:relative;z-index:1}
+    .sf-inner{max-width:600px;margin:0 auto}
+    .sf-title{font:600 14px var(--font-body);color:var(--text-bright);margin-bottom:8px}
+    .sf-body{font:400 13px/1.6 var(--font-body);color:var(--muted);margin-bottom:16px}
+    .sf-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:var(--accent-glow);color:var(--accent);font:600 12px var(--font-body);text-decoration:none;border:1px solid rgba(var(--motif-rgb),.28);border-radius:var(--radius);transition:all .22s var(--ease)}
+    .sf-cta:hover{background:rgba(var(--motif-rgb),.2);transform:translateY(-1px)}
+
+    /* ── Animations ── */
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .a{opacity:0;animation:rise .5s var(--ease) forwards}
+    .a1{animation-delay:.05s}.a2{animation-delay:.1s}.a3{animation-delay:.15s}.a4{animation-delay:.2s}.a5{animation-delay:.25s}.a6{animation-delay:.3s}
+
+    /* ── Accessibility ── */
+    .skip-link{position:absolute;top:-100px;left:16px;z-index:1000;padding:10px 18px;background:var(--accent);color:var(--bg);font:600 14px var(--font-body);border-radius:var(--radius);text-decoration:none;transition:top .2s}
+    .skip-link:focus{top:16px}
+    *:focus{outline:none}*:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}body{scroll-behavior:auto}.a{opacity:1!important}}
+
+    /* ── Responsive ── */
+    table{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    @media(max-width:600px){
+      table{display:block;font-size:11px}
+      th,td{padding:6px 8px}
+      .page{padding:0 8px 16px}
+      .sec-inner{padding:12px 12px 16px}
+      .dash-strip{grid-template-columns:1fr 1fr}
+      .nav-inner{padding:0 8px}
+      .hero-title{font-size:26px}
+    }
+    @media print{.nav-bar,.showcase-banner,.showcase-footer{display:none!important}}
+  </style>
+</head>
+<body>
+
+<div class="page-atmosphere">
+  <div class="page-glow-mid"></div>
+  <div class="page-glow-low"></div>
+</div>
+
+<div class="showcase-banner">
+  <div class="showcase-banner-inner">
+    <span class="sb-badge">Showcase Edition</span>
+    <span class="sb-text">This is a sterilized sample of a production <strong>CEO Weekly Brief</strong>. All company names, metrics, and individuals are synthetic. <a href="https://skalingventures.substack.com/p/the-agentic-ceo-reality-on-demand">Read the framework →</a></span>
+  </div>
+</div>
+
+<div class="scroll-progress"></div>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<nav class="nav-bar" aria-label="Section navigation">
+  <div class="nav-inner">
+    <a class="nav-home" href="https://www.skalingventures.com" aria-label="Home">
+      <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/></svg>
+    </a>
+    <div class="nav-title">CEO Weekly Brief <span class="nav-date">Showcase Edition</span></div>
+    <div class="toc-scroll">
+      <a href="#exec-reality">Reality</a>
+      <a href="#vitals">Vitals</a>
+      <span class="toc-sep"></span>
+      <a href="#cross-intel">Intelligence</a>
+      <a href="#actions">Actions</a>
+      <span class="toc-sep"></span>
+      <a href="#truth-alerts">Truth</a>
+      <a href="#stances">Stances</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <main id="main-content" tabindex="-1">
+
+    <header class="hero a a1">
+      <div class="motif"></div>
+      <div class="hero-brand">Skaling Ventures</div>
+      <h1 class="hero-title">CEO Weekly Brief</h1>
+      <div class="hero-bar"></div>
+      <div class="hero-date">Week of April 14, 2026 · Showcase Edition</div>
+    </header>
+
+    <!-- §1 Executive Reality Summary -->
+    <div class="sec open" id="exec-reality">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <h2 class="st">Executive Reality Summary</h2>
+        <span class="sh-sub">Synthesis across all operators</span>
+      </div>
+      <div class="sec-body"><div class="sec-inner">
+        <div class="exec-callout">
+          Revenue is structurally dependent on two late-stage deals that together represent 48% of open pipeline. Support ticket aging has improved for the second consecutive week, but three high-value accounts show early churn signals. Product velocity is strong — the Q2 release is on track — but the growth engine is showing signs of top-of-funnel fatigue. The board deck needs honest framing: ARR growth is real but fragile.
+        </div>
+        <div class="three-things">
+          <div class="tt-label">Three Things This Week</div>
+          <div class="tt-card">
+            <div class="tt-num">1</div>
+            <div class="tt-title">Pipeline concentration risk: two deals = 48% of open ARR</div>
+            <div class="tt-body">Both Commit-stage deals control $118K of $247K open pipeline. If either slips, Q2 target requires four new wins at current ACV to compensate — and top-of-funnel is empty.</div>
+            <div class="tt-source">Source: Pipeline Reality</div>
+          </div>
+          <div class="tt-card">
+            <div class="tt-num">2</div>
+            <div class="tt-title">Support aging improved, but three accounts need executive attention</div>
+            <div class="tt-body">Ticket aging P50 dropped from 4.2h to 3.1h. However, three high-value accounts show trust-risk signals: one with 5 open tickets, one with repeated integration failures, one with champion departure confirmed this week.</div>
+            <div class="tt-source">Source: Support Reality</div>
+          </div>
+          <div class="tt-card">
+            <div class="tt-num">3</div>
+            <div class="tt-title">Growth inbound volume dropped 22% WoW — investigate before it compounds</div>
+            <div class="tt-body">MQL volume fell from 182 to 142 in a single week. LinkedIn engagement flat, paid CPA up 15%. A competitor free-tier launch may be displacing inbound — but the data is inconclusive without another week of signal.</div>
+            <div class="tt-source">Source: Growth Reality</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- §2 Company Vitals -->
+    <div class="sec" id="vitals">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <h2 class="st">Company Vitals</h2>
+        <span class="sh-sub">Trailing metrics snapshot</span>
+      </div>
+      <div class="sec-body"><div class="sec-inner">
+        <div class="dash-strip">
+          <div class="dash-cell status-ok"><div class="label">ARR</div><div class="value">$3.2M</div><div class="delta">+8% YTD</div></div>
+          <div class="dash-cell status-ok"><div class="label">Net Revenue Retention</div><div class="value">104%</div><div class="delta">Above 100% target</div></div>
+          <div class="dash-cell status-warn"><div class="label">Pipeline Coverage</div><div class="value">1.8x</div><div class="delta">Below 3x target</div></div>
+        </div>
+        <div class="dash-strip">
+          <div class="dash-cell status-warn"><div class="label">CSAT (30d)</div><div class="value">87%</div><div class="delta">Down from 91%</div></div>
+          <div class="dash-cell status-ok"><div class="label">Sprint Velocity</div><div class="value">94%</div><div class="delta">On track for Q2</div></div>
+          <div class="dash-cell status-bad"><div class="label">Growth MQLs</div><div class="value">142</div><div class="delta">↓ 22% WoW</div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- §3 Cross-Functional Intelligence -->
+    <div class="sec" id="cross-intel">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <h2 class="st">Cross-Functional Intelligence</h2>
+        <span class="sh-sub">Per-domain synthesis</span>
+      </div>
+      <div class="sec-body"><div class="sec-inner">
+
+        <details class="domain-card">
+          <summary><span class="domain-dot" style="background:var(--warn)"></span>Revenue &amp; Pipeline</summary>
+          <div class="dc-body">Pipeline contracted $63K after Q1 close-out. Two Commit deals control the quarter — Meridian Systems ($68K, contract unsigned 9 days past close date) and Summit Holdings ($50K, IT approval pending). Top-of-funnel is empty: zero deals in Qualifying, one in Discovery. Deal velocity has slowed across the board. If both Commit deals slip, Q2 target requires four new wins at current ACV — and there is no pipeline wave to support that.</div>
+        </details>
+
+        <details class="domain-card">
+          <summary><span class="domain-dot" style="background:var(--bad)"></span>Customer &amp; Support</summary>
+          <div class="dc-body">Ticket aging P50 improved from 4.2 hours to 3.1 hours — second consecutive weekly improvement. Three accounts flagged for trust-risk: Vantage Corp (5 open tickets, longest open 6 days), Pinnacle Group (repeated integration failures, 3 incidents in 14 days), and Atlas Partners (champion departed, no replacement contact established). None of these were on the CS team's watch list until this week's Support Reality flagged them.</div>
+        </details>
+
+        <details class="domain-card">
+          <summary><span class="domain-dot" style="background:var(--fog)"></span>Product &amp; Engineering</summary>
+          <div class="dc-body">Q2 release on track at 94% sprint velocity. Three customer-driven P1 bugs closed this sprint — two related to the data export module, one a permissions edge case. API performance audit complete: two endpoints (bulk-export and webhook-replay) need optimization before launch. No scope changes requested. The team has earned trust — maintain current cadence.</div>
+        </details>
+
+        <details class="domain-card">
+          <summary><span class="domain-dot" style="background:var(--ok)"></span>Growth &amp; Market</summary>
+          <div class="dc-body">Inbound MQL volume dropped 22% WoW (182 → 142). LinkedIn engagement flat despite increased posting frequency. Paid channel CPA up 15% — the Google Ads account is showing diminishing returns on the primary keyword set. One competitor launched a free-tier product last Tuesday — early signals suggest displacement in the SMB segment. Monitor for 4 weeks before reacting with pricing changes.</div>
+        </details>
+
+      </div></div>
+    </div>
+
+    <!-- §4 CEO Action Items -->
+    <div class="sec" id="actions">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <h2 class="st">CEO Action Items</h2>
+        <span class="sh-sub">This week's priorities</span>
+      </div>
+      <div class="sec-body"><div class="sec-inner">
+        <table class="action-table">
+          <thead><tr>
+            <th scope="col">#</th>
+            <th scope="col">Action</th>
+            <th scope="col">Domain</th>
+            <th scope="col">Owner</th>
+            <th scope="col">By When</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Call Meridian VP to confirm contract signing status</td><td><span class="badge badge-rev">Revenue</span></td><td>CEO</td><td>This week</td></tr>
+            <tr><td>2</td><td>Send executive note to three trust-risk accounts</td><td><span class="badge badge-sup">Support</span></td><td>CEO</td><td>This week</td></tr>
+            <tr><td>3</td><td>Review growth channel mix with marketing lead</td><td><span class="badge badge-grow">Growth</span></td><td>CEO + Marketing</td><td>Next week</td></tr>
+            <tr><td>4</td><td>Approve Q2 release go/no-go</td><td><span class="badge badge-prod">Product</span></td><td>CEO</td><td>Next Friday</td></tr>
+            <tr><td>5</td><td>Prepare board deck with honest pipeline framing</td><td><span class="badge badge-strat">Strategy</span></td><td>CEO + CFO</td><td>End of month</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- §5 Truth Alerts -->
+    <div class="sec" id="truth-alerts">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <h2 class="st">Truth Alerts</h2>
+        <span class="sh-sub">Structural risks requiring honesty</span>
+      </div>
+      <div class="sec-body"><div class="sec-inner">
+        <div class="truth-alert">
+          <div class="truth-alert-label">Pipeline Coverage</div>
+          <div class="truth-alert-text">Pipeline coverage at 1.8x is below the 3x board commitment. The honest framing: we need the two Commit deals AND two new wins to hit Q2 target. The board deck must say this directly — not bury it in a weighted-probability forecast that obscures the concentration risk.</div>
+        </div>
+        <div class="truth-alert">
+          <div class="truth-alert-label">Churn Blind Spot</div>
+          <div class="truth-alert-text">Three accounts showing early churn signals were not on the CS team's watch list until this week's Support Reality flagged them. The gap between CRM health scores and actual ticket patterns is a systemic blind spot. Health scores showed "green" for all three accounts while ticket volume and sentiment were degrading.</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- §6 Stance Updates -->
+    <div class="sec" id="stances">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <h2 class="st">Stance Updates</h2>
+        <span class="sh-sub">Operating posture this week</span>
+      </div>
+      <div class="sec-body"><div class="sec-inner">
+        <div class="stance-card">
+          <div class="stance-type updated">Updated</div>
+          <div class="stance-text">Shifting growth posture from "scale what works" to "diagnose what's degrading" — inbound volume decline needs root cause before we add spend. Pausing budget increase request until we have two consecutive weeks of MQL data post-competitor launch.</div>
+        </div>
+        <div class="stance-card">
+          <div class="stance-type continues">Continues</div>
+          <div class="stance-text">Product velocity remains strong. The team has earned trust. Maintain current sprint cadence and avoid mid-quarter scope additions. The Q2 release is the priority — no distractions.</div>
+        </div>
+        <div class="stance-card">
+          <div class="stance-type watch">Watch</div>
+          <div class="stance-text">Competitor free-tier launch. Monitor pipeline displacement signals in Growth Reality for next 4 weeks before reacting. If SMB conversion rate drops below 12%, escalate to pricing review.</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- Colophon -->
+    <div class="colophon">
+      <div class="colophon-mark">
+        <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="20" aria-label="Skaling Ventures">
+          <path d="M5 38 L30 6 L55 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.5"/>
+          <path d="M12 38 L30 14 L48 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.7"/>
+          <path d="M19 38 L30 22 L41 38" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.9"/>
+          <line x1="5" y1="38" x2="55" y2="38" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="colophon-brand">Skaling Ventures</div>
+      <div class="colophon-tagline">For the Love of the Game</div>
+    </div>
+
+  </main>
+</div>
+
+<div class="showcase-footer">
+  <div class="sf-inner">
+    <div class="sf-title">This is the synthesis layer — it reads every other operator's output and produces one executive view.</div>
+    <div class="sf-body">The CEO Weekly Brief runs autonomously every Friday. It pulls insights from Pipeline Reality, Support Reality, Growth Reality, Product &amp; Eng Reality, and Voice of Market — then synthesizes them into the actions and truth alerts above.</div>
+    <a class="sf-cta" href="https://skalingventures.substack.com/p/the-agentic-ceo-reality-on-demand">Read the framework on Substack →</a>
+  </div>
+</div>
+
+<script>
+function toggleSec(head){head.parentElement.classList.toggle('open')}
+
+/* Editorial chrome injection */
+(function(){
+  var mtPath='M5 38 L30 6 L55 38';
+  document.querySelectorAll('.sec').forEach(function(sec){
+    var head=sec.querySelector('.sec-head');
+    if(!head)return;
+    if(!head.querySelector('.sec-head-rule')){
+      var rule=document.createElement('span');rule.className='sec-head-rule';head.appendChild(rule);
+    }
+    if(!head.querySelector('.sec-head-accent')){
+      var accent=document.createElement('span');accent.className='sec-head-accent';head.appendChild(accent);
+    }
+    if(!sec.querySelector('.sec-watermark')){
+      var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('class','sec-watermark');svg.setAttribute('viewBox','0 0 60 40');svg.setAttribute('fill','none');
+      var p1=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p1.setAttribute('d','M5 38 L30 6 L55 38');p1.setAttribute('stroke','currentColor');p1.setAttribute('stroke-width','1.2');p1.setAttribute('fill','none');p1.setAttribute('opacity','0.5');
+      var p2=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p2.setAttribute('d','M12 38 L30 14 L48 38');p2.setAttribute('stroke','currentColor');p2.setAttribute('stroke-width','1.2');p2.setAttribute('fill','none');p2.setAttribute('opacity','0.7');
+      var p3=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p3.setAttribute('d','M19 38 L30 22 L41 38');p3.setAttribute('stroke','currentColor');p3.setAttribute('stroke-width','1.2');p3.setAttribute('fill','none');p3.setAttribute('opacity','0.9');
+      svg.appendChild(p1);svg.appendChild(p2);svg.appendChild(p3);sec.appendChild(svg);
+    }
+  });
+})();
+
+/* Sticky nav shadow */
+var nav=document.querySelector('.nav-bar');
+if(nav){var sentinel=document.createElement('div');sentinel.style.cssText='height:1px;margin-top:-1px';nav.parentElement.insertBefore(sentinel,nav);new IntersectionObserver(function(e){nav.classList.toggle('stuck',!e[0].isIntersecting)},{threshold:[1]}).observe(sentinel)}
+
+/* TOC scroll-spy & click */
+var tocLinks=document.querySelectorAll('.toc-scroll a');
+var tocSections=[];
+tocLinks.forEach(function(a){var id=a.getAttribute('href');if(id&&id.startsWith('#')){var el=document.getElementById(id.slice(1));if(el)tocSections.push({link:a,el:el})}});
+function updateToc(){var y=window.scrollY+80;var active=null;for(var i=tocSections.length-1;i>=0;i--){if(tocSections[i].el.offsetTop<=y){active=tocSections[i];break}}tocLinks.forEach(function(a){a.classList.remove('active')});if(active)active.link.classList.add('active')}
+window.addEventListener('scroll',updateToc,{passive:true});updateToc();
+tocLinks.forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var id=this.getAttribute('href');var target=document.getElementById(id.slice(1));if(target){if(target.classList.contains('sec')&&!target.classList.contains('open'))target.classList.add('open');var prefersReduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;target.scrollIntoView({behavior:prefersReduced?'auto':'smooth',block:'start'})}})});
+
+/* Scroll progress */
+var bar=document.querySelector('.scroll-progress');
+function updateProgress(){var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(h>0?(window.scrollY/h*100):0)+'%'}
+window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();
+
+/* Keyboard nav */
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  var secs=Array.from(document.querySelectorAll('.sec'));
+  if(e.key==='j'||e.key==='k'){e.preventDefault();var cur=-1;secs.forEach(function(s,i){var r=s.getBoundingClientRect();if(r.top>=-10&&cur<0)cur=i});var next=e.key==='j'?Math.min(cur+1,secs.length-1):Math.max((cur<1?0:cur)-1,0);secs[next].scrollIntoView({behavior:'smooth',block:'start'})}
+  if(e.key==='Escape'){secs.forEach(function(s){s.classList.remove('open')});window.scrollTo({top:0,behavior:'smooth'})}
+});
+</script>
+</body>
+</html>

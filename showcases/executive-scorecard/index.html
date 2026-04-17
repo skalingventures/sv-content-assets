@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive Scorecard — Showcase Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#1F1F1F; --panel:#282726; --surface:#32312F;
+  --text-bright:#FFFAF4; --text:#E8E2D8; --muted:#A49E92;
+  --accent:#D08B68; --accent-deep:#89523B;
+  --accent-glow:rgba(137,82,59,.14); --accent-bright:#D49470;
+  --fog:#A3B1C0;
+  --ok:#78AC78; --ok-dim:rgba(120,172,120,.10); --ok-border:rgba(120,172,120,.28);
+  --warn:#C4956A; --warn-dim:rgba(196,149,106,.10); --warn-border:rgba(196,149,106,.28);
+  --bad:#DC807C; --bad-dim:rgba(220,128,124,.10); --bad-border:rgba(220,128,124,.28);
+  --border:#807E7A; --border-light:rgba(255,255,255,.06);
+  --motif-rgb:137,82,59;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --radius:10px; --radius-lg:14px;
+  --fd:'DM Sans',system-ui,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,monospace;
+  --font-serif:'DM Serif Display',Georgia,serif;
+}
+
+* { box-sizing:border-box; margin:0 }
+
+body {
+  background:var(--bg); color:var(--text);
+  font:15px/1.6 var(--fd); -webkit-font-smoothing:antialiased;
+}
+
+body::after {
+  content:''; position:fixed; inset:0; z-index:9999;
+  pointer-events:none; opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px;
+}
+
+.page-atmosphere {
+  position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+  background:
+    linear-gradient(32deg,transparent 49.5%,rgba(var(--motif-rgb),.035) 49.5%,rgba(var(--motif-rgb),.035) 50.5%,transparent 50.5%),
+    linear-gradient(148deg,transparent 49.5%,rgba(var(--motif-rgb),.022) 49.5%,rgba(var(--motif-rgb),.022) 50.5%,transparent 50.5%),
+    linear-gradient(85deg,transparent 49.5%,rgba(var(--motif-rgb),.015) 49.5%,rgba(var(--motif-rgb),.015) 50.5%,transparent 50.5%);
+}
+.page-glow-mid {
+  position:absolute; top:30%; left:50%; width:600px; height:600px;
+  transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--motif-rgb),.06),transparent 70%);
+}
+.page-glow-low {
+  position:absolute; top:75%; left:40%; width:500px; height:500px;
+  transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--motif-rgb),.04),transparent 70%);
+}
+
+.scroll-progress {
+  position:fixed; top:0; left:0; height:1px; width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent-bright));
+  z-index:10000; pointer-events:none;
+}
+
+.skip-link {
+  position:absolute; top:-100px; left:16px; z-index:1000;
+  padding:10px 18px; background:var(--accent); color:var(--bg);
+  font:600 14px var(--fd); border-radius:var(--radius);
+  text-decoration:none; transition:top .2s;
+}
+.skip-link:focus { top:16px }
+*:focus { outline:none }
+*:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:4px }
+
+/* ── Showcase banner ── */
+.showcase-banner {
+  background:var(--accent-deep); padding:10px 28px;
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  position:relative; z-index:1;
+}
+.showcase-badge {
+  font:600 9px var(--fm); letter-spacing:.08em; text-transform:uppercase;
+  background:rgba(255,250,244,.15); color:var(--text-bright);
+  padding:3px 10px; border-radius:999px; flex-shrink:0;
+}
+.showcase-text { font:400 12px/1.4 var(--fd); color:rgba(255,250,244,.85) }
+.showcase-text a { color:var(--text-bright); text-decoration:underline; text-underline-offset:2px }
+
+/* ── Nav bar ── */
+.nav-bar {
+  position:sticky; top:0; z-index:100;
+  background:rgba(31,31,31,.92); backdrop-filter:blur(12px) saturate(180%);
+  border-bottom:1px solid var(--border); transition:box-shadow .22s var(--ease);
+}
+.nav-bar.stuck { box-shadow:0 4px 20px rgba(0,0,0,.5) }
+.nav-inner {
+  max-width:960px; margin:0 auto;
+  display:flex; align-items:stretch; height:44px; padding:0 28px;
+}
+.nav-home {
+  display:flex; align-items:center; justify-content:center; width:36px;
+  flex-shrink:0; color:var(--accent); text-decoration:none;
+  transition:color .22s var(--ease);
+}
+.nav-home:hover { color:var(--accent-bright) }
+.nav-home svg { width:18px; height:18px }
+.nav-title {
+  display:flex; align-items:center; gap:6px; padding:0 14px 0 10px;
+  border-right:1px solid var(--border); flex-shrink:0;
+  font:700 9px/1 var(--fm); letter-spacing:.08em;
+  text-transform:uppercase; color:var(--accent); white-space:nowrap;
+}
+.toc-scroll {
+  display:flex; flex-wrap:nowrap; align-items:stretch; gap:0;
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; flex:1; min-width:0;
+}
+.toc-scroll::-webkit-scrollbar { display:none }
+.toc-scroll a {
+  position:relative; display:flex; align-items:center; padding:0 10px;
+  font:500 11px/1 var(--fd); color:var(--muted); text-decoration:none;
+  white-space:nowrap; flex-shrink:0; transition:color .22s var(--ease);
+}
+.toc-scroll a::after {
+  content:''; position:absolute; bottom:-1px; left:10px; right:10px;
+  height:2px; border-radius:1px; background:transparent;
+  transition:background .22s var(--ease);
+}
+.toc-scroll a:hover { color:var(--text-bright) }
+.toc-scroll a.active { color:var(--accent-bright) }
+.toc-scroll a.active::after { background:var(--accent) }
+
+/* ── Page container ── */
+.page { max-width:960px; margin:0 auto; padding:0 28px 24px; position:relative; z-index:1 }
+
+/* ── Hero header ── */
+.hero { text-align:center; padding:40px 0 32px; position:relative }
+.hero-mark { width:32px; height:22px; margin:0 auto 14px; color:var(--accent) }
+.hero-brand {
+  font:300 11px/1 var(--fd); letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:10px;
+}
+.hero-title { font:700 28px/1.2 var(--fd); color:var(--text-bright); margin-bottom:6px }
+.hero-meta { font:400 11px var(--fm); color:var(--muted); margin-bottom:18px }
+.hero-rule { width:56px; height:1px; margin:0 auto; background:linear-gradient(90deg,var(--accent),var(--accent-bright)) }
+
+/* ── Entrance animations ── */
+@keyframes rise { from { opacity:0; transform:translateY(14px) } to { opacity:1; transform:translateY(0) } }
+.a { opacity:0; animation:rise .5s var(--ease) forwards }
+.a1 { animation-delay:.08s } .a2 { animation-delay:.16s }
+.a3 { animation-delay:.24s } .a4 { animation-delay:.32s }
+.a5 { animation-delay:.4s }  .a6 { animation-delay:.48s }
+
+/* ── Section accordion ── */
+.sec {
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius-lg);
+  margin-bottom:14px; scroll-margin-top:72px; position:relative;
+  transition:border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+}
+.sec:hover { border-color:var(--border) }
+.sec.open {
+  box-shadow:0 8px 32px rgba(0,0,0,.28), 0 2px 8px rgba(0,0,0,.15),
+             inset 0 1px 0 rgba(var(--motif-rgb),.04);
+  transform:translateY(-1px);
+}
+.sec-head {
+  display:flex; align-items:baseline; gap:10px; padding:20px 24px;
+  cursor:pointer; position:relative; user-select:none; transition:background .15s;
+}
+.sec-head:hover { background:rgba(255,255,255,.02) }
+.sec-head::before {
+  content:''; position:absolute; left:0; top:16px; width:3px; height:24px;
+  border-radius:0 2px 2px 0; background:var(--accent);
+  opacity:0; transition:opacity .25s var(--ease);
+}
+.sec.open .sec-head::before { opacity:1 }
+.sec-head::after {
+  content:'▸'; position:absolute; right:20px; top:20px; font-size:11px;
+  color:var(--muted); transition:transform .12s ease, color .22s var(--ease);
+}
+.sec.open .sec-head::after { transform:rotate(90deg); color:var(--accent) }
+.sec-head-rule { position:absolute; bottom:0; left:0; right:0; height:1px; background:var(--border) }
+.sec-head-accent {
+  position:absolute; bottom:0; left:24px; width:0; height:1px;
+  background:var(--accent); transition:width .4s var(--ease);
+}
+.sec.open .sec-head-accent { width:56px }
+.sec-body { max-height:0; overflow:hidden; transition:max-height .35s cubic-bezier(.4,0,.2,1) }
+.sec.open .sec-body { max-height:20000px }
+.sec-inner { padding:24px 28px 28px }
+.sec-watermark {
+  position:absolute; top:14px; right:16px; width:20px; height:14px;
+  opacity:0; transition:opacity .3s var(--ease); color:var(--accent);
+}
+.sec.open .sec-watermark { opacity:.06 }
+.st { font:700 14px/1.2 var(--fd); letter-spacing:.02em; text-transform:uppercase; color:var(--text-bright) }
+.sh-sub { font:400 10px var(--fm); color:var(--muted) }
+
+/* ── Pulse grid ── */
+.pulse-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px }
+.pulse-group { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden }
+.pg-head {
+  font:600 10px var(--fm); letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); padding:10px 14px; border-bottom:1px solid var(--border);
+}
+.pg-table { width:100%; border-collapse:collapse }
+.pg-table td { padding:7px 14px; font-size:12.5px; border-bottom:1px solid rgba(var(--motif-rgb),.08) }
+.pg-table tr:last-child td { border-bottom:none }
+.pg-table .pm { color:var(--text); font-weight:500 }
+.pg-table .pv { font:500 12px var(--fm); color:var(--text-bright); text-align:right }
+.pg-table .pd { font:400 10px var(--fm); text-align:right; width:80px }
+.pd.up { color:var(--ok) }
+.pd.down { color:var(--bad) }
+
+/* ── Signal mix bar ── */
+.smb { height:4px; border-radius:2px; display:flex; overflow:hidden; margin-bottom:14px }
+.smb-seg { height:100%; transition:width .4s var(--ease) }
+.smb-legend { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:6px }
+.smb-legend span { font:400 10px var(--fm); color:var(--muted); display:flex; align-items:center; gap:4px }
+.smb-legend span::before { content:''; width:7px; height:7px; border-radius:50%; display:inline-block }
+.smb-legend .l-ok::before { background:var(--ok) }
+.smb-legend .l-warn::before { background:var(--warn) }
+.smb-legend .l-bad::before { background:var(--bad) }
+.smb-legend .l-muted::before { background:var(--muted) }
+.smb-wrap { margin-bottom:16px }
+
+/* ── Data freshness strip ── */
+.freshness {
+  display:flex; gap:12px; flex-wrap:wrap; padding:10px 14px;
+  background:var(--surface); border-radius:var(--radius); margin-top:8px;
+}
+.fresh-item { font:400 10px var(--fm); color:var(--muted); display:flex; align-items:center; gap:5px }
+.fresh-dot { width:6px; height:6px; border-radius:50%; background:var(--ok) }
+
+/* ── Callout cards ── */
+.callouts { display:grid; gap:10px; margin-bottom:18px }
+.callout {
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+  overflow:hidden; transition:border-color .22s var(--ease);
+}
+.callout.type-alert  { border-left:4px solid var(--bad) }
+.callout.type-opp    { border-left:4px solid var(--ok) }
+.callout.type-insight { border-left:4px solid var(--accent) }
+.co-head {
+  display:flex; align-items:center; gap:8px; padding:12px 16px;
+  cursor:pointer; user-select:none;
+}
+.co-head:hover { background:rgba(255,255,255,.02) }
+.co-tag {
+  font:600 9px var(--fm); letter-spacing:.06em; text-transform:uppercase;
+  padding:2px 8px; border-radius:999px;
+}
+.tag-alert   { background:var(--bad-dim); color:var(--bad); border:1px solid var(--bad-border) }
+.tag-opp     { background:var(--ok-dim); color:var(--ok); border:1px solid var(--ok-border) }
+.tag-insight { background:var(--accent-glow); color:var(--accent); border:1px solid rgba(var(--motif-rgb),.3) }
+.co-title { font:600 13px/1.3 var(--fd); color:var(--text-bright); flex:1 }
+.co-chev { font-size:11px; color:var(--muted); transition:transform .12s ease }
+.callout.co-open .co-chev { transform:rotate(90deg) }
+.co-body { max-height:0; overflow:hidden; transition:max-height .3s var(--ease) }
+.callout.co-open .co-body { max-height:600px }
+.co-inner { padding:0 16px 14px; font-size:13px; color:var(--text); line-height:1.55 }
+.co-source { font:400 10px var(--fm); color:var(--muted); margin-top:8px }
+
+/* ── Movers table ── */
+.movers-table {
+  width:100%; border-collapse:separate; border-spacing:0;
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden; margin-bottom:18px;
+}
+.movers-table th {
+  text-align:left; font:600 9px var(--fm); letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted); padding:8px 12px;
+  background:var(--surface); border-bottom:1px solid var(--border);
+}
+.movers-table td {
+  padding:8px 12px; font-size:12.5px; color:var(--text);
+  border-bottom:1px solid rgba(var(--motif-rgb),.08); vertical-align:middle;
+}
+.movers-table tbody tr { cursor:pointer; transition:background .22s var(--ease) }
+.movers-table tbody tr:hover { background:rgba(255,255,255,.02) }
+.movers-table tbody tr:last-child td { border-bottom:none }
+.movers-table .m-metric { font-weight:600; color:var(--text-bright) }
+.movers-table .m-delta.up { color:var(--ok) }
+.movers-table .m-delta.down { color:var(--bad) }
+.mover-ctx { display:none; background:var(--surface) }
+.mover-ctx.ctx-open { display:table-row }
+.mover-ctx td {
+  padding:10px 14px 12px; font-size:12.5px; color:var(--text);
+  line-height:1.5; border-bottom:1px solid rgba(var(--motif-rgb),.08);
+}
+.mover-ctx.ctx-up td   { border-left:3px solid var(--ok) }
+.mover-ctx.ctx-down td { border-left:3px solid var(--bad) }
+.m-domain { font:500 10px var(--fm); color:var(--muted) }
+
+/* ── Filter pills ── */
+.filter-bar { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px }
+.pill {
+  font:500 11px var(--fd); padding:4px 12px; border:1px solid var(--border);
+  border-radius:999px; background:transparent; color:var(--muted);
+  cursor:pointer; transition:all .22s var(--ease);
+}
+.pill:hover { border-color:var(--accent); color:var(--text) }
+.pill.active { background:var(--accent-glow); border-color:var(--accent); color:var(--accent) }
+
+/* ── Domain groups ── */
+.domain-group {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-lg); margin-bottom:10px; overflow:hidden;
+}
+.dg-head {
+  display:flex; align-items:center; gap:10px; padding:12px 16px;
+  cursor:pointer; user-select:none; transition:background .15s;
+}
+.dg-head:hover { background:rgba(255,255,255,.02) }
+.dg-name { font:600 11px var(--fm); letter-spacing:.05em; text-transform:uppercase; color:var(--text-bright) }
+.dg-chev { font-size:10px; color:var(--muted); margin-left:auto; transition:transform .12s ease }
+.domain-group.dg-open .dg-chev { transform:rotate(90deg) }
+.dg-smb { flex:1; max-width:120px; height:3px; border-radius:2px; display:flex; overflow:hidden }
+.dg-body { max-height:0; overflow:hidden; transition:max-height .3s var(--ease) }
+.domain-group.dg-open .dg-body { max-height:2000px }
+
+/* ── Domain metric table ── */
+.dm-table { width:100%; border-collapse:collapse }
+.dm-table th {
+  text-align:left; font:600 9px var(--fm); letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted); padding:7px 14px;
+  border-bottom:1px solid var(--border);
+}
+.dm-table td {
+  padding:7px 14px; font-size:12.5px; color:var(--text);
+  border-bottom:1px solid rgba(var(--motif-rgb),.08); vertical-align:middle;
+}
+.dm-table tr:last-child td { border-bottom:none }
+.dm-table tbody tr { transition:background .22s var(--ease) }
+.dm-table tbody tr:hover { background:rgba(255,255,255,.02) }
+.status-dot { width:7px; height:7px; border-radius:50%; display:inline-block }
+.dot-ok   { background:var(--ok);   box-shadow:0 0 4px var(--ok) }
+.dot-warn { background:var(--warn); box-shadow:0 0 4px var(--warn) }
+.dot-bad  { background:var(--bad);  box-shadow:0 0 4px var(--bad) }
+
+/* ── Opportunity cards ── */
+.opp-group-title {
+  font:600 10px var(--fm); letter-spacing:.06em;
+  text-transform:uppercase; color:var(--accent); margin:18px 0 8px;
+}
+.opp-card {
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:var(--radius-lg); margin-bottom:8px;
+  overflow:hidden; transition:border-color .22s var(--ease);
+}
+.opp-card:hover { border-color:var(--accent) }
+.opp-head {
+  display:flex; align-items:center; gap:8px; padding:12px 16px;
+  cursor:pointer; user-select:none; flex-wrap:wrap;
+}
+.opp-head:hover { background:rgba(255,255,255,.02) }
+.opp-name { font:600 14px var(--fd); color:var(--text-bright); flex:1; min-width:120px }
+.opp-badge {
+  font:600 9px var(--fm); padding:2px 8px; border-radius:999px;
+  letter-spacing:.04em; text-transform:uppercase;
+}
+.badge-ontrack { background:var(--ok-dim); color:var(--ok); border:1px solid var(--ok-border) }
+.badge-atrisk  { background:var(--warn-dim); color:var(--warn); border:1px solid var(--warn-border) }
+.opp-meta { font:400 10px var(--fm); color:var(--muted) }
+.opp-chev { font-size:11px; color:var(--muted); transition:transform .12s ease }
+.opp-card.opp-open .opp-chev { transform:rotate(90deg) }
+.opp-body { max-height:0; overflow:hidden; transition:max-height .3s var(--ease) }
+.opp-card.opp-open .opp-body { max-height:600px }
+.opp-inner { padding:0 16px 14px }
+.progress-bar { height:6px; background:var(--surface); border-radius:3px; overflow:hidden; margin:8px 0 }
+.progress-fill {
+  height:100%; border-radius:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-bright));
+  transition:width .4s var(--ease);
+}
+.opp-detail { font-size:12.5px; color:var(--text); line-height:1.5; margin-top:8px }
+.opp-detail strong { color:var(--text-bright) }
+
+/* ── QoQ table ── */
+.qoq-wrap {
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  background:var(--panel);
+}
+.qoq { width:100%; border-collapse:collapse; min-width:520px }
+.qoq th {
+  text-align:left; font:600 9px var(--fm); letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted); padding:8px 12px;
+  background:var(--surface); border-bottom:1px solid var(--border);
+  position:sticky; top:0;
+}
+.qoq th:first-child { position:sticky; left:0; z-index:2; background:var(--surface) }
+.qoq td {
+  padding:7px 12px; font-size:12.5px; color:var(--text);
+  border-bottom:1px solid rgba(var(--motif-rgb),.08);
+}
+.qoq td:first-child {
+  font-weight:600; color:var(--text-bright);
+  position:sticky; left:0; background:var(--panel); z-index:1;
+}
+.qoq tbody tr:hover td { background:rgba(255,255,255,.02) }
+.qoq .domain-sep td {
+  font:600 10px var(--fm); letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); background:var(--surface); padding:6px 12px;
+  border-bottom:1px solid var(--border);
+}
+.qoq .delta-up   { color:var(--ok) }
+.qoq .delta-down { color:var(--bad) }
+
+/* ── Showcase footer & colophon ── */
+.showcase-footer {
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px; margin-top:24px; text-align:center;
+}
+.showcase-footer h3 { font:600 16px var(--fd); color:var(--text-bright); margin-bottom:8px }
+.showcase-footer p { font:400 13px/1.6 var(--fd); color:var(--text); max-width:560px; margin:0 auto 16px }
+.showcase-footer a.cta {
+  display:inline-block; padding:8px 20px; background:var(--accent-deep);
+  color:var(--text-bright); border-radius:var(--radius); text-decoration:none;
+  font:600 12px var(--fm); letter-spacing:.04em; text-transform:uppercase;
+  transition:background .22s var(--ease);
+}
+.showcase-footer a.cta:hover { background:var(--accent) }
+
+.colophon {
+  margin-top:40px; padding:24px 0; border-top:1px solid var(--border);
+  text-align:center; position:relative;
+}
+.colophon::before {
+  content:''; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+  width:48px; height:1px; background:var(--accent);
+}
+.colophon-mark { width:24px; height:16px; margin:0 auto 8px; color:var(--muted) }
+.colophon-brand {
+  font:300 11px/1 var(--fd); letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted);
+}
+.colophon-tagline { margin-top:6px; font:italic 12px var(--fd); color:var(--muted) }
+
+/* ── Responsive ── */
+table { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch }
+
+@media (max-width:800px) {
+  .pulse-grid { grid-template-columns:1fr }
+}
+
+@media (max-width:600px) {
+  table { display:block; font-size:11px }
+  th, td { padding:6px 8px }
+  .page { padding:0 8px 16px }
+  .sec-inner { padding:12px 12px 16px }
+  .nav-inner { padding:0 8px }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  body { scroll-behavior:auto }
+  .a { opacity:1 !important; animation:none !important }
+}
+
+@media print {
+  .nav-bar, .showcase-banner, .scroll-progress { display:none !important }
+}
+</style>
+</head>
+<body>
+<div class="page-atmosphere"><div class="page-glow-mid"></div><div class="page-glow-low"></div></div>
+<div class="scroll-progress"></div>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="showcase-banner">
+  <span class="showcase-badge">Showcase Edition</span>
+  <span class="showcase-text">Sterilized sample with synthetic data — no real company information. <a href="https://skalingventures.substack.com/p/the-agentic-ceo-reality-on-demand">Read the full story &rarr;</a></span>
+</div>
+
+<nav class="nav-bar" aria-label="Section navigation">
+  <div class="nav-inner">
+    <a class="nav-home" href="https://skalingventures.com" aria-label="Skaling Ventures Home">
+      <svg viewBox="0 0 60 40" fill="none"><path d="M5 38 L30 6 L55 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".5"/><path d="M12 38 L30 14 L48 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".7"/><path d="M19 38 L30 22 L41 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".9"/><line x1="5" y1="38" x2="55" y2="38" stroke="currentColor" stroke-width="1" opacity=".3"/></svg>
+    </a>
+    <div class="nav-title">Executive Scorecard</div>
+    <div class="toc-scroll">
+      <a href="#pulse">The Pulse</a>
+      <a href="#weekly">Weekly Metrics</a>
+      <a href="#opportunities">Opportunities</a>
+      <a href="#qoq">QoQ Overview</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+<main id="main-content" tabindex="-1">
+
+<!-- ── Hero ── -->
+<div class="hero a a1">
+  <svg class="hero-mark" viewBox="0 0 60 40" fill="none">
+    <path d="M5 38 L30 6 L55 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".5"/>
+    <path d="M12 38 L30 14 L48 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".7"/>
+    <path d="M19 38 L30 22 L41 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".9"/>
+    <line x1="5" y1="38" x2="55" y2="38" stroke="currentColor" stroke-width="1" opacity=".3"/>
+  </svg>
+  <div class="hero-brand">Skaling Ventures</div>
+  <h1 class="hero-title">Executive Scorecard</h1>
+  <div class="hero-meta">W15 · Generated Apr 14, 2026</div>
+  <div class="hero-rule"></div>
+</div>
+
+<!-- ═══ 1. THE PULSE ═══ -->
+<div class="sec open a a2" id="pulse">
+  <div class="sec-head" onclick="toggleSec(this)">
+    <h2 class="st">The Pulse</h2>
+    <span class="sh-sub">Cash · Growth · Customer Health</span>
+  </div>
+  <div class="sec-body"><div class="sec-inner">
+
+    <div class="pulse-grid">
+      <div class="pulse-group">
+        <div class="pg-head">Cash</div>
+        <table class="pg-table"><tbody>
+          <tr><td class="pm">Cash Balance</td><td class="pv">$284K</td><td class="pd up">+3.2% ▲</td></tr>
+          <tr><td class="pm">Free Cash Flow</td><td class="pv">$18K</td><td class="pd up">+142.0% ▲</td></tr>
+          <tr><td class="pm">OpEx</td><td class="pv">$96K</td><td class="pd up">-4.8% ▲</td></tr>
+          <tr><td class="pm">Subscription Rev</td><td class="pv">$267K</td><td class="pd up">+2.1% ▲</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="pulse-group">
+        <div class="pg-head">Growth</div>
+        <table class="pg-table"><tbody>
+          <tr><td class="pm">Implied ARR</td><td class="pv">$3.2M</td><td class="pd up">+1.8% ▲</td></tr>
+          <tr><td class="pm">New Booked ARR</td><td class="pv">$24K</td><td class="pd up">+60.0% ▲</td></tr>
+          <tr><td class="pm">Pipeline Added</td><td class="pv">$86K</td><td class="pd down">-12.4% ▼</td></tr>
+          <tr><td class="pm">Total Pipeline</td><td class="pv">$410K</td><td class="pd down">-8.2% ▼</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="pulse-group">
+        <div class="pg-head">Customer Health</div>
+        <table class="pg-table"><tbody>
+          <tr><td class="pm">NRR</td><td class="pv">104%</td><td class="pd up">+2.1% ▲</td></tr>
+          <tr><td class="pm">Churned Logos</td><td class="pv">1</td><td class="pd up">-50.0% ▲</td></tr>
+          <tr><td class="pm">Support Tickets</td><td class="pv">98</td><td class="pd up">-14.8% ▲</td></tr>
+          <tr><td class="pm">CSAT</td><td class="pv">91%</td><td class="pd up">+3.4% ▲</td></tr>
+          <tr><td class="pm">Customers</td><td class="pv">124</td><td class="pd up">+0.8% ▲</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <!-- Dual signal mix bars -->
+    <div class="smb-wrap">
+      <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:8px">
+        <div style="flex:1;min-width:180px">
+          <div style="font:500 10px var(--fm);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Evergreen Health</div>
+          <div class="smb">
+            <span class="smb-seg" style="width:40%;background:var(--ok)"></span>
+            <span class="smb-seg" style="width:38%;background:var(--warn)"></span>
+            <span class="smb-seg" style="width:22%;background:var(--bad)"></span>
+          </div>
+          <div class="smb-legend">
+            <span class="l-ok">40% healthy</span>
+            <span class="l-warn">38% stagnant</span>
+            <span class="l-bad">22% declining</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px">
+          <div style="font:500 10px var(--fm);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Outcome Health</div>
+          <div class="smb">
+            <span class="smb-seg" style="width:45%;background:var(--ok)"></span>
+            <span class="smb-seg" style="width:35%;background:var(--warn)"></span>
+            <span class="smb-seg" style="width:20%;background:var(--bad)"></span>
+          </div>
+          <div class="smb-legend">
+            <span class="l-ok">45% healthy</span>
+            <span class="l-warn">35% stagnant</span>
+            <span class="l-bad">20% declining</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data freshness -->
+    <div class="freshness">
+      <span class="fresh-item"><span class="fresh-dot"></span>CRM 2h ago</span>
+      <span class="fresh-item"><span class="fresh-dot"></span>Finance 4h ago</span>
+      <span class="fresh-item"><span class="fresh-dot"></span>Support 1h ago</span>
+      <span class="fresh-item"><span class="fresh-dot"></span>Product 6h ago</span>
+    </div>
+
+  </div></div>
+</div>
+
+<!-- ═══ 2. WEEKLY METRICS ═══ -->
+<div class="sec open a a3" id="weekly">
+  <div class="sec-head" onclick="toggleSec(this)">
+    <h2 class="st">Weekly Metrics</h2>
+    <span class="sh-sub">W15 signal analysis</span>
+  </div>
+  <div class="sec-body"><div class="sec-inner">
+
+    <!-- Overall signal mix -->
+    <div class="smb-wrap">
+      <div class="smb">
+        <span class="smb-seg" style="width:38%;background:var(--ok)"></span>
+        <span class="smb-seg" style="width:42%;background:var(--warn)"></span>
+        <span class="smb-seg" style="width:20%;background:var(--bad)"></span>
+      </div>
+      <div class="smb-legend">
+        <span class="l-ok">38% improving</span>
+        <span class="l-warn">42% stagnant</span>
+        <span class="l-bad">20% declining</span>
+        <span class="l-muted">0% insufficient</span>
+      </div>
+    </div>
+
+    <!-- Callout strip -->
+    <div class="callouts">
+      <div class="callout type-alert co-open" onclick="toggleCallout(this)">
+        <div class="co-head">
+          <span class="co-tag tag-alert">Alert</span>
+          <span class="co-title">Pipeline concentration risk — two deals represent 52% of open ARR</span>
+          <span class="co-chev">▸</span>
+        </div>
+        <div class="co-body"><div class="co-inner">
+          Meridian Systems ($68,400) and Summit Holdings ($50,000) together comprise $118,400 of the $228,000 open pipeline. Both are in Commit stage but neither has a signed contract. If both slip, Q2 target requires closing 4 deals at current ACV from a pipeline that added zero new opportunities this week.
+          <div class="co-source">Source: pipeline_reality_operator, weekly_brief_operator</div>
+        </div></div>
+      </div>
+
+      <div class="callout type-opp" onclick="toggleCallout(this)">
+        <div class="co-head">
+          <span class="co-tag tag-opp">Opportunity</span>
+          <span class="co-title">Support resolution velocity improving for third consecutive week</span>
+          <span class="co-chev">▸</span>
+        </div>
+        <div class="co-body"><div class="co-inner">
+          Escalated ticket median time dropped from 18h to 3.2h. First-touch resolution rate hit 42%, up from 28% four weeks ago. Three accounts previously flagged as trust-risk have had all open tickets resolved. The support system is demonstrably improving.
+          <div class="co-source">Source: support_reality_operator</div>
+        </div></div>
+      </div>
+
+      <div class="callout type-insight" onclick="toggleCallout(this)">
+        <div class="co-head">
+          <span class="co-tag tag-insight">Insight</span>
+          <span class="co-title">Growth inbound volume dropped 22% WoW — needs root cause before adding spend</span>
+          <span class="co-chev">▸</span>
+        </div>
+        <div class="co-body"><div class="co-inner">
+          Inbound MQLs fell from 182 to 142 while paid channel CPA rose 15%. LinkedIn organic engagement remains flat. The decline coincides with content calendar gap in weeks 13-14. Investigate whether the volume drop is seasonal, content-driven, or channel fatigue before increasing budget.
+          <div class="co-source">Source: growth_reality_operator, weekly_brief_operator</div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Significant Movers This Week -->
+    <div style="font:600 11px var(--fm);letter-spacing:.05em;text-transform:uppercase;color:var(--text-bright);margin-bottom:8px">Significant Movers This Week</div>
+    <table class="movers-table">
+      <thead><tr>
+        <th scope="col">Metric</th><th scope="col">From</th>
+        <th scope="col">To</th><th scope="col">Δ</th><th scope="col">Domain</th>
+      </tr></thead>
+      <tbody>
+        <tr onclick="toggleMoverContext(this)">
+          <td class="m-metric">Pipeline Coverage (x)</td><td>2.4</td><td>1.8</td>
+          <td class="m-delta down">-25.0%</td><td class="m-domain">Sales</td>
+        </tr>
+        <tr class="mover-ctx ctx-down">
+          <td colspan="5">Two commit deals control 52% of pipeline. If either slips, coverage drops below 1.5x.</td>
+        </tr>
+        <tr onclick="toggleMoverContext(this)">
+          <td class="m-metric">First-Touch Resolution (%)</td><td>28</td><td>42</td>
+          <td class="m-delta up">+50.0%</td><td class="m-domain">Support</td>
+        </tr>
+        <tr class="mover-ctx ctx-up">
+          <td colspan="5">Knowledge base improvements and agent tooling producing measurable first-contact deflection.</td>
+        </tr>
+        <tr onclick="toggleMoverContext(this)">
+          <td class="m-metric">Inbound MQLs (#)</td><td>182</td><td>142</td>
+          <td class="m-delta down">-22.0%</td><td class="m-domain">Growth</td>
+        </tr>
+        <tr class="mover-ctx ctx-down">
+          <td colspan="5">Content calendar gap plus LinkedIn algorithm changes. Two posts in pipeline for W16 recovery.</td>
+        </tr>
+        <tr onclick="toggleMoverContext(this)">
+          <td class="m-metric">Sprint Velocity (%)</td><td>88</td><td>94</td>
+          <td class="m-delta up">+6.8%</td><td class="m-domain">Product</td>
+        </tr>
+        <tr class="mover-ctx ctx-up">
+          <td colspan="5">Team stabilized after Q1 re-org. Scope creep controls improved sprint completion rate.</td>
+        </tr>
+        <tr onclick="toggleMoverContext(this)">
+          <td class="m-metric">Escalated Ticket Time (hrs)</td><td>8.4</td><td>3.2</td>
+          <td class="m-delta up">-61.9%</td><td class="m-domain">Support</td>
+        </tr>
+        <tr class="mover-ctx ctx-up">
+          <td colspan="5">New triage workflow and dedicated escalation owner reduced median time to resolution.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Domain filter pills -->
+    <div class="filter-bar" id="domain-filter">
+      <span class="pill active" onclick="filterMulti(this,'weekly-smb','domain-list')">All</span>
+      <span class="pill" onclick="filterMulti(this,'weekly-smb','domain-list')">Sales</span>
+      <span class="pill" onclick="filterMulti(this,'weekly-smb','domain-list')">Growth</span>
+      <span class="pill" onclick="filterMulti(this,'weekly-smb','domain-list')">Support</span>
+      <span class="pill" onclick="filterMulti(this,'weekly-smb','domain-list')">Product</span>
+    </div>
+
+    <!-- Domain metric tables -->
+    <div id="domain-list">
+
+      <!-- Sales -->
+      <div class="domain-group dg-open" data-domain="Sales">
+        <div class="dg-head" onclick="toggleDomain(this)">
+          <span class="dg-name">Sales</span>
+          <div class="dg-smb">
+            <span class="smb-seg" style="width:33%;background:var(--ok)"></span>
+            <span class="smb-seg" style="width:33%;background:var(--warn)"></span>
+            <span class="smb-seg" style="width:34%;background:var(--bad)"></span>
+          </div>
+          <span class="dg-chev">▸</span>
+        </div>
+        <div class="dg-body">
+          <table class="dm-table">
+            <thead><tr><th scope="col">Metric</th><th scope="col">Owner</th><th scope="col">Status</th><th scope="col">Current</th><th scope="col">W8–W15</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Stage Progressions (#)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>3</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,16 8.6,12 17.1,16 25.7,8 34.3,12 42.9,20 51.4,16 60,8" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="8" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Next-Step Coverage (%)</td><td>—</td>
+                <td><span class="status-dot dot-warn"></span></td><td>38</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,20 8.6,17.5 17.1,15 25.7,16 34.3,12.5 42.9,14 51.4,10 60,11" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="11" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Stagnant Deals (# &gt;14d)</td><td>—</td>
+                <td><span class="status-dot dot-bad"></span></td><td>2</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,3.3 8.6,6.7 17.1,10 25.7,6.7 34.3,13.3 42.9,10 51.4,10 60,13.3" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="13.3" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Growth -->
+      <div class="domain-group dg-open" data-domain="Growth">
+        <div class="dg-head" onclick="toggleDomain(this)">
+          <span class="dg-name">Growth</span>
+          <div class="dg-smb">
+            <span class="smb-seg" style="width:50%;background:var(--ok)"></span>
+            <span class="smb-seg" style="width:25%;background:var(--warn)"></span>
+            <span class="smb-seg" style="width:25%;background:var(--bad)"></span>
+          </div>
+          <span class="dg-chev">▸</span>
+        </div>
+        <div class="dg-body">
+          <table class="dm-table">
+            <thead><tr><th scope="col">Metric</th><th scope="col">Owner</th><th scope="col">Status</th><th scope="col">Current</th><th scope="col">W8–W15</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Engagement Reach (#)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>48</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,19.2 8.6,16.2 17.1,12.7 25.7,15 34.3,9.2 42.9,10.4 51.4,7.3 60,5" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="5" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Identified → Aware (#)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>26</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,18.5 8.6,16 17.1,13.8 25.7,11.5 34.3,13.1 42.9,10 51.4,8.5 60,5" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="5" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Engagement → Meeting (#)</td><td>—</td>
+                <td><span class="status-dot dot-warn"></span></td><td>2</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,10 8.6,13.3 17.1,6.7 25.7,10 34.3,13.3 42.9,16.7 51.4,10 60,13.3" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="13.3" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Inbound MQLs (#)</td><td>—</td>
+                <td><span class="status-dot dot-bad"></span></td><td>142</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,14 8.6,11.5 17.1,10 25.7,8.3 34.3,7.5 42.9,8.8 51.4,9.2 60,17" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="17" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Support -->
+      <div class="domain-group dg-open" data-domain="Support">
+        <div class="dg-head" onclick="toggleDomain(this)">
+          <span class="dg-name">Support</span>
+          <div class="dg-smb">
+            <span class="smb-seg" style="width:50%;background:var(--ok)"></span>
+            <span class="smb-seg" style="width:25%;background:var(--warn)"></span>
+            <span class="smb-seg" style="width:25%;background:var(--bad)"></span>
+          </div>
+          <span class="dg-chev">▸</span>
+        </div>
+        <div class="dg-body">
+          <table class="dm-table">
+            <thead><tr><th scope="col">Metric</th><th scope="col">Owner</th><th scope="col">Status</th><th scope="col">Current</th><th scope="col">W8–W15</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Escalated Ticket Time (hrs)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>3.2</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,2 8.6,4.5 17.1,7.5 25.7,10 34.3,11.7 42.9,12.5 51.4,13.2 60,14.7" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="14.7" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>First-Touch Resolution (%)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>42</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,18.5 8.6,17 17.1,15 25.7,14 34.3,12.5 42.9,10 51.4,8 60,5" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="5" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Mean Response Time (hrs)</td><td>—</td>
+                <td><span class="status-dot dot-warn"></span></td><td>2.8</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,13.3 8.6,14.7 17.1,12 25.7,10 34.3,12.7 42.9,8 51.4,11.3 60,9.3" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="9.3" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>High-Severity Tickets (#)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>0</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,13.3 8.6,16.7 17.1,16.7 25.7,20 34.3,16.7 42.9,20 51.4,16.7 60,20" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="20" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Product -->
+      <div class="domain-group dg-open" data-domain="Product">
+        <div class="dg-head" onclick="toggleDomain(this)">
+          <span class="dg-name">Product</span>
+          <div class="dg-smb">
+            <span class="smb-seg" style="width:67%;background:var(--ok)"></span>
+            <span class="smb-seg" style="width:33%;background:var(--warn)"></span>
+          </div>
+          <span class="dg-chev">▸</span>
+        </div>
+        <div class="dg-body">
+          <table class="dm-table">
+            <thead><tr><th scope="col">Metric</th><th scope="col">Owner</th><th scope="col">Status</th><th scope="col">Current</th><th scope="col">W8–W15</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Sprint Velocity (%)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>94</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,17 8.6,15 17.1,12 25.7,13 34.3,9 42.9,12 51.4,7 60,5" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="5" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Items Shipped (#)</td><td>—</td>
+                <td><span class="status-dot dot-warn"></span></td><td>6</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,10 8.6,3.3 17.1,6.7 25.7,13.3 34.3,20 42.9,16.7 51.4,10 60,13.3" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="13.3" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+              <tr>
+                <td>Bug Escape Rate (%)</td><td>—</td>
+                <td><span class="status-dot dot-ok"></span></td><td>2.1</td>
+                <td><svg width="60" height="20" viewBox="0 0 60 20"><polyline points="0,5 8.6,7.5 17.1,9.4 25.7,11 34.3,12.5 42.9,11.5 51.4,13.2 60,14.2" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="60" cy="14.2" r="2" fill="var(--accent)"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div></div>
+</div>
+
+<!-- ═══ 3. OPPORTUNITIES ═══ -->
+<div class="sec a a4" id="opportunities">
+  <div class="sec-head" onclick="toggleSec(this)">
+    <h2 class="st">Opportunities</h2>
+    <span class="sh-sub">6 active</span>
+  </div>
+  <div class="sec-body"><div class="sec-inner">
+
+    <div class="opp-group-title">Growth Engine</div>
+
+    <div class="opp-card" onclick="toggleOpp(this)">
+      <div class="opp-head">
+        <span class="opp-name">Content-Led Demand Generation</span>
+        <span class="opp-badge badge-ontrack">On Track</span>
+        <span class="opp-meta">Marketing · Score 2.5 · 34d</span>
+        <span class="opp-chev">▸</span>
+      </div>
+      <div class="opp-body"><div class="opp-inner">
+        <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+        <div class="opp-detail"><strong>Hypothesis:</strong> A structured content calendar targeting 3 ICP verticals will increase inbound MQLs by 30% within 60 days.<br><strong>Pass/Fail:</strong> MQL volume exceeds 200/week for 2 consecutive weeks by W20.</div>
+      </div></div>
+    </div>
+
+    <div class="opp-card" onclick="toggleOpp(this)">
+      <div class="opp-head">
+        <span class="opp-name">ABM Pilot — Top 50 Accounts</span>
+        <span class="opp-badge badge-ontrack">On Track</span>
+        <span class="opp-meta">Growth · Score 1.8 · 21d</span>
+        <span class="opp-chev">▸</span>
+      </div>
+      <div class="opp-body"><div class="opp-inner">
+        <div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div>
+        <div class="opp-detail"><strong>Hypothesis:</strong> Personalized outreach to 50 named accounts will yield 8+ meetings in 45 days vs. 3 from spray-and-pray.<br><strong>Pass/Fail:</strong> ≥8 meetings booked from target list by W18.</div>
+      </div></div>
+    </div>
+
+    <div class="opp-group-title">Product Excellence</div>
+
+    <div class="opp-card" onclick="toggleOpp(this)">
+      <div class="opp-head">
+        <span class="opp-name">API Performance Optimization</span>
+        <span class="opp-badge badge-ontrack">On Track</span>
+        <span class="opp-meta">Engineering · Score 3.0 · 42d</span>
+        <span class="opp-chev">▸</span>
+      </div>
+      <div class="opp-body"><div class="opp-inner">
+        <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+        <div class="opp-detail"><strong>Hypothesis:</strong> Reducing P95 latency below 200ms will decrease support escalations by 40% and improve NPS.<br><strong>Pass/Fail:</strong> P95 &lt; 200ms in production for 7 consecutive days.</div>
+      </div></div>
+    </div>
+
+    <div class="opp-card" onclick="toggleOpp(this)">
+      <div class="opp-head">
+        <span class="opp-name">Customer Health Score Framework</span>
+        <span class="opp-badge badge-ontrack">On Track</span>
+        <span class="opp-meta">CS · Score 1.5 · 15d</span>
+        <span class="opp-chev">▸</span>
+      </div>
+      <div class="opp-body"><div class="opp-inner">
+        <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+        <div class="opp-detail"><strong>Hypothesis:</strong> A composite health score (usage + support + NPS) will identify churn-risk accounts 30 days earlier than current methods.<br><strong>Pass/Fail:</strong> Framework predicts 80%+ of churn events in backtesting.</div>
+      </div></div>
+    </div>
+
+    <div class="opp-group-title">Revenue Operations</div>
+
+    <div class="opp-card" onclick="toggleOpp(this)">
+      <div class="opp-head">
+        <span class="opp-name">Pipeline Velocity Improvement</span>
+        <span class="opp-badge badge-atrisk">At Risk</span>
+        <span class="opp-meta">Sales · Score 2.0 · 28d</span>
+        <span class="opp-chev">▸</span>
+      </div>
+      <div class="opp-body"><div class="opp-inner">
+        <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
+        <div class="opp-detail"><strong>Hypothesis:</strong> Implementing structured deal progression criteria will reduce average sales cycle from 42 to 30 days.<br><strong>Pass/Fail:</strong> Median cycle time ≤ 32 days for deals closed in Q2.</div>
+      </div></div>
+    </div>
+
+    <div class="opp-card" onclick="toggleOpp(this)">
+      <div class="opp-head">
+        <span class="opp-name">Pricing Modernization</span>
+        <span class="opp-badge badge-ontrack">On Track</span>
+        <span class="opp-meta">CEO · Score 1.2 · 18d</span>
+        <span class="opp-chev">▸</span>
+      </div>
+      <div class="opp-body"><div class="opp-inner">
+        <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+        <div class="opp-detail"><strong>Hypothesis:</strong> Usage-based pricing tier will increase expansion revenue by 15% without increasing churn.<br><strong>Pass/Fail:</strong> A/B test shows ≥12% expansion lift with ≤2% incremental churn after 90 days.</div>
+      </div></div>
+    </div>
+
+  </div></div>
+</div>
+
+<!-- ═══ 4. QoQ OVERVIEW ═══ -->
+<div class="sec a a5" id="qoq">
+  <div class="sec-head" onclick="toggleSec(this)">
+    <h2 class="st">QoQ Overview</h2>
+    <span class="sh-sub">Quarterly trajectory</span>
+  </div>
+  <div class="sec-body"><div class="sec-inner">
+    <div class="qoq-wrap">
+      <table class="qoq">
+        <thead><tr>
+          <th scope="col">Metric</th>
+          <th scope="col">Q2 '25</th>
+          <th scope="col">Q3 '25</th>
+          <th scope="col">Q4 '25</th>
+          <th scope="col">Q1 '26</th>
+          <th scope="col">Δ QoQ</th>
+        </tr></thead>
+        <tbody>
+          <tr class="domain-sep"><td colspan="6">GTM</td></tr>
+          <tr><td>Implied ARR</td><td>$2.8M</td><td>$2.9M</td><td>$3.0M</td><td>$3.2M</td><td class="delta-up">+6.7%</td></tr>
+          <tr><td>New Booked ARR</td><td>$42K</td><td>$56K</td><td>$48K</td><td>$72K</td><td class="delta-up">+50.0%</td></tr>
+          <tr><td>Total Pipeline</td><td>$380K</td><td>$420K</td><td>$450K</td><td>$410K</td><td class="delta-down">-8.9%</td></tr>
+          <tr class="domain-sep"><td colspan="6">Operations</td></tr>
+          <tr><td>Subscription Revenue</td><td>$780K</td><td>$810K</td><td>$840K</td><td>$801K</td><td class="delta-down">-4.6%</td></tr>
+          <tr><td>Cash Balance</td><td>$240K</td><td>$260K</td><td>$275K</td><td>$284K</td><td class="delta-up">+3.3%</td></tr>
+          <tr class="domain-sep"><td colspan="6">CS</td></tr>
+          <tr><td>NRR</td><td>98%</td><td>101%</td><td>103%</td><td>104%</td><td class="delta-up">+1.0%</td></tr>
+          <tr><td>Total Support Tickets</td><td>320</td><td>280</td><td>240</td><td>294</td><td class="delta-down">+22.5%</td></tr>
+          <tr><td>Churned Logos</td><td>4</td><td>3</td><td>2</td><td>3</td><td class="delta-down">+50.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+
+<!-- ── Showcase footer ── -->
+<div class="showcase-footer">
+  <h3>The integrated executive view — fully autonomous</h3>
+  <p>The Executive Scorecard is the capstone — it reads every operator's output, every data source, and every weekly intelligence extract to produce one integrated executive view. Metrics, sparklines, AI-generated alerts, significant movers, and strategic opportunities — all autonomous, all weekly.</p>
+  <a class="cta" href="https://skalingventures.substack.com/p/the-agentic-ceo-reality-on-demand">Read the full story on Substack &rarr;</a>
+</div>
+
+<!-- ── Colophon ── -->
+<div class="colophon">
+  <svg class="colophon-mark" viewBox="0 0 60 40" fill="none">
+    <path d="M5 38 L30 6 L55 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".5"/>
+    <path d="M12 38 L30 14 L48 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".7"/>
+    <path d="M19 38 L30 22 L41 38" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".9"/>
+    <line x1="5" y1="38" x2="55" y2="38" stroke="currentColor" stroke-width="1" opacity=".3"/>
+  </svg>
+  <div class="colophon-brand">Skaling Ventures</div>
+  <div class="colophon-tagline">For the Love of the Game</div>
+</div>
+
+</main>
+</div>
+
+<script>
+function toggleSec(head) { head.parentElement.classList.toggle('open') }
+function toggleCallout(el) { el.classList.toggle('co-open') }
+function toggleOpp(card) { card.classList.toggle('opp-open') }
+
+function toggleMoverContext(row) {
+  var ctx = row.nextElementSibling;
+  if (ctx && ctx.classList.contains('mover-ctx')) ctx.classList.toggle('ctx-open');
+}
+
+function toggleDomain(head) { head.parentElement.classList.toggle('dg-open') }
+
+function filterMulti(pill, barId, domainsId) {
+  var pills = pill.parentElement.querySelectorAll('.pill');
+  pills.forEach(function(p) { p.classList.remove('active') });
+  pill.classList.add('active');
+  var filter = pill.textContent.trim();
+  var groups = document.getElementById(domainsId).querySelectorAll('.domain-group');
+  groups.forEach(function(g) {
+    g.style.display = (filter === 'All' || g.getAttribute('data-domain') === filter) ? '' : 'none';
+  });
+}
+
+/* Editorial chrome injection */
+(function() {
+  document.querySelectorAll('.sec').forEach(function(sec) {
+    var head = sec.querySelector('.sec-head');
+    if (!head) return;
+    if (!head.querySelector('.sec-head-rule')) {
+      var r = document.createElement('span');
+      r.className = 'sec-head-rule';
+      head.appendChild(r);
+    }
+    if (!head.querySelector('.sec-head-accent')) {
+      var a = document.createElement('span');
+      a.className = 'sec-head-accent';
+      head.appendChild(a);
+    }
+    if (!sec.querySelector('.sec-watermark')) {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'sec-watermark');
+      svg.setAttribute('viewBox', '0 0 60 40');
+      svg.setAttribute('fill', 'none');
+      var paths = [
+        { d:'M5 38 L30 6 L55 38', o:'0.5' },
+        { d:'M12 38 L30 14 L48 38', o:'0.7' },
+        { d:'M19 38 L30 22 L41 38', o:'0.9' }
+      ];
+      paths.forEach(function(cfg) {
+        var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        p.setAttribute('d', cfg.d);
+        p.setAttribute('stroke', 'currentColor');
+        p.setAttribute('stroke-width', '1.2');
+        p.setAttribute('fill', 'none');
+        p.setAttribute('opacity', cfg.o);
+        svg.appendChild(p);
+      });
+      var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      ln.setAttribute('x1', '5'); ln.setAttribute('y1', '38');
+      ln.setAttribute('x2', '55'); ln.setAttribute('y2', '38');
+      ln.setAttribute('stroke', 'currentColor');
+      ln.setAttribute('stroke-width', '1');
+      ln.setAttribute('opacity', '0.3');
+      svg.appendChild(ln);
+      sec.appendChild(svg);
+    }
+  });
+})();
+
+/* Scroll progress */
+var bar = document.querySelector('.scroll-progress');
+function updateProgress() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive:true });
+updateProgress();
+
+/* Nav bar stuck state */
+var nav = document.querySelector('.nav-bar');
+if (nav) {
+  var sentinel = document.createElement('div');
+  sentinel.style.cssText = 'height:1px;position:absolute;top:0;left:0;right:0';
+  nav.parentNode.insertBefore(sentinel, nav);
+  new IntersectionObserver(function(e) {
+    nav.classList.toggle('stuck', !e[0].isIntersecting);
+  }, { threshold:[1], rootMargin:'-1px 0px 0px 0px' }).observe(sentinel);
+}
+
+/* TOC scroll spy */
+var tocLinks = document.querySelectorAll('.toc-scroll a'), tocSections = [];
+tocLinks.forEach(function(a) {
+  var id = a.getAttribute('href');
+  if (id && id.startsWith('#')) {
+    var el = document.getElementById(id.slice(1));
+    if (el) tocSections.push({ link:a, el:el });
+  }
+});
+function updateToc() {
+  var y = window.scrollY + 80, active = null;
+  for (var i = tocSections.length - 1; i >= 0; i--) {
+    if (tocSections[i].el.offsetTop <= y) { active = tocSections[i]; break; }
+  }
+  tocLinks.forEach(function(a) { a.classList.remove('active') });
+  if (active) active.link.classList.add('active');
+}
+window.addEventListener('scroll', updateToc, { passive:true });
+updateToc();
+
+/* TOC click → auto-open section + smooth scroll */
+tocLinks.forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var t = document.getElementById(this.getAttribute('href').slice(1));
+    if (t) {
+      if (t.classList.contains('sec') && !t.classList.contains('open')) t.classList.add('open');
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      t.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block:'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
