@@ -28,6 +28,49 @@
     });
   });
 
+  // ── Private-conversation form → /api/contact
+  var form = document.getElementById('talkForm');
+  if (form) {
+    var started = Date.now();
+    var statusEl = document.getElementById('talkStatus');
+    var submitBtn = document.getElementById('talkSubmit');
+    var say = function (msg, ok) { statusEl.textContent = msg; statusEl.classList.toggle('ok', !!ok); };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = form.elements;
+      var bad = [];
+      ['name', 'email'].forEach(function (k) { f[k].removeAttribute('aria-invalid'); });
+      if (!f.name.value.trim()) bad.push(f.name);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())) bad.push(f.email);
+      var role = form.querySelector('input[name="role"]:checked');
+      if (bad.length || !role) {
+        bad.forEach(function (el) { el.setAttribute('aria-invalid', 'true'); });
+        say(bad.length ? 'Please add your name and a valid email.' : 'Please choose what best describes you.');
+        (bad[0] || form.querySelector('input[name="role"]')).focus();
+        return;
+      }
+      var payload = {
+        name: f.name.value, email: f.email.value, company: f.company.value,
+        role: role.value, message: f.message.value, deck: f.deck.checked,
+        website: f.website.value, t: Date.now() - started
+      };
+      submitBtn.disabled = true;
+      say('Sending…');
+      fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (j) { return { r: r, j: j }; }); })
+        .then(function (x) {
+          if (x.r.ok && x.j.ok) {
+            form.querySelectorAll('input, textarea, button').forEach(function (el) { el.disabled = true; });
+            say('Thank you. Kjael will reply personally.', true);
+          } else {
+            submitBtn.disabled = false;
+            say(x.j && x.j.error === 'invalid' ? 'Please check your details and try again.' : 'That didn’t go through. Please try again in a moment, or reach out on LinkedIn.');
+          }
+        })
+        .catch(function () { submitBtn.disabled = false; say('That didn’t go through. Please try again in a moment, or reach out on LinkedIn.'); });
+    });
+  }
+
   function setActive(i) {
     if (i === active) return;
     active = i;
