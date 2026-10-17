@@ -451,6 +451,23 @@ html{scroll-behavior:auto}
 .cta-bar.show{transform:none}
 @media (max-width:760px){.cta-bar{display:block}}
 
+.lyr{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.lyr-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.lyr-t{margin:0;font:500 14px/1.45 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1F1F1F}
+.lyr .wedges{margin:2px 0 0}
+.lvls.st{align-items:stretch}
+.lvls.st .lv{opacity:1}
+.lvls.st .lv .ms{display:block}
+.lvls.st .lv.on{opacity:1}
+.lv .lt span{margin-left:8px;font:600 10px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7C766C}
+.thread.mini{margin-top:10px;gap:5px}
+.thread.mini .msg{font-size:13.5px;padding:7px 11px 8px;max-width:92%}
+.lvls.st .done{margin-top:8px}
+.ladder-row{display:flex;flex-direction:column;gap:8px}
+.pnl.on .lvls.st .msg{animation:none}
+.pnl.on .lvls.st .done{animation:none}
+@media (max-width:520px){.lv .lt span{display:block;margin:4px 0 0}.lyr-h .mono-l:last-child{display:none}.lvls.st .lv:not(.on) .ms{display:none}.lvls.st .lv{grid-template-columns:28px minmax(0,1fr);gap:8px}.lyr-t{font-size:13.5px}.lvl-t{font-size:13.5px}}
+
 </style>
 </head>
 <body>
@@ -596,11 +613,19 @@ html{scroll-behavior:auto}
 <div class="pnl on">
 <div class="sheet">
 <div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · I / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span></span><span></span></span><span class="tag cu">How we operate</span></div>
-<div class="s-body xp" data-xp>
+<div class="s-body" style="gap: 14px">
 <div><span class="mono-l" style="color: #5E5C58">The leadership system</span><p class="s-title">Lock direction. Bet small. Learn fast.</p></div>
-<div class="xp-steps" role="tablist" aria-label="Lock direction. Bet small. Learn fast."><button type="button" role="tab" class="xp-step" id="d1-t0" aria-controls="d1-p0" aria-selected="true" tabindex="0"><span class="k">90-day anchor</span><span class="t">Outcome</span></button><button type="button" role="tab" class="xp-step" id="d1-t1" aria-controls="d1-p1" aria-selected="false" tabindex="-1"><span class="k">30-day bet</span><span class="t">Opportunity</span></button><button type="button" role="tab" class="xp-step" id="d1-t2" aria-controls="d1-p2" aria-selected="false" tabindex="-1"><span class="k">2–4 week test</span><span class="t">Experiment</span></button></div>
-<div class="xp-panel" role="tabpanel" id="d1-p0" aria-labelledby="d1-t0"><p class="xp-t">One metric that matters, written so anyone on the team can understand it. It holds for a full quarter.</p><div class="xp-foot"><button type="button" class="xp-next" data-go="1">Next: Opportunity <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d1-p1" aria-labelledby="d1-t1" hidden><p class="xp-t">A hypothesis for moving that metric, sized by its expected impact and the team-weeks it will cost.</p><div class="xp-foot"><button type="button" class="xp-next" data-go="2">Next: Experiment <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d1-p2" aria-labelledby="d1-t2" hidden><p class="xp-t">One variable, a clear signal, then a decision.</p><div class="chips gates-row"><span>Kill</span><span>Iterate</span><span>Scale</span></div><div class="xp-foot"><button type="button" class="xp-next" data-go="0"><span aria-hidden="true">↺</span> Start again</button></div></div>
-<details class="xp-more"><summary>Four guardrails</summary><ul class="xp-list"><li>No metric, no project.</li><li>No owner, back to the backlog.</li><li>No more than three bets per owner.</li><li>Every test reviewed within four weeks.</li></ul></details>
+<div class="tree">
+<div class="lvl box"><div><span class="mono-l" style="color: #89523B">Outcome</span><p class="lvl-t">One metric that matters, written so anyone can understand it.</p></div><span class="tag">90-day anchor</span></div>
+<div class="nest">
+<div class="lvl box"><div><span class="mono-l" style="color: #89523B">Opportunity</span><p class="lvl-t">A hypothesis for moving it, sized by impact and team-weeks.</p></div><span class="tag">30-day bet</span></div>
+<div class="nest">
+<div class="lvl box"><div><span class="mono-l" style="color: #89523B">Experiment</span><p class="lvl-t">One variable. A clear signal. Then a decision.</p><div class="gates" style="margin-top: 10px" aria-hidden="true"><span class="gate">Kill</span><span class="gate">Iterate</span><span class="gate">Scale</span></div></div><span class="tag cu">2–4 week test</span></div>
+</div>
+</div>
+</div>
+<div><span class="mono-l" style="color: #5E5C58">Guardrails</span>
+<div class="rails" style="margin-top: 10px"><span>No metric, no project</span><span>No owner, back to the backlog</span><span>≤ 3 bets per owner</span><span>Every test reviewed within 4 weeks</span></div></div>
 <p class="xp-cap">Every unit of work traces up to an Outcome.</p>
 </div>
 </div>
@@ -615,11 +640,23 @@ html{scroll-behavior:auto}
 <div class="pnl ">
 <div class="sheet">
 <div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · II / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span></span></span><span class="tag cu">How we build</span></div>
-<div class="s-body xp" data-xp>
+<div class="s-body" style="gap: 14px">
 <div><span class="mono-l" style="color: #5E5C58">Three layers, built in order</span><p class="s-title">Truth first. Then the work. Then intelligence.</p></div>
-<div class="xp-steps" role="tablist" aria-label="Truth first. Then the work. Then intelligence."><button type="button" role="tab" class="xp-step" id="d2-t0" aria-controls="d2-p0" aria-selected="true" tabindex="0"><span class="k">What can be trusted</span><span class="t">Truth</span></button><button type="button" role="tab" class="xp-step" id="d2-t1" aria-controls="d2-p1" aria-selected="false" tabindex="-1"><span class="k">How work moves</span><span class="t">Orchestration</span></button><button type="button" role="tab" class="xp-step" id="d2-t2" aria-controls="d2-p2" aria-selected="false" tabindex="-1"><span class="k">What becomes possible</span><span class="t">Intelligence</span></button></div>
-<div class="xp-panel" role="tabpanel" id="d2-p0" aria-labelledby="d2-t0"><p class="xp-t">Records, prices, rules and schedules are cleaned up and kept exact. Agents work on top of them, never instead of them.</p><p class="xp-sub">The root work</p><div class="chips"><span>Normalize the data</span><span>Encode the business rules</span><span>Keep changes in sync</span><span>Reconcile across systems</span></div><div class="xp-foot"><button type="button" class="xp-next" data-go="1">Next: Orchestration <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d2-p1" aria-labelledby="d2-t1" hidden><p class="xp-t">Agents carry routine work across systems: answers, follow-ups, bookings and orders. People get the exceptions, with the context attached.</p><div class="xp-foot"><button type="button" class="xp-next" data-go="2">Next: Intelligence <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d2-p2" aria-labelledby="d2-t2" hidden><p class="xp-t">The business notices who needs attention and acts before anyone asks.</p><div class="qpair"><div class="qcard"><small>An answer</small>Can we do this, at what price, and when?</div><div class="qcard"><small>A signal</small>Which customers are drifting away, and why?</div></div><div class="xp-foot"><button type="button" class="xp-next" data-go="0"><span aria-hidden="true">↺</span> Start again</button></div></div>
-
+<div class="box lyr truth">
+<div class="lyr-h"><span class="mono-l" style="color: #1F1F1F">1 · Truth</span><span class="mono-l" style="color: #5E5C58">What can be trusted</span></div>
+<p class="lyr-t">Records, prices, rules and schedules, kept exact. Agents work on top of them, never instead of them.</p>
+<ol class="wedges"><li>Normalize the data</li><li>Encode the business rules</li><li>Keep changes in sync</li><li>Reconcile across systems</li></ol>
+</div>
+<div class="down" aria-hidden="true"></div>
+<div class="box lyr">
+<div class="lyr-h"><span class="mono-l" style="color: #89523B">2 · Orchestration</span><span class="mono-l" style="color: #5E5C58">How work moves</span></div>
+<p class="lyr-t">Agents carry routine work across systems. People get the exceptions, with context attached.</p>
+</div>
+<div class="down" aria-hidden="true"></div>
+<div class="box lyr">
+<div class="lyr-h"><span class="mono-l" style="color: #89523B">3 · Intelligence</span><span class="mono-l" style="color: #5E5C58">What becomes possible</span></div>
+<div class="qpair" style="margin-top: 10px"><div class="qcard"><small>An answer</small>Can we do this, at what price, and when?</div><div class="qcard"><small>A signal</small>Which customers are drifting away, and why?</div></div>
+</div>
 <p class="xp-cap">Agents built on messy data are confidently wrong. We build in this order; customer demand decides what we build first within it.</p>
 </div>
 </div>
@@ -634,11 +671,17 @@ html{scroll-behavior:auto}
 <div class="pnl ">
 <div class="sheet">
 <div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · III / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span class="lit"></span></span><span class="tag cu">How we judge it</span></div>
-<div class="s-body xp" data-xp>
-<div><span class="mono-l" style="color: #5E5C58">Three levels of value</span><p class="s-title">Revenue from work nobody had time to do.</p></div>
-<div class="xp-steps" role="tablist" aria-label="Revenue from work nobody had time to do."><button type="button" role="tab" class="xp-step" id="d3-t0" aria-controls="d3-p0" aria-selected="true" tabindex="0"><span class="k">L1 · Do it faster</span><span class="t">Task efficiency</span></button><button type="button" role="tab" class="xp-step" id="d3-t1" aria-controls="d3-p1" aria-selected="false" tabindex="-1"><span class="k">L2 · Do it differently</span><span class="t">Behavioral transformation</span></button><button type="button" role="tab" class="xp-step" id="d3-t2" aria-controls="d3-p2" aria-selected="false" tabindex="-1"><span class="k">L3 · Do what never happened</span><span class="t">Economic expansion</span></button></div>
-<div class="xp-panel" role="tabpanel" id="d3-p0" aria-labelledby="d3-t0"><dl class="ba"><dt>Before</dt><dd>After each visit, the vet spends 15 minutes writing up notes and the invoice.</dd><dt>After</dt><dd class="aft">The agent drafts both from the visit. The vet checks and signs in two minutes.</dd></dl><p class="xp-m"><span>Measure</span>Hours and cost per visit</p><div class="xp-foot"><button type="button" class="xp-next" data-go="1">Next: Behavioral transformation <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d3-p1" aria-labelledby="d3-t1" hidden><dl class="ba"><dt>Before</dt><dd>The practice waits for clients to call when something goes wrong.</dd><dt>After</dt><dd class="aft">It reaches out first: a refill about to run out, a lab result that needs a follow-up, a missed appointment. The agent drafts each message; staff approve.</dd></dl><p class="xp-m"><span>Measure</span>Follow-up completion, response time and consistency</p><div class="xp-foot"><button type="button" class="xp-next" data-go="2">Next: Economic expansion <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d3-p2" aria-labelledby="d3-t2" hidden><p class="xp-tag">An illustration · a veterinary practice</p><p class="xp-t">Max is five months overdue for his checkup. Nobody had time to call.</p><div class="thread"><div class="msg a"><small>Agent</small>Hi Sam, Max is due for his annual checkup and vaccines. Want me to find a time?</div><div class="msg b"><small>Owner</small>Saturday mornings only. What will it cost?</div><div class="msg a"><small>Agent</small>Saturday at 9:30 with Dr. Lee. The exam and vaccines come to $185. Shall I book it?</div><div class="msg b"><small>Owner</small>Book it.</div></div><div class="done"><span>Visit booked</span><span>Reminder set</span><span>No one had to make the call</span></div><p class="xp-rule">Within the practice’s rules: approved services, prices and schedule. A sick pet or a billing question goes to a person.</p><p class="xp-m"><span>Measure</span>Incremental visits and revenue per lapsed client, against the usual reminders</p><div class="xp-foot"><button type="button" class="xp-next" data-go="0"><span aria-hidden="true">↺</span> Start again</button></div></div>
-<details class="xp-more"><summary>How autonomy is earned</summary><ol class="ladder"><li><b>Read</b><span>Sourced answers only</span></li><li><b>Notify</b><span>Flags what changed; never acts</span></li><li><b>Approve</b><span>Prepares the work; a person approves</span></li><li><b>Act</b><span>Completes routine work within approved rules; people take the exceptions</span></li></ol><p class="xp-note">Each step is earned with evidence, not granted.</p></details>
+<div class="s-body" style="gap: 14px">
+<div><span class="mono-l" style="color: #5E5C58">Three levels of value · a veterinary practice</span><p class="s-title">Revenue from work nobody had time to do.</p></div>
+<div class="lvls st">
+<div class="lv box"><span class="ln">L1</span><div><div class="lt">Task efficiency <span>Do it faster</span></div><p>Visit notes and invoices take two minutes instead of fifteen. The agent drafts; the vet signs.</p><p class="ms">Measure: hours and cost per visit</p></div></div>
+<div class="lv box"><span class="ln">L2</span><div><div class="lt">Behavioral transformation <span>Do it differently</span></div><p>The practice reaches out first instead of waiting for calls: refills, lab follow-ups, missed visits. Staff approve each message.</p><p class="ms">Measure: follow-up completion and response time</p></div></div>
+<div class="lv box on"><span class="ln">L3</span><div><div class="lt">Economic expansion <span>Do what never happened</span></div><p>Lapsed clients nobody had time to call come back.</p>
+<div class="thread mini"><div class="msg a"><small>Agent</small>Max is due for his checkup. Want me to find a time?</div><div class="msg b"><small>Owner</small>Saturday morning works. Book it.</div></div>
+<div class="done"><span>Visit booked</span><span>No one made the call</span></div>
+<p class="ms">Measure: incremental visits and revenue per lapsed client</p></div></div>
+</div>
+<div class="ladder-row"><span class="mono-l" style="color: #5E5C58">Autonomy is earned</span><div class="rails"><span>1 · Read</span><span>2 · Notify</span><span>3 · Approve</span><span>4 · Act within approved rules</span></div></div>
 <p class="xp-cap">Each level rests on the layers beneath it. L1 saves time, L2 changes how the work gets done, L3 creates revenue that wasn’t happening. We claim the level we can evidence.</p>
 </div>
 </div>
