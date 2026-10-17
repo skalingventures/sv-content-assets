@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Operating system · Skaling Ventures</title>
-<meta name="description" content="Every weekday at 6am, agents brief our operating company's leadership. See how the week runs, what a report looks like, and four editions from a real week, anonymized.">
+<meta name="description" content="Every weekday morning, agents brief our operating company's leadership, and the reports read each other. See how it flows, what a report looks like, and five sample editions.">
 <link rel="canonical" href="https://www.skalingventures.com/operating-system">
 <meta name="theme-color" content="#1F1F1F">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skaling Ventures">
 <meta property="og:title" content="We run on the system we write about · Skaling Ventures">
-<meta property="og:description" content="Agents brief our operating company's leadership every weekday at 6am. Four editions from a real week, anonymized.">
+<meta property="og:description" content="Agents brief our operating company's leadership every weekday morning, and the reports read each other. Five sample editions.">
 <meta property="og:url" content="https://www.skalingventures.com/operating-system">
 <meta property="og:image" content="https://www.skalingventures.com/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -60,24 +60,34 @@ a{color:inherit}
 .fact{padding:22px 24px 0 0}
 .fact b{display:block;font:700 clamp(1.15rem,1.7vw,1.4rem)/1.15 var(--f);color:var(--bone);margin-bottom:8px}
 .fact span{font:400 14px/1.55 var(--f);color:var(--mut2)}
-/* the week */
+/* the flow */
 .on-bone{background:var(--bone2);color:var(--ink)}
-.week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:clamp(44px,5vw,72px);list-style:none;padding:0}
-.day{background:var(--bone);border:1px solid rgba(31,31,31,.10);border-radius:14px;padding:20px 18px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.day-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid rgba(31,31,31,.10);padding-bottom:12px}
-.day-h b{font:700 15px/1 var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--g)}
-.day-h span{font:500 11.5px/1 var(--f);color:var(--mut);letter-spacing:.04em}
-.day ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
-.day li{font:400 14px/1.35 var(--f);color:var(--ink);padding-left:14px;position:relative}
-.day li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;border:1px solid #9A948A}
-.day li.s{color:var(--g);font-weight:600}
-.day li.s::before{background:var(--nev);border-color:var(--nev)}
-.day .then{font:600 10.5px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;color:#8A847A;margin:2px 0 -2px;padding-left:14px}
-.week-foot{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;margin-top:22px;font:400 13.5px/1.6 var(--f);color:var(--mut)}
-.week-foot .key{display:inline-flex;align-items:center;gap:8px}
-.week-foot .key i{width:7px;height:7px;border-radius:50%;background:var(--nev);display:inline-block}
+.flow{display:grid;grid-template-columns:minmax(0,.85fr) 28px minmax(0,1.3fr) 28px minmax(0,1fr) 28px minmax(0,1.15fr);align-items:stretch;margin-top:clamp(44px,5vw,72px)}
+.col{display:flex;flex-direction:column;gap:10px;min-width:0}
+.col-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:10px;border-bottom:1px solid rgba(31,31,31,.14);margin-bottom:4px}
+.col-h b{font:700 13px/1.1 var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--g)}
+.col-h span{font:500 11.5px/1 var(--f);color:var(--mut)}
+.node{background:var(--bone);border:1px solid rgba(31,31,31,.10);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+.node b{font:600 14px/1.25 var(--f);color:var(--g)}
+.node small{font:400 12.5px/1.4 var(--f);color:var(--mut)}
+.node.s{border-color:var(--nev);box-shadow:inset 3px 0 0 var(--nev)}
+.node.src{background:transparent;border-style:dashed}
+.node.cap{background:var(--g);border-color:var(--g)}
+.node.cap b{color:var(--bone)}.node.cap small{color:var(--mut2)}
+.node.cap.s{box-shadow:inset 3px 0 0 var(--fog);border-color:var(--g)}
+.down{align-self:center;color:#9A948A;font:400 14px/1 var(--f);padding:2px 0 2px 14px}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--nev)}
+.arrow svg{width:22px;height:12px}
+.flow-cap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(31,31,31,.14)}
+.flow-cap p{margin:0;font:400 14px/1.6 var(--f);color:var(--ink)}
+.flow-cap b{color:var(--g)}
+.key{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font:400 13px/1.5 var(--f);color:var(--mut)}
+.key i{width:14px;height:10px;border-radius:3px;border:1px solid var(--nev);box-shadow:inset 3px 0 0 var(--nev);display:inline-block}
 /* editions */
 .eds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:clamp(48px,6vw,80px)}
+.ed.cap{grid-column:1/-1;flex-direction:row}
+.ed.cap .ed-shot{flex:0 0 56%;aspect-ratio:auto;border-bottom:0;border-right:1px solid rgba(128,126,122,.35);min-height:340px}
+.ed.cap h3{font-size:clamp(1.6rem,2.6vw,2.2rem)}
 .ed{background:var(--g2);border:1px solid rgba(128,126,122,.35);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .3s ease,transform .5s cubic-bezier(.23,1,.32,1)}
 .ed:hover{border-color:rgba(163,177,192,.7);transform:translateY(-2px)}
 .ed-shot{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid rgba(128,126,122,.35);background:#1A1A1A}
@@ -125,7 +135,11 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding-top:40px;padding-bottom:40px}
 .foot small{font:400 12px/1.4 var(--f)}
 @media (max-width:1024px){
- .week{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .flow{grid-template-columns:1fr;row-gap:6px}
+ .arrow{transform:rotate(90deg);height:28px}
+ .flow-cap{grid-template-columns:1fr}
+ .ed.cap{flex-direction:column}
+ .ed.cap .ed-shot{flex:none;aspect-ratio:16/10;border-right:0;border-bottom:1px solid rgba(128,126,122,.35);min-height:0}
  .loop{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}
  .anat{grid-template-columns:1fr}
  .legend{position:static}
@@ -134,7 +148,6 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
  .nav{display:none}
  .split{grid-template-columns:1fr;gap:28px}
  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
- .week{grid-template-columns:1fr}
  .eds{grid-template-columns:1fr}
  .loop{grid-template-columns:1fr}
  .limits{grid-template-columns:1fr}
@@ -168,13 +181,13 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <p class="kicker" style="color:#A3B1C0"><a href="/#work" style="text-decoration:none;opacity:.7">Our work</a><span aria-hidden="true" style="opacity:.5">/</span>Operating system</p>
 <div class="split">
 <h1 id="h1" class="h1">We run on the system we write about.</h1>
-<p class="lead" style="color:#E8E2D8">At our operating company, agents brief the leadership team every weekday at 6am. They read the CRM, the support desk, product usage, the books and the market, then write reports that take a position, show their sources and recommend the next move. People make the calls.</p>
+<p class="lead" style="color:#E8E2D8">At our operating company, agents brief the leadership team every weekday morning. They read the CRM, the support desk, product usage, the books, customer calls and the market, then write reports that take a position, show their sources and recommend the next move. The reports read each other. People make the calls.</p>
 </div>
 <div class="facts" role="list">
-<div class="fact" role="listitem"><b>Every weekday, 6am</b><span>Reports run in order, each feeding the next.</span></div>
+<div class="fact" role="listitem"><b>Every weekday morning</b><span>Reports run in sequence from 6am, each reading the ones before it.</span></div>
 <div class="fact" role="listitem"><b>A position, not a summary</b><span>Every report opens with a verdict and the moves it implies.</span></div>
 <div class="fact" role="listitem"><b>Sources on the page</b><span>What it read, how fresh it was, and what it couldn’t see.</span></div>
-<div class="fact" role="listitem"><b>Graded every Friday</b><span>Feedback is stored and read by the next run.</span></div>
+<div class="fact" role="listitem"><b>It learns from feedback</b><span>The CEO’s feedback is stored and read by the next run.</span></div>
 </div>
 </div>
 </section>
@@ -183,19 +196,54 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <div class="wrap">
 <div class="split">
 <div>
-<p class="kicker" style="color:#89523B">The week</p>
-<h2 id="week-h" class="h2" style="color:#1F1F1F">Outside in first. Synthesis last.</h2>
+<p class="kicker" style="color:#89523B">How it flows</p>
+<h2 id="week-h" class="h2" style="color:#1F1F1F">The reports read each other.</h2>
 </div>
-<p class="lead">The week opens with the market, moves through revenue, customers, product and money, and ends with one digest that reads everything else. Each report knows what the others found.</p>
+<p class="lead">Each report writes a structured record, not just a page. The next ones read it. Functional reports keep score Monday to Thursday, the assists turn that into the CEO’s moves the same morning, and on Friday the synthesis reads the whole week.</p>
 </div>
-<ol class="week" aria-label="The weekly schedule">
-<li class="day"><div class="day-h"><b>Mon</b><span>6:00 am</span></div><ul><li>Market scan</li><li class="s">Operating newspaper</li></ul></li>
-<li class="day"><div class="day-h"><b>Tue</b><span>6:00 am</span></div><ul><li>Growth reality</li><li class="s">Pipeline reality</li><li>Prospecting reality</li></ul><p class="then">then</p><ul><li>AE week ahead</li><li class="s">Sales CEO assist</li></ul></li>
-<li class="day"><div class="day-h"><b>Wed</b><span>6:00 am</span></div><ul><li>Support reality</li><li>Onboarding reality</li></ul><p class="then">then</p><ul><li>Support CEO assist</li></ul></li>
-<li class="day"><div class="day-h"><b>Thu</b><span>6:00 am</span></div><ul><li>Product &amp; engineering reality</li><li>Finance reality</li></ul></li>
-<li class="day"><div class="day-h"><b>Fri</b><span>6:00 am</span></div><ul><li>Voice of market</li></ul><p class="then">then</p><ul><li class="s">Weekly CEO digest</li></ul><p class="then">then</p><ul><li>Editorial retro</li></ul></li>
-</ol>
-<div class="week-foot"><span class="key"><i aria-hidden="true"></i>Sampled below</span><span>Sunday: an outcome diagnosis checks the quarter’s bets against what the week showed.</span></div>
+<div class="flow" role="img" aria-label="Sources feed functional reports, which feed the assists and the Friday synthesis">
+<div class="col">
+<div class="col-h"><b>Sources</b><span>live systems</span></div>
+<div class="node src"><b>CRM</b><small>deals, activity, history</small></div>
+<div class="node src"><b>Support desk</b><small>tickets and threads</small></div>
+<div class="node src"><b>Product usage</b><small>who uses what, and how much</small></div>
+<div class="node src"><b>The books</b><small>billing, collections, spend</small></div>
+<div class="node src"><b>Customer calls</b><small>recordings and summaries</small></div>
+<div class="node src"><b>Market feeds</b><small>trade press, competitors, macro</small></div>
+</div>
+<div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
+<div class="col">
+<div class="col-h"><b>Keep score</b><span>Mon to Thu</span></div>
+<div class="node s"><b>Market Scan</b><small>Mon · the vertical, outside in</small></div>
+<div class="node"><b>Growth Reality</b><small>Tue · demand and channel effort</small></div>
+<div class="node s"><b>Pipeline Reality</b><small>Tue · every deal, against the evidence</small></div>
+<div class="node"><b>Prospecting Reality</b><small>Tue · outbound effort and reach</small></div>
+<div class="node"><b>Support · Onboarding Reality</b><small>Wed · what customers are living</small></div>
+<div class="node"><b>Product &amp; Engineering · Finance Reality</b><small>Thu · what shipped, what it earned</small></div>
+</div>
+<div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
+<div class="col">
+<div class="col-h"><b>Act</b><span>same morning</span></div>
+<div class="node s"><b>Sales CEO Assist</b><small>Tue · reads Pipeline Reality: the calls only the CEO can make, notes drafted</small></div>
+<div class="node"><b>AE Week Ahead</b><small>Tue · reads the pipeline and prospecting reports</small></div>
+<div class="node"><b>Support CEO Assist</b><small>Wed · reads Support and Onboarding Reality</small></div>
+</div>
+<div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
+<div class="col">
+<div class="col-h"><b>Synthesize</b><span>Friday</span></div>
+<div class="node s"><b>Voice of Market</b><small>reads the week’s calls and the support, growth and pipeline reports</small></div>
+<div class="down" aria-hidden="true">↓</div>
+<div class="node cap s"><b>Weekly CEO Digest</b><small>reads every report above, finds what no single one can see</small></div>
+<div class="down" aria-hidden="true">↓</div>
+<div class="node"><b>Editorial retro</b><small>reviews the week’s reports</small></div>
+</div>
+</div>
+<span class="key"><i aria-hidden="true"></i>Sample editions below</span>
+<div class="flow-cap">
+<p><b>One record, many readers.</b> Pipeline Reality is read the same morning by the Sales CEO Assist, on Friday by Voice of Market for loss patterns, and again by the Digest.</p>
+<p><b>Inside and outside.</b> Market Scan reads the vertical our customers sell in. A separate weekly newspaper reads capital markets and M&amp;A for us, as owners.</p>
+<p><b>Sunday closes the loop.</b> An outcome diagnosis checks the quarter’s bets against what the week’s reports showed.</p>
+</div>
 </div>
 </section>
 
@@ -203,54 +251,64 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <div class="wrap">
 <div class="split">
 <div>
-<p class="kicker" style="color:#A3B1C0">Four editions, one real week</p>
+<p class="kicker" style="color:#A3B1C0">Five sample editions</p>
 <h2 id="eds-h" class="h2" style="color:#FFFAF4">What the system actually says.</h2>
 </div>
-<p class="lead" style="color:#E8E2D8">One edition for each kind of work the system does: synthesize, keep score, read the market, and turn all of it into the CEO’s next move.</p>
+<p class="lead" style="color:#E8E2D8">One edition for each kind of work the system does: synthesize the week, keep score, read the market from outside and from customers, and turn all of it into the CEO’s next move.</p>
 </div>
 <div class="eds">
-<a class="ed" href="/operating-system/weekly-ceo-digest">
-<div class="ed-shot"><img src="/operating-system/img/weekly-ceo-digest-thumb.jpg" alt="The Weekly CEO Digest reader's cut: verdict, sources line and vital signs" loading="lazy" width="1200" height="750"></div>
+<a class="ed cap" href="/operating-system/weekly-ceo-digest">
+<div class="ed-shot"><img src="/operating-system/img/weekly-ceo-digest-thumb.jpg" alt="The Weekly CEO Digest sample: verdict, sources line and vital signs" loading="lazy" width="1200" height="750"></div>
 <div class="ed-body">
-<div class="ed-top"><span class="pill">Synthesis</span><span class="mono-l" style="color:#A49E92">Friday · 6am</span></div>
+<div class="ed-top"><span class="pill">Synthesis · the capstone</span><span class="mono-l" style="color:#A49E92">Friday</span></div>
 <h3>Weekly CEO Digest</h3>
-<blockquote>“The business is healthy where customers are, and stalled where the future gets built.”</blockquote>
-<p>One view across every function: the verdict, the vital signs, the patterns no single report can see, and a ranked action list.</p>
-<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
+<blockquote>“The signal is strongest where customers are, not where prospects are.”</blockquote>
+<p>Reads every other report and writes one view across the business: the verdict, the vital signs, the patterns no single report can see, and a ranked action list for the CEO.</p>
+<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
 </div>
 </a>
 <a class="ed" href="/operating-system/pipeline-reality">
-<div class="ed-shot"><img src="/operating-system/img/pipeline-reality-thumb.jpg" alt="The Sales Pipeline Reality reader's cut: headline and pipeline verdict" loading="lazy" width="1200" height="750"></div>
+<div class="ed-shot"><img src="/operating-system/img/pipeline-reality-thumb.jpg" alt="The Sales Pipeline Reality sample: headline and pipeline verdict" loading="lazy" width="1200" height="750"></div>
 <div class="ed-body">
-<div class="ed-top"><span class="pill">Reality</span><span class="mono-l" style="color:#A49E92">Tuesday · 6am</span></div>
+<div class="ed-top"><span class="pill">Reality</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
 <h3>Sales Pipeline Reality</h3>
-<blockquote>“The pipeline sat frozen all week, and two committed recovery actions never happened.”</blockquote>
-<p>Keeps score without spin: facts kept apart from inference, missed commitments named, every deal’s next move dated.</p>
-<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
-</div>
-</a>
-<a class="ed" href="/operating-system/operating-newspaper">
-<div class="ed-shot"><img src="/operating-system/img/operating-newspaper-thumb.jpg" alt="The Operating Newspaper reader's cut: front page" loading="lazy" width="1200" height="750"></div>
-<div class="ed-body">
-<div class="ed-top"><span class="pill">Signal</span><span class="mono-l" style="color:#A49E92">Monday · 6am</span></div>
-<h3>Operating Newspaper</h3>
-<blockquote>“Cache, not egress, is now the fastest-growing cost in AI. Instrument cost per agent run before features scale.”</blockquote>
-<p>Reads the outside world for us: each story turned into a stance, a decision with options, and a change to how we run.</p>
-<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
+<blockquote>“Two deals stalled after their champions changed and now need a close-or-recycle call, not more patience.”</blockquote>
+<p>Keeps score without spin: facts kept apart from inference, each deal checked against the evidence, every next move dated.</p>
+<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
 </div>
 </a>
 <a class="ed" href="/operating-system/sales-ceo-assist">
-<div class="ed-shot"><img src="/operating-system/img/sales-ceo-assist-thumb.jpg" alt="The Sales CEO Assist reader's cut: the day's first action" loading="lazy" width="1200" height="750"></div>
+<div class="ed-shot"><img src="/operating-system/img/sales-ceo-assist-thumb.jpg" alt="The Sales CEO Assist sample: the day's first action" loading="lazy" width="1200" height="750"></div>
 <div class="ed-body">
-<div class="ed-top"><span class="pill">Assist</span><span class="mono-l" style="color:#A49E92">Tuesday · 6am</span></div>
+<div class="ed-top"><span class="pill">Assist</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
 <h3>Sales CEO Assist</h3>
-<blockquote>“The largest deal has gone quiet for eleven days. Send the time-boxed note today; recycle it if she stays silent.”</blockquote>
-<p>Turns the pipeline into the calls only the CEO can make, with drafted notes in three tones and a rule for when to send each.</p>
-<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
+<blockquote>“A direct note from the CEO is the most credible last channel before it’s recycled.”</blockquote>
+<p>Reads Pipeline Reality and turns it into the calls only the CEO can make, with notes drafted in three tones and a rule for when to send each.</p>
+<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="ed" href="/operating-system/market-scan">
+<div class="ed-shot"><img src="/operating-system/img/market-scan-thumb.jpg" alt="The Market Scan sample: front page" loading="lazy" width="1200" height="750"></div>
+<div class="ed-body">
+<div class="ed-top"><span class="pill">Signal · outside in</span><span class="mono-l" style="color:#A49E92">Monday</span></div>
+<h3>Market Scan</h3>
+<blockquote>“Flag dealers with the same profile for a check-in before the show, not after a closure notice.”</blockquote>
+<p>Reads the trade press and competitors in our customers’ vertical, takes a stance for each part of the channel, and hands each team a move for the week.</p>
+<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="ed" href="/operating-system/voice-of-market">
+<div class="ed-shot"><img src="/operating-system/img/voice-of-market-thumb.jpg" alt="The Voice of Market sample: market snapshot" loading="lazy" width="1200" height="750"></div>
+<div class="ed-body">
+<div class="ed-top"><span class="pill">Signal · customers in</span><span class="mono-l" style="color:#A49E92">Friday</span></div>
+<h3>Voice of Market</h3>
+<blockquote>“What we claim to be, customers are investing to make true.”</blockquote>
+<p>Reads the week’s customer and prospect calls alongside the support, growth and pipeline reports, and shows where the sales story and customer reality agree or split.</p>
+<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
 </div>
 </a>
 </div>
-<p class="note">A real week, October 12 to 16, 2026, anonymized and excerpted. Customer, deal and people names, every figure and the industry are changed; the structure, the verdicts and the reasoning follow the originals. Each edition is rendered by the system’s own templates and trimmed to a reader’s cut; the live editions are several times longer and stay private.</p>
+<p class="note">Sample editions built from real editions of the system. Customer, deal and people names, every figure, the situations and the industry are changed; the format, the structure and the kind of reasoning are the system’s own. Each sample is rendered by the system’s own templates and trimmed to a reader’s cut; the live editions are several times longer and stay private.</p>
 </div>
 </section>
 
@@ -265,19 +323,21 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 </div>
 <div class="anat">
 <div class="frame">
-<img src="/operating-system/img/anatomy-digest.jpg" alt="The top of the Weekly CEO Digest, annotated: verdict, sources line, vital signs, three things that matter, and the source record" width="1440" height="2004" loading="lazy">
-<span class="pin" style="top:12.8%" aria-hidden="true">1</span>
-<span class="pin" style="top:18.7%" aria-hidden="true">2</span>
-<span class="pin" style="top:50.1%" aria-hidden="true">3</span>
-<span class="pin" style="top:63.1%" aria-hidden="true">4</span>
-<span class="pin" style="top:95.2%" aria-hidden="true">5</span>
+<img src="/operating-system/img/anatomy-digest.jpg" alt="The top of the Weekly CEO Digest sample, annotated: verdict, sources line, vital signs, three things that matter, a citation to another report, and the source record" width="1440" height="1824" loading="lazy">
+<span class="pin" style="top:14.0%" aria-hidden="true">1</span>
+<span class="pin" style="top:20.6%" aria-hidden="true">2</span>
+<span class="pin" style="top:47.0%" aria-hidden="true">3</span>
+<span class="pin" style="top:60.2%" aria-hidden="true">4</span>
+<span class="pin" style="top:80.8%" aria-hidden="true">5</span>
+<span class="pin" style="top:94.7%" aria-hidden="true">6</span>
 </div>
 <ol class="legend">
-<li><span class="n" aria-hidden="true">1</span><div><b>The verdict</b><span>It opens with a position, not a summary. If the week was bad, the first line says so.</span></div></li>
-<li><span class="n" aria-hidden="true">2</span><div><b>What it read</b><span>The time it read the data, how many sources it covered, and a flag when one of them is partial.</span></div></li>
-<li><span class="n" aria-hidden="true">3</span><div><b>Vital signs</b><span>This week against last, with the normal range where one exists, so a dip in season reads as a dip in season.</span></div></li>
-<li><span class="n" aria-hidden="true">4</span><div><b>Three things that matter</b><span>Ranked, each traced to the report it came from, each ending in what it means for the week.</span></div></li>
-<li><span class="n" aria-hidden="true">5</span><div><b>The source record</b><span>Every section opens to the structured record behind it. Nothing on the page is unsourced.</span></div></li>
+<li><span class="n" aria-hidden="true">1</span><div><b>The verdict</b><span>It opens with a position, not a summary. If the week was mixed, the first line says so.</span></div></li>
+<li><span class="n" aria-hidden="true">2</span><div><b>What it read</b><span>When it read the data, how many sources it covered, and a flag when one of them is partial.</span></div></li>
+<li><span class="n" aria-hidden="true">3</span><div><b>Vital signs</b><span>This week against last, with the normal range where one exists, so a seasonal dip reads as one.</span></div></li>
+<li><span class="n" aria-hidden="true">4</span><div><b>Three things that matter</b><span>Ranked, each ending in what it means for the week.</span></div></li>
+<li><span class="n" aria-hidden="true">5</span><div><b>One report citing another</b><span>“Per Sales Pipeline Reality report, Oct 13.” The digest reads the week’s reports and says which one each claim came from.</span></div></li>
+<li><span class="n" aria-hidden="true">6</span><div><b>The source record</b><span>Every section opens to the structured record behind it. Nothing on the page is unsourced.</span></div></li>
 </ol>
 </div>
 </div>
@@ -293,11 +353,11 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <p class="lead" style="color:#E8E2D8">A model writes well. Whether its report deserves trust depends on everything around it: what it may read, what it must check, and what happens when it’s wrong.</p>
 </div>
 <ol class="loop">
-<li class="step"><div class="bar"></div><small>01</small><b>Read</b><p>Agents query the live systems directly, under versioned prompts, and write a structured record rather than free text.</p></li>
-<li class="step"><div class="bar"></div><small>02</small><b>Check</b><p>Validators fail closed. A missing source or a broken contract stops the report instead of letting it guess.</p></li>
-<li class="step"><div class="bar"></div><small>03</small><b>Publish</b><p>Reports land before the workday starts, each carrying its own freshness and coverage line.</p></li>
-<li class="step"><div class="bar"></div><small>04</small><b>Grade</b><p>Every Friday an editorial retro scores the week’s reports. The CEO adds feedback of his own.</p></li>
-<li class="step"><div class="bar"></div><small>05</small><b>Remember</b><p>That feedback is stored and read by the next run, so the same miss doesn’t repeat.</p></li>
+<li class="step"><div class="bar"></div><small>01</small><b>Read</b><p>Agents read the source systems and the reports upstream of them, under versioned prompts, and write a structured record rather than free text.</p></li>
+<li class="step"><div class="bar"></div><small>02</small><b>Check</b><p>Validators fail closed: a report that breaks its contract doesn’t publish. A partial source is flagged on the page, not hidden.</p></li>
+<li class="step"><div class="bar"></div><small>03</small><b>Publish</b><p>Reports land through the morning in dependency order, each carrying its own freshness and coverage line.</p></li>
+<li class="step"><div class="bar"></div><small>04</small><b>Grade</b><p>Every Friday an editorial retro reviews the week’s reports, and the CEO records what missed.</p></li>
+<li class="step"><div class="bar"></div><small>05</small><b>Remember</b><p>The CEO’s feedback is stored and read by the next run, so the same miss doesn’t repeat.</p></li>
 </ol>
 <p class="back"><svg width="28" height="12" viewBox="0 0 28 12" aria-hidden="true"><path d="M27 6H2M6 1L1 6l5 5" fill="none" stroke="#A3B1C0" stroke-width="1.2"/></svg>Then Monday starts again, a little sharper. Changes to the report templates run against a fixed set of test cases before they ship.</p>
 <div class="limits">

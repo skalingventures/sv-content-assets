@@ -479,7 +479,7 @@ html{scroll-behavior:auto}
 .osb-dot{width:6px;height:6px;border-radius:50%;background:#A3B1C0}
 .osb-h{margin:0;font:700 clamp(1.7rem,3.2vw,2.6rem)/1.02 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.005em;color:#FFFAF4;text-wrap:balance}
 .osb-lead{margin:0;font:400 1rem/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#E8E2D8}
-.osb-grid{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.osb-grid{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
 .osb-grid li{min-width:0;display:flex}
 .osb-tile{flex:1;display:flex;flex-direction:column;gap:12px;padding:20px 18px 18px;border-radius:12px;background:#1F1F1F;border:1px solid rgba(128,126,122,.32);text-decoration:none;color:#E8E2D8;transition:border-color .3s ease,transform .5s cubic-bezier(.23,1,.32,1)}
 .osb-tile:hover{border-color:rgba(163,177,192,.7);transform:translateY(-2px)}
@@ -489,7 +489,8 @@ html{scroll-behavior:auto}
 .osb-go{margin-top:auto;font:600 13px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A3B1C0}
 .osb-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 28px;margin-top:22px;padding-top:14px;border-top:1px solid rgba(128,126,122,.28)}
 .osb-fine{font:400 13px/1.6 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A49E92}
-@media (max-width:1024px){.osb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1180px){.osb-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.osb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.osb-head{grid-template-columns:1fr}.osb-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -780,19 +781,20 @@ html{scroll-behavior:auto}
 <div class="osb" data-reveal="1" aria-labelledby="osb-h">
 <div class="osb-head">
 <div style="min-width: 0">
-<div class="osb-meta"><span class="mono-l" style="color: #A3B1C0">The operating system</span><span class="osb-pill"><span class="osb-dot"></span>Every weekday · 6am</span></div>
+<div class="osb-meta"><span class="mono-l" style="color: #A3B1C0">The operating system</span><span class="osb-pill"><span class="osb-dot"></span>Every weekday morning</span></div>
 <h3 id="osb-h" class="osb-h">We run on the system we write about.</h3>
 </div>
-<p class="osb-lead">At our operating company, agents read the CRM, support desk, product usage, books and market every morning, and brief the leadership team before the day starts. Each report takes a position, shows its sources, and gets graded every Friday.</p>
+<p class="osb-lead">At our operating company, agents read the CRM, support desk, product usage, books, customer calls and market, and brief the leadership team before the day gets going. The reports read each other; Friday’s digest reads them all. Each one takes a position and shows its sources.</p>
 </div>
-<ul class="osb-grid" aria-label="Four editions from one real week">
-<li><a class="osb-tile" href="/operating-system/operating-newspaper"><span class="osb-k">Signal · Mon</span><b>Operating Newspaper</b><q>Cache, not egress, is now the fastest-growing cost in AI. Instrument cost per agent run before features scale.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/pipeline-reality"><span class="osb-k">Reality · Tue</span><b>Pipeline Reality</b><q>The pipeline sat frozen all week, and two committed recovery actions never happened.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/sales-ceo-assist"><span class="osb-k">Assist · Tue</span><b>Sales CEO Assist</b><q>The largest deal has gone quiet for eleven days. Send the time-boxed note today.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/weekly-ceo-digest"><span class="osb-k">Synthesis · Fri</span><b>Weekly CEO Digest</b><q>The business is healthy where customers are, and stalled where the future gets built.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-</ul>
+<ol class="osb-grid" aria-label="Five sample editions, in the order they run">
+<li><a class="osb-tile" href="/operating-system/market-scan"><span class="osb-k">Mon · Signal</span><b>Market Scan</b><q>Flag dealers with the same profile for a check-in before the show, not after a closure notice.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+<li><a class="osb-tile" href="/operating-system/pipeline-reality"><span class="osb-k">Tue · Reality</span><b>Pipeline Reality</b><q>Two deals stalled after their champions changed and now need a close-or-recycle call, not more patience.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+<li><a class="osb-tile" href="/operating-system/sales-ceo-assist"><span class="osb-k">Tue · Assist</span><b>Sales CEO Assist</b><q>A direct note from the CEO is the most credible last channel before it’s recycled.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+<li><a class="osb-tile" href="/operating-system/voice-of-market"><span class="osb-k">Fri · Signal</span><b>Voice of Market</b><q>What we claim to be, customers are investing to make true.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+<li><a class="osb-tile" href="/operating-system/weekly-ceo-digest"><span class="osb-k">Fri · Synthesis</span><b>Weekly CEO Digest</b><q>The signal is strongest where customers are, not where prospects are.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+</ol>
 <div class="osb-foot">
-<span class="osb-fine">From a real week, anonymized: names, numbers and industry changed.</span>
+<span class="osb-fine">Sample editions built from real ones: names, figures and situations changed.</span>
 <a class="tlink" href="/operating-system" style="color: #A3B1C0">See how the system works <span class="arr" aria-hidden="true">→</span></a>
 </div>
 </div>
