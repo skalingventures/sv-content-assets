@@ -26,6 +26,15 @@ module.exports = async (req, res) => {
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
   }
 
+  // Native (no-JS) form posts get a branded page instead of raw JSON.
+  const isJson = String(req.headers['content-type'] || '').includes('application/json');
+  const done = (status, payload) => {
+    if (isJson) return res.status(status).json(payload);
+    res.statusCode = 303;
+    res.setHeader('Location', payload.ok ? '/thanks' : '/talk-error');
+    return res.end();
+  };
+
   let body = req.body;
   if (typeof body === 'string') {
     try { body = JSON.parse(body); } catch (e) { body = {}; }
@@ -33,9 +42,9 @@ module.exports = async (req, res) => {
   body = body || {};
 
   // Bot traps: hidden field must stay empty; humans take more than ~3s to fill the form.
-  if (clean(body.website, 200)) return res.status(200).json({ ok: true });
-  const elapsed = Number(body.t || 0);
-  if (!(elapsed >= 3000)) return res.status(200).json({ ok: true });
+  if (clean(body.website, 200)) return done(200, { ok: true });
+  // Timing check only applies to the JS path (native posts carry no timer).
+  if (isJson && !(Number(body.t || 0) >= 3000)) return done(200, { ok: true });
 
   const name = clean(body.name, 120);
   const email = clean(body.email, 200);
@@ -45,11 +54,11 @@ module.exports = async (req, res) => {
   const wantsDeck = body.deck === true || body.deck === 'on' || body.deck === 'true';
 
   if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || !ROLES[roleKey]) {
-    return res.status(400).json({ ok: false, error: 'invalid' });
+    return done(400, { ok: false, error: 'invalid' });
   }
 
   const key = process.env.RESEND_API_KEY || process.env.Resend_email;
-  if (!key) return res.status(503).json({ ok: false, error: 'not_configured' });
+  if (!key) return done(503, { ok: false, error: 'not_configured' });
 
   const role = ROLES[roleKey];
   const to = process.env.CONTACT_TO || 'kjael@skalingventures.com';
@@ -73,11 +82,11 @@ module.exports = async (req, res) => {
     });
     if (!r.ok) {
       console.error('resend_failed', r.status, await r.text().catch(() => ''));
-      return res.status(502).json({ ok: false, error: 'send_failed' });
+      return done(502, { ok: false, error: 'send_failed' });
     }
-    return res.status(200).json({ ok: true });
+    return done(200, { ok: true });
   } catch (e) {
     console.error('resend_error', e && e.message);
-    return res.status(502).json({ ok: false, error: 'send_failed' });
+    return done(502, { ok: false, error: 'send_failed' });
   }
 };
