@@ -59,8 +59,7 @@ module.exports = async (req, res) => {
   const company = clean(body.company, 200);
   const roleKey = clean(body.role, 20);
   const message = String(body.message == null ? '' : body.message).slice(0, 2000).trim();
-  const wantsDeck = body.deck === true || body.deck === 'on' || body.deck === 'true';
-
+  
   if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || !ROLES[roleKey]) {
     return done(400, { ok: false, error: 'invalid' });
   }
@@ -71,11 +70,10 @@ module.exports = async (req, res) => {
   const role = ROLES[roleKey];
   const to = process.env.CONTACT_TO || 'kjael@skalingventures.com';
   const from = process.env.CONTACT_FROM || 'Skaling Ventures <onboarding@resend.dev>';
-  const subject = `[skalingventures.com] ${role}: ${name}${company ? ' · ' + company : ''}${wantsDeck ? ' (deck requested)' : ''}`;
+  const subject = `[skalingventures.com] ${role}: ${name}${company ? ' · ' + company : ''}`;
 
   const lines = [
-    ['Name', name], ['Email', email], ['Company', company || '—'], ['Describes them', role],
-    ['Deck requested', wantsDeck ? 'Yes' : 'No'], ['What they’ve built', message || '—']
+    ['Name', name], ['Email', email], ['Company', company || '—'], ['Describes them', role], ['What they’ve built', message || '—']
   ];
   const text = lines.map(([k, v]) => `${k}: ${v}`).join('\n');
   const html = '<table style="font:14px/1.5 -apple-system,Segoe UI,sans-serif;border-collapse:collapse">' +

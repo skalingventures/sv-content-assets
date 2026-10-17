@@ -886,7 +886,7 @@ html{scroll-behavior:auto}
 <label><input type="radio" name="role" value="other"><span>Other</span></label>
 </fieldset>
 <label class="fld"><span>What have you built? <em>(optional)</em></span><textarea name="message" rows="3" maxlength="2000"></textarea></label>
-<label class="chk"><input type="checkbox" name="deck"><span>Include the Skaling deck with your reply</span></label>
+
 <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
 <div class="f-foot">
 <button type="submit" class="btn btn-bone" id="talkSubmit">Request a conversation <span class="arr" aria-hidden="true">→</span></button>
@@ -1004,7 +1004,7 @@ html{scroll-behavior:auto}
       }
       var payload = {
         name: f.name.value, email: f.email.value, company: f.company.value,
-        role: role.value, message: f.message.value, deck: f.deck.checked,
+        role: role.value, message: f.message.value,
         website: f.website.value, t: Date.now() - started
       };
       submitBtn.disabled = true;
