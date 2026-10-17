@@ -915,7 +915,7 @@ html{scroll-behavior:auto}
     function go(i, focus) {
       tabs.forEach(function (t, k) { var on = k === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
       pans.forEach(function (p, k) { p.hidden = k !== i; });
-      if (focus) tabs[i].focus();
+      if (focus) tabs[i].focus({ preventScroll: true });
     }
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { go(i); });
