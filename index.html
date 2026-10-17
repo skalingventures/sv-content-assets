@@ -368,6 +368,89 @@ html{scroll-behavior:auto}
 }
 
 [hidden]{display:none!important}
+
+/* explorer: structure visible, one step of detail at a time */
+.xp{gap:16px}
+.xp-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.xp-step{appearance:none;background:none;border:0;border-top:2px solid #D0C4B4;padding:12px 4px 2px 0;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-height:44px;color:#3A3836;transition:border-color .3s ease}
+.xp-step .k{font:600 10px/1.2 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7C766C}
+.xp-step .t{font:600 15px/1.2 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#5E5C58}
+.xp-step:hover{border-top-color:#7C766C}
+.xp-step[aria-selected="true"]{border-top-color:#89523B}
+.xp-step[aria-selected="true"] .k{color:#89523B}
+.xp-step[aria-selected="true"] .t{color:#1F1F1F}
+.xp-step:focus-visible{outline:2px solid #89523B;outline-offset:3px}
+.xp-panel{border:1px solid #7C766C;border-radius:10px;background:#FFFAF4;padding:18px 18px 12px;display:flex;flex-direction:column;gap:12px;animation:fadeUp .45s cubic-bezier(.19,1,.22,1) both}
+.xp-t{margin:0;font:400 15.5px/1.55 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1F1F1F;max-width:34rem}
+.xp-sub{margin:4px 0 -4px;font:600 10px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#5E5C58}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{padding:6px 10px;border-radius:6px;border:1px solid #D0C4B4;background:#F2ECE2;font:500 12px/1.2 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#3A3836}
+.chips.gates-row span{border-color:#7C766C;background:#FFFAF4;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+.xp-m{margin:0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font:500 13px/1.4 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#89523B}
+.xp-m span{font:600 10px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#5E5C58}
+.xp-foot{display:flex;justify-content:flex-end;border-top:1px solid #E8E2D8;padding-top:10px;margin-top:2px}
+.xp-next{appearance:none;background:none;border:0;padding:6px 0;min-height:36px;cursor:pointer;font:600 12.5px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#89523B;letter-spacing:.01em}
+.xp-next:hover{color:#1F1F1F}
+.xp-more{border-top:1px solid #D0C4B4;padding-top:2px}
+.xp-more summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:40px;font:600 11px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#3A3836}
+.xp-more summary::-webkit-details-marker{display:none}
+.xp-more summary::after{content:'+';font:400 18px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#89523B;transition:transform .3s ease}
+.xp-more[open] summary::after{transform:rotate(45deg)}
+.xp-list{margin:4px 0 8px;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.xp-list li{padding:8px 10px;border:1px dashed #7C766C;border-radius:6px;font:500 12.5px/1.35 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#3A3836}
+.ladder{margin:6px 0 6px;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;counter-reset:rung}
+.ladder li{counter-increment:rung;position:relative;padding:10px 10px 10px;border:1px solid #D0C4B4;border-radius:8px;background:#FFFAF4;display:flex;flex-direction:column;gap:4px}
+.ladder li b{font:600 13px/1.2 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1F1F1F}
+.ladder li b::before{content:counter(rung) '  ';font-weight:600;color:#89523B;font-size:11px}
+.ladder li span{font:400 12px/1.35 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#5E5C58}
+.ladder li:nth-child(n){border-color:rgba(137,82,59,.35)}
+.ladder li:last-child{background:rgba(137,82,59,.06);border-color:#89523B}
+.xp-note{margin:0 0 8px;font:400 12.5px/1.45 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#5E5C58}
+.xp-cap{margin:0;font:400 12.5px/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#5E5C58}
+.scn{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-left:2px solid #89523B;background:rgba(137,82,59,.05);border-radius:0 8px 8px 0}
+.scn-q{margin:0;font:500 17px/1.35 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1F1F1F}
+.scn-n{margin:0;font:400 13px/1.4 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#5E5C58}
+@media (max-width:520px){
+ .xp-steps{gap:6px}
+ .xp-step .t{font-size:13.5px}
+ .xp-list{grid-template-columns:minmax(0,1fr)}
+ .ladder{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .s-body.xp{padding:18px}
+}
+@media (min-width:901px){.pnl{top:96px}}
+@media (max-width:900px){
+ .ch .numeral{font-size:2.6rem}
+ .ch .rule{margin:16px 0 14px}
+ .ch,.ch.r1,.ch.r2,.ch.r3{padding-top:28px}
+ .pnl,.pnl.on{margin-top:20px}
+}
+@media (max-width:520px){.s-bar{display:none}.xp-foot{padding-top:6px}.msg{font-size:13.5px;max-width:90%}}
+/* diagram III conversation */
+.xp-lead{margin:0;font:600 15px/1.4 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1F1F1F}
+.xp-tag{margin:0 0 -4px;font:600 10px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7C766C}
+.thread{display:flex;flex-direction:column;gap:6px}
+.msg{max-width:86%;padding:9px 12px 10px;border-radius:12px;font:400 14px/1.4 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1F1F1F;background:#F2ECE2;border:1px solid #D0C4B4;align-self:flex-start;border-bottom-left-radius:4px}
+.msg small{display:block;margin-bottom:3px;font:600 9.5px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#89523B}
+.msg.b{align-self:flex-end;background:#1F1F1F;border-color:#1F1F1F;color:#FFFAF4;border-radius:12px;border-bottom-right-radius:4px}
+.msg.b small{color:#A3B1C0}
+.done{display:flex;flex-wrap:wrap;gap:6px}
+.done span{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#89523B;color:#FFFAF4;font:600 11.5px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.02em}
+.done span::before{content:'✓';font-size:11px}
+.xp-rule{margin:0;font:400 12.5px/1.45 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#5E5C58}
+.pnl.on .msg{animation:fadeUp .5s cubic-bezier(.19,1,.22,1) both}
+.pnl.on .msg:nth-child(2){animation-delay:.5s}.pnl.on .msg:nth-child(3){animation-delay:1s}.pnl.on .msg:nth-child(4){animation-delay:1.5s}
+.pnl.on .done{animation:fadeUp .5s cubic-bezier(.19,1,.22,1) 2s both}
+.ba{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 14px;align-items:baseline}
+.ba dt{font:600 10px/1.6 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7C766C}
+.ba dd{margin:0;font:400 15px/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#5E5C58}
+.ba dd.aft{color:#1F1F1F}
+.ba dt:nth-of-type(2){color:#89523B}
+/* mobile: persistent invitation */
+.cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(31,31,31,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,250,244,.12);transform:translateY(110%);transition:transform .45s cubic-bezier(.23,1,.32,1)}
+.cta-bar a{display:flex;align-items:center;justify-content:center;gap:10px;min-height:46px;border-radius:999px;background:#FFFAF4;color:#1F1F1F;text-decoration:none;font:600 15px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif}
+.cta-bar.show{transform:none}
+@media (max-width:760px){.cta-bar{display:block}}
+
 </style>
 </head>
 <body>
@@ -507,28 +590,18 @@ html{scroll-behavior:auto}
 <span class="numeral" aria-hidden="true">I</span>
 <span class="rule" aria-hidden="true"></span>
 <h3 style="margin: 0 0 14px; font: 700 clamp(1.6rem, 2.6vw, 2.25rem)/1.1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; text-transform: uppercase; color: #1F1F1F">Transform the business</h3>
-<p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">We invest in the company itself: its people, operating systems, commercial execution, product discipline, and ability to deliver. We build on what already works and change what needs to change.</p>
+<p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">We start with the company itself: its people, its operating rhythm, how it sells and how it delivers. We keep what works and change what doesn’t, one measured bet at a time.</p>
 <a class="tlink" href="https://skalingventures.substack.com/p/the-operating-layer-trading-performance" target="_blank" rel="noopener" style="color: #89523B; margin-top: 18px; align-self: flex-start">Read: The Operating Layer <span class="arr ne" aria-hidden="true">↗</span></a>
 </div>
 <div class="pnl on">
 <div class="sheet">
 <div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · I / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span></span><span></span></span><span class="tag cu">How we operate</span></div>
-<div class="s-body" style="gap: 16px">
+<div class="s-body xp" data-xp>
 <div><span class="mono-l" style="color: #5E5C58">The leadership system</span><p class="s-title">Lock direction. Bet small. Learn fast.</p></div>
-<div class="tree">
-<div class="lvl box"><div><span class="mono-l" style="color: #89523B">Outcome</span><p class="lvl-t">One metric that matters, written so anyone can understand it.</p></div><span class="tag">90-day anchor</span></div>
-<div class="nest">
-<div class="lvl box"><div><span class="mono-l" style="color: #89523B">Opportunity</span><p class="lvl-t">A hypothesis on how to move it, sized by impact and team-weeks.</p></div><span class="tag">30-day bet</span></div>
-<div class="nest">
-<div class="lvl box"><div><span class="mono-l" style="color: #89523B">Experiment</span><p class="lvl-t">One variable. A clear signal. Then a decision.</p><div class="gates" style="margin-top: 10px" aria-hidden="true"><span class="gate">Kill</span><span class="gate">Iterate</span><span class="gate">Scale</span></div></div><span class="tag cu">2–4 week test</span></div>
-</div>
-</div>
-</div>
-<div style="margin-top: auto">
-<span class="mono-l" style="color: #5E5C58">Guardrails</span>
-<div class="rails" style="margin-top: 10px"><span>No metric → no project</span><span>No owner → backlog</span><span>≤ 3 bets per owner</span><span>Every test reviewed within 4 weeks</span></div>
-</div>
-<p style="margin: 0; font: 400 12.5px/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #5E5C58">A subtraction discipline: every unit of work traces up to an Outcome.</p>
+<div class="xp-steps" role="tablist" aria-label="Lock direction. Bet small. Learn fast."><button type="button" role="tab" class="xp-step" id="d1-t0" aria-controls="d1-p0" aria-selected="true" tabindex="0"><span class="k">90-day anchor</span><span class="t">Outcome</span></button><button type="button" role="tab" class="xp-step" id="d1-t1" aria-controls="d1-p1" aria-selected="false" tabindex="-1"><span class="k">30-day bet</span><span class="t">Opportunity</span></button><button type="button" role="tab" class="xp-step" id="d1-t2" aria-controls="d1-p2" aria-selected="false" tabindex="-1"><span class="k">2–4 week test</span><span class="t">Experiment</span></button></div>
+<div class="xp-panel" role="tabpanel" id="d1-p0" aria-labelledby="d1-t0"><p class="xp-t">One metric that matters, written so anyone on the team can understand it. It holds for a full quarter.</p><div class="xp-foot"><button type="button" class="xp-next" data-go="1">Next: Opportunity <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d1-p1" aria-labelledby="d1-t1" hidden><p class="xp-t">A hypothesis for moving that metric, sized by its expected impact and the team-weeks it will cost.</p><div class="xp-foot"><button type="button" class="xp-next" data-go="2">Next: Experiment <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d1-p2" aria-labelledby="d1-t2" hidden><p class="xp-t">One variable, a clear signal, then a decision.</p><div class="chips gates-row"><span>Kill</span><span>Iterate</span><span>Scale</span></div><div class="xp-foot"><button type="button" class="xp-next" data-go="0"><span aria-hidden="true">↺</span> Start again</button></div></div>
+<details class="xp-more"><summary>Four guardrails</summary><ul class="xp-list"><li>No metric, no project.</li><li>No owner, back to the backlog.</li><li>No more than three bets per owner.</li><li>Every test reviewed within four weeks.</li></ul></details>
+<p class="xp-cap">Every unit of work traces up to an Outcome.</p>
 </div>
 </div>
 </div>
@@ -536,30 +609,18 @@ html{scroll-behavior:auto}
 <span class="numeral" aria-hidden="true">II</span>
 <span class="rule" aria-hidden="true"></span>
 <h3 style="margin: 0 0 14px; font: 700 clamp(1.6rem, 2.6vw, 2.25rem)/1.1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; text-transform: uppercase; color: #1F1F1F">Advance the product</h3>
-<p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">A product that understands its market can become far more useful. We want to turn dependable records, business rules, and customer context into timely intelligence and better decisions.</p>
+<p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">Every vertical product sees its market from the inside. That view is the advantage, if the data behind it can be trusted. We make it dependable first, then let agents move the work and surface what matters.</p>
 <a class="tlink" href="https://skalingventures.substack.com/p/the-agentic-acquirers-playbook" target="_blank" rel="noopener" style="color: #89523B; margin-top: 18px; align-self: flex-start">Read: The Agentic Acquirer’s Playbook <span class="arr ne" aria-hidden="true">↗</span></a>
 </div>
 <div class="pnl ">
 <div class="sheet">
 <div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · II / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span></span></span><span class="tag cu">How we build</span></div>
-<div class="s-body" style="gap: 14px">
-<div><span class="mono-l" style="color: #5E5C58">From data exhaust to intelligence</span><p class="s-title">Truth first. Then intelligence.</p></div>
-<div class="axes">
-<div class="box ax"><span class="mono-l" style="color: #89523B">In the product</span><p>What users do every day</p></div>
-<div class="box ax"><span class="mono-l" style="color: #89523B">Around it</span><p>What their customers do in return</p></div>
-<div class="box ax"><span class="mono-l" style="color: #89523B">Outcomes</span><p>What gets bought, renewed and expanded</p></div>
-</div>
-<div class="down" aria-hidden="true"></div>
-<div class="box truth">
-<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap"><span class="mono-l" style="color: #1F1F1F">Upstream truth</span><span class="mono-l" style="color: #5E5C58">The root wedges</span></div>
-<ol class="wedges"><li>Normalize the data</li><li>Encode the business rules</li><li>Govern and propagate change</li><li>Reconcile across systems</li></ol>
-</div>
-<div class="down" aria-hidden="true"></div>
-<div class="qpair">
-<div class="qcard"><small>An answer</small>Can we take this, at what cost, and when?</div>
-<div class="qcard"><small>A signal</small>Which customers need attention this week, and why?</div>
-</div>
-<p style="margin: 0; font: 400 12.5px/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #5E5C58">Agents built on messy data are confidently wrong. The moat is the truth, and the position it’s collected from.</p>
+<div class="s-body xp" data-xp>
+<div><span class="mono-l" style="color: #5E5C58">Three layers, built in order</span><p class="s-title">Truth first. Then the work. Then intelligence.</p></div>
+<div class="xp-steps" role="tablist" aria-label="Truth first. Then the work. Then intelligence."><button type="button" role="tab" class="xp-step" id="d2-t0" aria-controls="d2-p0" aria-selected="true" tabindex="0"><span class="k">What can be trusted</span><span class="t">Truth</span></button><button type="button" role="tab" class="xp-step" id="d2-t1" aria-controls="d2-p1" aria-selected="false" tabindex="-1"><span class="k">How work moves</span><span class="t">Orchestration</span></button><button type="button" role="tab" class="xp-step" id="d2-t2" aria-controls="d2-p2" aria-selected="false" tabindex="-1"><span class="k">What becomes possible</span><span class="t">Intelligence</span></button></div>
+<div class="xp-panel" role="tabpanel" id="d2-p0" aria-labelledby="d2-t0"><p class="xp-t">Records, prices, rules and schedules are cleaned up and kept exact. Agents work on top of them, never instead of them.</p><p class="xp-sub">The root work</p><div class="chips"><span>Normalize the data</span><span>Encode the business rules</span><span>Keep changes in sync</span><span>Reconcile across systems</span></div><div class="xp-foot"><button type="button" class="xp-next" data-go="1">Next: Orchestration <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d2-p1" aria-labelledby="d2-t1" hidden><p class="xp-t">Agents carry routine work across systems: answers, follow-ups, bookings and orders. People get the exceptions, with the context attached.</p><div class="xp-foot"><button type="button" class="xp-next" data-go="2">Next: Intelligence <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d2-p2" aria-labelledby="d2-t2" hidden><p class="xp-t">The business notices who needs attention and acts before anyone asks.</p><div class="qpair"><div class="qcard"><small>An answer</small>Can we do this, at what price, and when?</div><div class="qcard"><small>A signal</small>Which customers are drifting away, and why?</div></div><div class="xp-foot"><button type="button" class="xp-next" data-go="0"><span aria-hidden="true">↺</span> Start again</button></div></div>
+
+<p class="xp-cap">Agents built on messy data are confidently wrong. We build in this order; customer demand decides what we build first within it.</p>
 </div>
 </div>
 </div>
@@ -567,26 +628,18 @@ html{scroll-behavior:auto}
 <span class="numeral" aria-hidden="true">III</span>
 <span class="rule" aria-hidden="true"></span>
 <h3 style="margin: 0 0 14px; font: 700 clamp(1.6rem, 2.6vw, 2.25rem)/1.1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; text-transform: uppercase; color: #1F1F1F">Expand the work</h3>
-<p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">Software often sits in the middle of a much larger job. Carefully controlled agents can help complete parts of that job, from preparing information to coordinating defined actions, with permissions, evaluation, and a person accountable.</p>
+<p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">Legacy software shapes behavior. Teams chase the same answers, repeat the same steps, and let lapsed customers drift because the follow-up never paid. Agents change that math: they can carry that work through to a booking or an order within the business’s rules, with people stepping in only for the exceptions. We build them inside a harness that keeps that work dependable.</p>
+<a class="tlink" href="https://skalingventures.substack.com/p/the-harness-is-where-the-work-is" target="_blank" rel="noopener" style="color: #89523B; margin-top: 18px; align-self: flex-start">Read: The Harness Is Where the Work Is <span class="arr ne" aria-hidden="true">↗</span></a>
 </div>
 <div class="pnl ">
 <div class="sheet">
 <div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · III / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span class="lit"></span></span><span class="tag cu">How we judge it</span></div>
-<div class="s-body" style="gap: 14px">
-<div><span class="mono-l" style="color: #5E5C58">The same job, three levels of value</span><p class="s-title">Someone is with a customer. The customer needs an answer.</p></div>
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap"><span style="font: 400 13px/1.4 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">Today, they step out and call the office.</span>
-<div class="seg" role="group" aria-label="Choose a level">
-<button type="button" aria-pressed="true" data-lv="0">L1</button>
-<button type="button" aria-pressed="false" data-lv="1">L2</button>
-<button type="button" aria-pressed="false" data-lv="2">L3</button>
-</div></div>
-<div class="lvls">
-<div class="lv box on"><span class="ln">L1</span><div><div class="lt">Task efficiency</div><p>Automate the lookup. They still step out, just for less time.</p><p class="ms">Measure: hours and cost per transaction</p></div></div>
-<div class="lv box "><span class="ln">L2</span><div><div class="lt">Behavioral change</div><p>A trustworthy answer inside the moment. They stay with the customer.</p><p class="ms">Measure: turnaround, completion and consistency</p></div></div>
-<div class="lv box "><span class="ln">L3</span><div><div class="lt">Economic expansion</div><p>Customers nobody had time for make this week’s list, with a reason and a next step.</p><p class="ms">Measure: coverage, recovery and incremental revenue, against a baseline that can fail</p></div></div>
-</div>
-<div class="rails"><span>Reads scoped and sourced</span><span>Writes confirmed and reversible</span><span>Outward actions: the agent prepares, a person approves</span></div>
-<p style="margin: 0; font: 400 12.5px/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #5E5C58">L1 saves labor. L2 changes the pattern. L3 creates activity that wasn’t happening. We claim the level we can evidence.</p>
+<div class="s-body xp" data-xp>
+<div><span class="mono-l" style="color: #5E5C58">Three levels of value</span><p class="s-title">Revenue from work nobody had time to do.</p></div>
+<div class="xp-steps" role="tablist" aria-label="Revenue from work nobody had time to do."><button type="button" role="tab" class="xp-step" id="d3-t0" aria-controls="d3-p0" aria-selected="true" tabindex="0"><span class="k">L1 · Do it faster</span><span class="t">Task efficiency</span></button><button type="button" role="tab" class="xp-step" id="d3-t1" aria-controls="d3-p1" aria-selected="false" tabindex="-1"><span class="k">L2 · Do it differently</span><span class="t">Behavioral transformation</span></button><button type="button" role="tab" class="xp-step" id="d3-t2" aria-controls="d3-p2" aria-selected="false" tabindex="-1"><span class="k">L3 · Do what never happened</span><span class="t">Economic expansion</span></button></div>
+<div class="xp-panel" role="tabpanel" id="d3-p0" aria-labelledby="d3-t0"><dl class="ba"><dt>Before</dt><dd>After each visit, the vet spends 15 minutes writing up notes and the invoice.</dd><dt>After</dt><dd class="aft">The agent drafts both from the visit. The vet checks and signs in two minutes.</dd></dl><p class="xp-m"><span>Measure</span>Hours and cost per visit</p><div class="xp-foot"><button type="button" class="xp-next" data-go="1">Next: Behavioral transformation <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d3-p1" aria-labelledby="d3-t1" hidden><dl class="ba"><dt>Before</dt><dd>The practice waits for clients to call when something goes wrong.</dd><dt>After</dt><dd class="aft">It reaches out first: a refill about to run out, a lab result that needs a follow-up, a missed appointment. The agent drafts each message; staff approve.</dd></dl><p class="xp-m"><span>Measure</span>Follow-up completion, response time and consistency</p><div class="xp-foot"><button type="button" class="xp-next" data-go="2">Next: Economic expansion <span aria-hidden="true">→</span></button></div></div><div class="xp-panel" role="tabpanel" id="d3-p2" aria-labelledby="d3-t2" hidden><p class="xp-tag">An illustration · a veterinary practice</p><p class="xp-t">Max is five months overdue for his checkup. Nobody had time to call.</p><div class="thread"><div class="msg a"><small>Agent</small>Hi Sam, Max is due for his annual checkup and vaccines. Want me to find a time?</div><div class="msg b"><small>Owner</small>Saturday mornings only. What will it cost?</div><div class="msg a"><small>Agent</small>Saturday at 9:30 with Dr. Lee. The exam and vaccines come to $185. Shall I book it?</div><div class="msg b"><small>Owner</small>Book it.</div></div><div class="done"><span>Visit booked</span><span>Reminder set</span><span>No one had to make the call</span></div><p class="xp-rule">Within the practice’s rules: approved services, prices and schedule. A sick pet or a billing question goes to a person.</p><p class="xp-m"><span>Measure</span>Incremental visits and revenue per lapsed client, against the usual reminders</p><div class="xp-foot"><button type="button" class="xp-next" data-go="0"><span aria-hidden="true">↺</span> Start again</button></div></div>
+<details class="xp-more"><summary>How autonomy is earned</summary><ol class="ladder"><li><b>Read</b><span>Sourced answers only</span></li><li><b>Notify</b><span>Flags what changed; never acts</span></li><li><b>Approve</b><span>Prepares the work; a person approves</span></li><li><b>Act</b><span>Completes routine work within approved rules; people take the exceptions</span></li></ol><p class="xp-note">Each step is earned with evidence, not granted.</p></details>
+<p class="xp-cap">Each level rests on the layers beneath it. L1 saves time, L2 changes how the work gets done, L3 creates revenue that wasn’t happening. We claim the level we can evidence.</p>
 </div>
 </div>
 </div>
@@ -790,7 +843,7 @@ html{scroll-behavior:auto}
 <label><input type="radio" name="role" value="other"><span>Other</span></label>
 </fieldset>
 <label class="fld"><span>What have you built? <em>(optional)</em></span><textarea name="message" rows="3" maxlength="2000"></textarea></label>
-<label class="chk"><input type="checkbox" name="deck"><span>Also send me the Skaling deck</span></label>
+<label class="chk"><input type="checkbox" name="deck"><span>Include the Skaling deck with your reply</span></label>
 <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
 <div class="f-foot">
 <button type="submit" class="btn btn-bone" id="talkSubmit">Request a conversation <span class="arr" aria-hidden="true">→</span></button>
@@ -834,6 +887,7 @@ html{scroll-behavior:auto}
 </div>
 </footer>
 </div>
+<div class="cta-bar" id="ctaBar" aria-hidden="true"><a href="#talk" tabindex="-1">Start a private conversation <span aria-hidden="true">→</span></a></div>
 <script>
 (function () {
   'use strict';
@@ -854,16 +908,35 @@ html{scroll-behavior:auto}
   };
   var active = 0, lastY = 0, raf = 0;
 
-  // ── Level toggle (L1 / L2 / L3) on diagram III
-  var segBtns = $$('.seg button[data-lv]');
-  var lvRows = $$('.lvls .lv');
-  segBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var k = +b.getAttribute('data-lv');
-      segBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      lvRows.forEach(function (r, i) { r.classList.toggle('on', i === k); });
+  // ── Diagram explorers: one step of detail at a time
+  $$('[data-xp]').forEach(function (xp) {
+    var tabs = Array.prototype.slice.call(xp.querySelectorAll('.xp-step'));
+    var pans = Array.prototype.slice.call(xp.querySelectorAll('.xp-panel'));
+    function go(i, focus) {
+      tabs.forEach(function (t, k) { var on = k === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+      pans.forEach(function (p, k) { p.hidden = k !== i; });
+      if (focus) tabs[i].focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { go(i); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go((i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length, true); }
+      });
     });
+    xp.querySelectorAll('.xp-next').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go'), true); }); });
   });
+
+  // ── Mobile invitation bar: after the hero, hidden once the conversation section is in view
+  var ctaBar = document.getElementById('ctaBar');
+  var talkSec = document.getElementById('talk');
+  function updateBar(y, vh) {
+    if (!ctaBar || !talkSec) return;
+    var tr = talkSec.getBoundingClientRect();
+    var show = y > vh * 0.9 && tr.top > vh * 0.85;
+    ctaBar.classList.toggle('show', show);
+    ctaBar.setAttribute('aria-hidden', show ? 'false' : 'true');
+    var a = ctaBar.querySelector('a'); if (a) a.tabIndex = show ? 0 : -1;
+  }
 
   // ── Private-conversation form → /api/contact
   var form = document.getElementById('talkForm');
@@ -980,12 +1053,13 @@ html{scroll-behavior:auto}
     var max = Math.max(1, d.scrollHeight - vh);
     if (q.bar) q.bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, y / max)).toFixed(4) + ')';
 
-    if (q.hdr && !reduce) {
+    if (q.hdr && !reduce && window.innerWidth < 761) {
       var down = y > lastY;
       if (y > 420 && down && y - lastY > 2) q.hdr.classList.add('tuck');
       else if (!down || y < 120) q.hdr.classList.remove('tuck');
     }
     lastY = y;
+    updateBar(y, vh);
 
     // instrument: chapter nearest viewport centre
     if (q.chapters.length) {
