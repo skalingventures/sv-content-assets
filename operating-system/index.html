@@ -228,7 +228,7 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <div class="node s"><b>Pipeline Reality</b><small>Tue · every deal, against the evidence</small></div>
 <div class="node"><b>Prospecting Reality</b><small>Tue · outbound effort and reach</small></div>
 <div class="node"><b>Support · Onboarding Reality</b><small>Wed · what customers are living</small></div>
-<div class="node"><b>Product &amp; Engineering · Finance Reality</b><small>Thu · what shipped, what it earned</small></div>
+<div class="node"><b>Product + Engineering · Finance Reality</b><small>Thu · what shipped, what it earned</small></div>
 </div>
 <div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
 <div class="col">
@@ -244,7 +244,7 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <div class="down" aria-hidden="true">↓</div>
 <div class="node cap s"><b>Weekly CEO Digest</b><small>reads the scorekeeping and market reports plus Voice of Market, and finds what no single one can see</small></div>
 <div class="down" aria-hidden="true">↓</div>
-<div class="node cap s"><b>Executive Scorecard</b><small>Tue · reads the metrics sheet against the digest and the scorekeeping reports, and writes why each number moved</small></div>
+<div class="node cap s"><b>Executive Scorecard</b><small>Tue · reads the metrics sheet against the digest and the pipeline, growth, support, product and finance reports, and writes why each number moved</small></div>
 </div>
 </div>
 <span class="key"><i aria-hidden="true"></i>Sample editions below</span>
@@ -282,8 +282,8 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <div class="ed-body">
 <div class="ed-top"><span class="pill">Measure · the numbers, reasoned</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
 <h3>Executive Scorecard</h3>
-<blockquote>“Activation fell because the newest pilot joined the average with 4 of 25 users active while single sign-on waits on the customer’s IT team.”</blockquote>
-<p>Grades every weekly metric, then reads the digest and the scorekeeping reports to say why the big movers moved, and which report says so. A check pass drops any explanation that contradicts the reports it cites.</p>
+<blockquote>“Activation fell because a well-adopted pilot converted to a rollout and left the average, which now leans on the newest pilot.”</blockquote>
+<p>Grades every weekly metric, then reads the digest and the functional reports to say why the big movers moved, and which report says so. A second pass checks each explanation against the reports it cites.</p>
 <span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
 </div>
 </a>
@@ -356,7 +356,7 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <li><span class="n" aria-hidden="true">2</span><div><b>What it read</b><span>When it read the data, how many sources it covered, and a flag when one of them is partial.</span></div></li>
 <li><span class="n" aria-hidden="true">3</span><div><b>Vital signs</b><span>This week against last, with the normal range where one exists, so a seasonal dip reads as one.</span></div></li>
 <li><span class="n" aria-hidden="true">4</span><div><b>Three things that matter</b><span>Ranked, each ending in what it means for the week.</span></div></li>
-<li><span class="n" aria-hidden="true">5</span><div><b>One report citing another</b><span>“Per Sales Pipeline Reality report, Oct 13.” The digest reads the week’s reports and says which one each claim came from.</span></div></li>
+<li><span class="n" aria-hidden="true">5</span><div><b>One report citing another</b><span>“per Sales Pipeline Reality report, Oct 13” The digest reads the week’s reports and says which one each claim came from.</span></div></li>
 <li><span class="n" aria-hidden="true">6</span><div><b>The source record</b><span>Every section opens to the structured record behind it. Nothing on the page is unsourced.</span></div></li>
 </ol>
 </div>
@@ -368,7 +368,7 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <ul>
 <li><b>The trend</b> twelve weeks of history against the average, so one bad week reads as one.</li>
 <li><b>The why</b> written by an agent that reads the week’s reports, not the sheet alone.</li>
-<li><b>The checks</b> a lint drops claims about the wrong week; a second pass drops claims that contradict the reports they cite.</li>
+<li><b>The checks</b> a lint catches claims about the wrong week, and a second pass checks each claim against the reports it cites.</li>
 </ul>
 </div>
 <figure class="why-fig"><img src="/operating-system/img/scorecard-why.jpg" alt="One metric opened in the Executive Scorecard sample: pilot activation falling from 40 to 29 percent, with the reasoned explanation and the two reports it was reasoned from" width="1440" height="705" loading="lazy"></figure>
@@ -389,8 +389,8 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <li class="step"><div class="bar"></div><small>01</small><b>Read</b><p>Agents read the source systems and the reports upstream of them, under versioned prompts, and write a structured record rather than free text.</p></li>
 <li class="step"><div class="bar"></div><small>02</small><b>Check</b><p>Checks fail closed: a report that fails its render checks doesn’t publish. A partial source is flagged on the page, not hidden.</p></li>
 <li class="step"><div class="bar"></div><small>03</small><b>Publish</b><p>Reports land through the morning in dependency order, each carrying its own freshness and coverage line.</p></li>
-<li class="step"><div class="bar"></div><small>04</small><b>Grade</b><p>Every Friday an editorial retro reviews the week’s reports, and the CEO records what missed.</p></li>
-<li class="step"><div class="bar"></div><small>05</small><b>Remember</b><p>The CEO’s feedback is stored and read by the next run, so the same miss doesn’t repeat.</p></li>
+<li class="step"><div class="bar"></div><small>04</small><b>Grade</b><p>Every Friday an editorial retro reviews the week’s reports. Separately, the CEO records what a report missed.</p></li>
+<li class="step"><div class="bar"></div><small>05</small><b>Remember</b><p>The CEO’s feedback is stored and read by the next run, so it starts from what the last one got wrong.</p></li>
 </ol>
 <p class="back"><svg width="28" height="12" viewBox="0 0 28 12" aria-hidden="true"><path d="M27 6H2M6 1L1 6l5 5" fill="none" stroke="#A3B1C0" stroke-width="1.2"/></svg>Then Monday starts again, a little sharper. Changes to the report templates run against a fixed set of test cases before they ship.</p>
 <div class="limits">
