@@ -23,7 +23,7 @@
   if (btn) btn.addEventListener('click', function () {
     var on = btn.getAttribute('aria-pressed') !== 'true';
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    btn.textContent = on ? 'Reset' : 'Approve resolution';
+    btn.textContent = on ? 'Undo' : 'Send as rep';
     btn.classList.toggle('btn-graphite', !on);
     btn.classList.toggle('btn-line', on);
     stOk.hidden = !on; stWait.hidden = on;

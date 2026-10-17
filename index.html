@@ -175,6 +175,32 @@ a:hover{color:inherit}
 .rails span{padding:6px 10px;border-radius:6px;border:1px dashed #7C766C;background:#FFFAF4;font:500 11px/1.2 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.03em;color:#3A3836}
 .tree .gate{padding:6px 11px;font-size:11px}
 @media (max-width:520px){.nest{margin-left:8px;padding-left:14px}.nest>.lvl::before{left:-14px;width:14px}.tree .lvl{grid-template-columns:minmax(0,1fr)}.tree .lvl .tag{justify-self:start;grid-row:1}}
+.axes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ax{padding:11px 12px}
+.ax p{margin:6px 0 0;font:500 13px/1.35 'DM Sans',system-ui,sans-serif;color:#1F1F1F}
+.down{width:1px;height:14px;background:#89523B;margin:-6px auto;position:relative}
+.down::after{content:'';position:absolute;left:-4px;bottom:-1px;border:4px solid transparent;border-top:5px solid #89523B;border-bottom:0}
+.truth{padding:12px 14px;border-color:#1F1F1F;border-width:1.5px}
+.wedges{counter-reset:w;list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.wedges li{counter-increment:w;padding:7px 10px;border-radius:6px;background:#F2ECE2;font:500 12.5px/1.3 'DM Sans',system-ui,sans-serif;color:#1F1F1F}
+.wedges li::before{content:counter(w) '  ';font:600 11px 'IBM Plex Mono',ui-monospace,monospace;color:#89523B}
+.pnl.on .axes .ax,.pnl.on .truth,.pnl.on .bubble,.pnl.on .tiers .tr{animation:fadeUp .7s cubic-bezier(.19,1,.22,1) both}
+.pnl.on .axes .ax:nth-child(2){animation-delay:.08s}.pnl.on .axes .ax:nth-child(3){animation-delay:.16s}.pnl.on .truth{animation-delay:.3s}
+.bubble{position:relative;padding:14px 16px;border-radius:12px 12px 12px 4px;background:#1F1F1F;color:#FFFAF4}
+.bubble p{margin:0;font:400 14px/1.5 'DM Sans',system-ui,sans-serif}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.srcs span{padding:4px 8px;border-radius:999px;border:1px solid rgba(255,250,244,.3);font:500 10px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.05em;text-transform:uppercase;color:#D0C4B4}
+.acts{display:flex;flex-wrap:wrap;gap:6px}
+.acts span{padding:7px 11px;border-radius:999px;border:1px solid #7C766C;background:#FFFAF4;font:500 12.5px/1 'DM Sans',system-ui,sans-serif;color:#1F1F1F}
+.acts span.on{border-color:#89523B;background:#89523B;color:#FFFAF4}
+.tiers{padding:4px 12px}
+.tr{display:grid;grid-template-columns:22px 110px minmax(0,1fr);gap:10px;align-items:center;padding:7px 0;border-top:1px solid rgba(124,118,108,.35);font:400 12.5px/1.35 'DM Sans',system-ui,sans-serif;color:#3A3836}
+.tr:first-child{border-top:0}
+.tr span:nth-child(2){font-weight:600;color:#1F1F1F}
+.tn{width:20px;height:20px;border-radius:50%;border:1px solid #89523B;display:inline-flex;align-items:center;justify-content:center;font:600 10.5px/1 'IBM Plex Mono',ui-monospace,monospace;color:#89523B}
+.tr.hum .tn{background:#89523B;color:#FFFAF4}
+.pnl.on .tiers .tr:nth-child(2){animation-delay:.08s}.pnl.on .tiers .tr:nth-child(3){animation-delay:.16s}.pnl.on .tiers .tr:nth-child(4){animation-delay:.24s}
+@media (max-width:520px){.axes{grid-template-columns:minmax(0,1fr)}.wedges{grid-template-columns:minmax(0,1fr)}.tr{grid-template-columns:22px minmax(0,1fr)}.tr span:nth-child(3){grid-column:2}}
 .flow{display:grid;grid-template-columns:minmax(0,1fr) 88px minmax(0,1.25fr);gap:14px;align-items:center}
 .inp{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;font:500 13px/1.2 'DM Sans',system-ui,sans-serif;color:#1F1F1F}
 .inp i{font-style:normal;font:500 10px/1 'IBM Plex Mono',ui-monospace,monospace;color:#5E5C58;letter-spacing:.06em}
@@ -462,43 +488,29 @@ html{scroll-behavior:auto}
 <span class="rule" aria-hidden="true"></span>
 <h3 style="margin: 0 0 14px; font: 700 clamp(1.6rem, 2.6vw, 2.25rem)/1.1 'DM Sans', system-ui, sans-serif; text-transform: uppercase; color: #1F1F1F">Advance the product</h3>
 <p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'DM Sans', system-ui, sans-serif; color: #3A3836">A product that understands its market can become far more useful. We want to turn dependable records, business rules, and customer context into timely intelligence and better decisions.</p>
+<a class="tlink" href="https://skalingventures.substack.com/p/the-agentic-acquirers-playbook" target="_blank" rel="noopener" style="color: #89523B; margin-top: 18px; align-self: flex-start">Read: The Agentic Acquirer’s Playbook <span class="arr ne" aria-hidden="true">↗</span></a>
 </div>
-<div class="pnl " role="img" aria-label="Diagram: records, business rules and customer context pass through a lens and become timely intelligence.">
+<div class="pnl ">
 <div class="sheet">
-<div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · II / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span></span></span><span class="tag">Illustrative</span></div>
-<div class="s-body">
-<div><span class="mono-l" style="color: #5E5C58">From records to decisions</span><p class="s-title">Context becomes intelligence</p></div>
-<div class="flow">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<span class="mono-l" style="color: #5E5C58; margin-bottom: 4px">Already in the product</span>
-<div class="inp box">Dependable records <i>DATA</i></div>
-<div class="inp box">Business rules <i>RULES</i></div>
-<div class="inp box">Customer context <i>CONTEXT</i></div>
-<div class="inp box">Market knowledge <i>EARNED</i></div>
+<div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · II / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span></span></span><span class="tag cu">How we build</span></div>
+<div class="s-body" style="gap: 14px">
+<div><span class="mono-l" style="color: #5E5C58">From data exhaust to intelligence</span><p class="s-title">Truth first. Then intelligence.</p></div>
+<div class="axes">
+<div class="box ax"><span class="mono-l" style="color: #89523B">Supply side</span><p>What users do inside the product</p></div>
+<div class="box ax"><span class="mono-l" style="color: #89523B">Demand side</span><p>What their customers do on the other side</p></div>
+<div class="box ax"><span class="mono-l" style="color: #89523B">Outcomes</span><p>What converts, renews and expands</p></div>
 </div>
-<div class="lens" aria-hidden="true">
-<svg viewBox="0 0 88 220" preserveAspectRatio="xMidYMid meet">
-<path class="stream" d="M0 58 C40 58 30 110 44 110"></path>
-<path class="stream" d="M0 98 C30 98 34 110 44 110"></path>
-<path class="stream" d="M0 138 C30 138 34 110 44 110"></path>
-<path class="stream" d="M0 178 C40 178 30 110 44 110"></path>
-<ellipse cx="44" cy="110" rx="20" ry="20" fill="#FFFAF4" stroke="#89523B" stroke-width="1.2"></ellipse>
-<ellipse cx="44" cy="110" rx="20" ry="10" fill="none" stroke="#89523B" stroke-width="1.2"></ellipse>
-<ellipse cx="44" cy="110" rx="8" ry="4" fill="none" stroke="#89523B" stroke-width="1.2"></ellipse>
-<path class="stream" d="M64 110 L88 86"></path>
-<path class="stream" d="M64 110 L88 140"></path>
-</svg>
+<div class="down" aria-hidden="true"></div>
+<div class="box truth">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap"><span class="mono-l" style="color: #1F1F1F">Upstream truth</span><span class="mono-l" style="color: #5E5C58">The root wedges</span></div>
+<ol class="wedges"><li>Normalize the data</li><li>Encode the business rules</li><li>Govern and propagate change</li><li>Reconcile across systems</li></ol>
 </div>
-<div style="display: flex; flex-direction: column; gap: 10px">
-<span class="mono-l" style="color: #5E5C58; margin-bottom: 4px">What it makes possible</span>
-<div class="qcard"><small>Intelligence</small>Timely signals instead of static reports</div>
-<div class="qcard"><small>Decisions</small>Better choices, made with the right context</div>
+<div class="down" aria-hidden="true"></div>
+<div class="qcard"><small>Intelligence</small>Answers and signals a customer can trust, delivered where the work happens.</div>
+<p style="margin: 0; font: 400 12.5px/1.5 'DM Sans', system-ui, sans-serif; color: #5E5C58">Agents built on messy data are confidently wrong. The moat is the truth, and the position it’s collected from.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-
 <div class="ch r3 ">
 <span class="numeral" aria-hidden="true">III</span>
 <span class="rule" aria-hidden="true"></span>
@@ -507,39 +519,26 @@ html{scroll-behavior:auto}
 </div>
 <div class="pnl ">
 <div class="sheet">
-<div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · III / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span class="lit"></span></span><span class="tag cu">Hypothetical</span></div>
-<div class="s-body" style="gap: 16px">
-<div><span class="mono-l" style="color: #5E5C58">Imagine · a specialty distributor’s software</span><p class="s-title">Check incoming orders before anything changes</p></div>
-<ol class="steps" style="list-style: none; margin: 0; padding: 0" aria-label="How the agent works">
-<li class="step"><span class="n">1</span><p>Read the incoming order</p></li>
-<li class="step"><span class="n">2</span><p>Compare product, customer &amp; contracted pricing</p></li>
-<li class="step"><span class="n">3</span><p>Propose a resolution</p></li>
-<li class="step human"><span class="n">4</span><p>Route the exception to a person</p></li>
-</ol>
-<div class="perm">
-<div class="box">
-<span class="mono-l" style="color: #2D5E2D">Can</span>
-<ul>
-<li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5 L5.5 11 L12 3.5" fill="none" stroke="#2D5E2D" stroke-width="1.4"></path></svg>Read orders and records</li>
-<li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5 L5.5 11 L12 3.5" fill="none" stroke="#2D5E2D" stroke-width="1.4"></path></svg>Flag inconsistencies</li>
-<li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5 L5.5 11 L12 3.5" fill="none" stroke="#2D5E2D" stroke-width="1.4"></path></svg>Propose a fix</li>
-</ul>
+<div class="s-bar"><span class="mono-l" style="color: #5E5C58">Diagram · III / III</span><span class="s-rail" aria-hidden="true"><span class="lit"></span><span class="lit"></span><span class="lit"></span></span><span class="tag cu">Work in progress</span></div>
+<div class="s-body" style="gap: 14px">
+<div><span class="mono-l" style="color: #5E5C58">A sales partner, not a chatbot · the morning after a showroom visit</span></div>
+<div class="bubble">
+<p>You visited a showroom yesterday. They’ve ordered from three collections this year, but haven’t reordered their strongest line since June. Want a follow-up while the conversation is fresh?</p>
+<div class="srcs" aria-label="Sources"><span>Visit log</span><span>Invoiced orders</span><span>Account history</span></div>
 </div>
-<div class="box">
-<span class="mono-l" style="color: #8B2020">Cannot</span>
-<ul>
-<li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3 L11 11 M11 3 L3 11" fill="none" stroke="#8B2020" stroke-width="1.4"></path></svg>Change an order on its own</li>
-<li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3 L11 11 M11 3 L3 11" fill="none" stroke="#8B2020" stroke-width="1.4"></path></svg>Edit pricing or contracts</li>
-<li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3 L11 11 M11 3 L3 11" fill="none" stroke="#8B2020" stroke-width="1.4"></path></svg>Act outside its scope</li>
-</ul>
-</div>
+<div class="acts" aria-hidden="true"><span>Review assortment gaps</span><span class="on">Draft a follow-up</span><span>Find similar accounts</span></div>
+<div class="box tiers">
+<div class="tr"><span class="tn">0</span><span>Read</span><span>Scoped to the rep’s book, every figure sourced</span></div>
+<div class="tr"><span class="tn">1</span><span>Rep’s own notes</span><span>Light confirm, undo, audit</span></div>
+<div class="tr"><span class="tn">2</span><span>Shared records</span><span>A card shows exactly what changes</span></div>
+<div class="tr hum"><span class="tn">3</span><span>Outward</span><span>The agent prepares. The rep taps.</span></div>
 </div>
 <div class="statusbar box">
-<span class="st ok" role="status" id="stOk" hidden><span class="dot"></span>Resolution approved by a person</span>
-<span class="st" role="status" id="stWait"><span class="dot"></span>Exception routed · awaiting review</span>
-<button type="button" class="btn btn-graphite approve" id="approveBtn" aria-pressed="false">Approve resolution</button>
+<span class="st ok" role="status" id="stOk" hidden><span class="dot"></span>Follow-up sent by the rep</span>
+<span class="st" role="status" id="stWait"><span class="dot"></span>Draft ready · the rep decides</span>
+<button type="button" class="btn btn-graphite approve" id="approveBtn" aria-pressed="false">Send as rep</button>
 </div>
-<p style="margin: 0; font: 400 12px/1.5 'DM Sans', system-ui, sans-serif; color: #5E5C58">Illustrative scenario, not a Skaling or SuperCat deployment claim.</p>
+<p style="margin: 0; font: 400 12px/1.5 'DM Sans', system-ui, sans-serif; color: #5E5C58"><span style="font: 600 10.5px/1 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .06em; color: #89523B">L3 CLAIM</span> · it becomes a result only when coverage moves against a baseline. Illustrative, drawn from work in progress; not a production or results claim.</p>
 </div>
 </div>
 </div>
