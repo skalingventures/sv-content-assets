@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Operating system · Skaling Ventures</title>
-<meta name="description" content="Every weekday morning, agents brief our operating company's leadership, and the reports read each other. See how it flows, what a report looks like, and five sample editions.">
+<meta name="description" content="Every weekday morning, agents brief our operating company's leadership, and the reports read each other. See how it flows, what a report looks like, and six sample editions.">
 <link rel="canonical" href="https://www.skalingventures.com/operating-system">
 <meta name="theme-color" content="#1F1F1F">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skaling Ventures">
 <meta property="og:title" content="We run on the system we write about · Skaling Ventures">
-<meta property="og:description" content="Agents brief our operating company's leadership every weekday morning, and the reports read each other. Five sample editions.">
+<meta property="og:description" content="Agents brief our operating company's leadership every weekday morning, and the reports read each other. Six sample editions.">
 <meta property="og:url" content="https://www.skalingventures.com/operating-system">
 <meta property="og:image" content="https://www.skalingventures.com/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -100,6 +100,94 @@ a{color:inherit}
 .ed p{margin:0;font:400 14.5px/1.6 var(--f);color:var(--mut2)}
 .ed .go{margin-top:auto;padding-top:8px;font:600 14.5px/1 var(--f);color:var(--fog)}
 .note{margin:28px 0 0;max-width:52rem;font:400 13.5px/1.65 var(--f);color:var(--mut2);padding-top:20px;border-top:1px solid rgba(128,126,122,.35)}
+/* system map */
+.map-card{margin-top:clamp(44px,5vw,72px);background:#262524;border:1px solid rgba(128,126,122,.32);border-radius:18px;padding:clamp(18px,2.4vw,32px)}
+.map-legend{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:flex-end;font:500 12px/1 var(--f);color:var(--mut2);margin-bottom:14px}
+.map-legend span{display:inline-flex;align-items:center;gap:8px}
+.map-legend i{display:inline-block;width:22px;height:0;border-top:1.5px solid #C4886B}
+.map-legend .lg-out{border-top:1.5px dashed #A3B1C0}
+.map-legend .lg-s{width:12px;height:12px;border:1px solid rgba(163,177,192,.6);border-radius:4px;background:#32302E}
+.map-wrap{position:relative}
+.map-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
+.map-svg path{fill:none;stroke-width:1.1;stroke:rgba(255,250,244,.07);transition:stroke .25s ease,stroke-width .25s ease,opacity .25s ease}
+.map-svg path.in{stroke:#C4886B;stroke-width:1.6}
+.map-svg path.out{stroke:#A3B1C0;stroke-width:1.4;stroke-dasharray:4 4}
+.map{position:relative;display:grid;grid-template-columns:118px repeat(5,minmax(0,1fr)) 28px minmax(0,1fr);grid-template-rows:auto;column-gap:14px}
+.mh{padding:0 2px 12px;font:700 12px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--bone)}
+.mh small{display:block;margin-top:5px;font:500 11px/1 var(--f);letter-spacing:.02em;text-transform:none;color:var(--mut2)}
+.mh-next{color:var(--fog)}
+.mbreak{justify-self:center;width:0;border-left:1px dashed rgba(163,177,192,.35);margin:2px 0}
+.ml{grid-column:1;align-self:center;font:600 10.5px/1.3 var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--fog);padding-right:8px}
+.mrow{grid-column:1/-1;border-top:1px solid rgba(255,250,244,.07);pointer-events:none}
+.mc{display:flex;flex-direction:column;gap:8px;padding:14px 0;justify-content:center;position:relative;z-index:2}
+.mn{appearance:none;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px;width:100%;padding:9px 11px;border-radius:10px;border:1px solid rgba(255,250,244,.12);background:#1F1F1F;color:var(--mut2);font:500 12.5px/1.25 var(--f);transition:opacity .25s ease,border-color .25s ease,background .25s ease,color .25s ease,transform .3s cubic-bezier(.23,1,.32,1)}
+.mn:hover{border-color:rgba(163,177,192,.6);color:var(--tx)}
+.mn-hero{background:#32302E;border-color:rgba(163,177,192,.45);color:var(--bone);font-weight:600;font-size:13.5px;padding:11px 12px}
+.mn-cap{background:var(--bone);border-color:var(--bone);color:var(--g);font-weight:700;font-size:14px;padding:12px 13px}
+.mn-cap:hover{color:var(--g);border-color:var(--fog)}
+.mn-tag{font:600 9.5px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--fog)}
+.mn-cap .mn-tag{color:var(--nev)}
+.map.focus .mn{opacity:.28}
+.map.focus .mn.rel{opacity:1}
+.map.focus .mn.rel-in{border-color:#C4886B}
+.map.focus .mn.rel-out{border-color:#A3B1C0;border-style:dashed}
+.map.focus .mn.sel{opacity:1;box-shadow:0 0 0 2px var(--g),0 0 0 3.5px var(--fog);transform:translateY(-1px)}
+.map-readout{min-height:3.2em;margin:18px 0 0;padding-top:16px;border-top:1px solid rgba(255,250,244,.08);font:400 14.5px/1.6 var(--f);color:var(--tx)}
+.map-readout b{color:var(--bone)}
+.map-readout .rd-in{color:#D9A189}.map-readout .rd-out{color:var(--fog)}
+.map-src{margin:8px 0 0;font:400 13px/1.6 var(--f);color:var(--mut2)}
+.map-src b{color:var(--tx);font-weight:600;margin-right:6px}
+.mlist{display:none}
+/* viewer */
+.viewer{margin-top:clamp(56px,6vw,88px)}
+.vtabs-row{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}
+.vkick{margin:0}
+.vnav{display:flex;gap:8px}
+.vbtn{appearance:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,250,244,.24);background:transparent;color:var(--bone);font:500 16px/1 var(--f);cursor:pointer}
+.vbtn:hover{border-color:var(--fog);color:var(--fog)}
+.vtabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;border-bottom:1px solid rgba(128,126,122,.35)}
+.vt{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:12px 4px 14px;text-align:left;cursor:pointer;color:var(--mut2);font:600 14px/1.25 var(--f)}
+.vt small{display:block;margin-bottom:6px;font:600 10.5px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.vt:hover{color:var(--tx)}
+.vt[aria-selected="true"]{color:var(--bone);border-bottom-color:var(--fog)}
+.vt[aria-selected="true"] small{color:var(--fog)}
+.vp{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);margin-top:24px;background:var(--g2);border:1px solid rgba(128,126,122,.35);border-radius:16px;overflow:hidden;animation:vpin .45s cubic-bezier(.23,1,.32,1)}
+@keyframes vpin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vp[hidden]{display:none}
+.vp-shot{display:block;background:#1A1A1A;border-right:1px solid rgba(128,126,122,.35);min-height:360px;overflow:hidden}
+.vp-shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block;transition:transform .8s cubic-bezier(.23,1,.32,1)}
+.vp-shot:hover img{transform:scale(1.015)}
+.vp-body{padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:14px}
+.vp-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.vp h3{margin:0;font:700 clamp(1.5rem,2.4vw,2rem)/1.02 var(--f);text-transform:uppercase;color:var(--bone)}
+.vp blockquote{margin:0;padding-left:16px;border-left:1px solid var(--fog);font:400 clamp(1.02rem,1.3vw,1.12rem)/1.55 var(--f);color:var(--bone)}
+.vp-desc{margin:0;font:400 14.5px/1.6 var(--f);color:var(--mut2)}
+.vp-rels{display:grid;gap:8px;padding-top:12px;border-top:1px solid rgba(128,126,122,.28)}
+.vrel{margin:0;font:400 13.5px/1.55 var(--f);color:var(--tx)}
+.vrel b{display:inline-block;min-width:68px;margin-right:8px;font:600 10.5px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--fog)}
+.vp .go{margin-top:auto;padding-top:6px;font:600 14.5px/1 var(--f);color:var(--fog);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.vp .go:hover .arr{transform:translateX(4px)}
+html:not(.js) .vp[hidden]{display:grid}
+html:not(.js) .vtabs-row .vnav,html:not(.js) .vtabs{display:none}
+@media (max-width:1024px){
+ .map{grid-template-columns:96px repeat(5,minmax(0,1fr)) 18px minmax(0,1fr);column-gap:8px}
+ .mn{font-size:11.5px;padding:8px 9px}.mn-hero{font-size:12.5px}.mn-cap{font-size:13px}
+ .vp{grid-template-columns:1fr}.vp-shot{min-height:0;aspect-ratio:16/10;border-right:0;border-bottom:1px solid rgba(128,126,122,.35)}
+ .vtabs{display:flex;overflow-x:auto;scrollbar-width:none;gap:22px}.vtabs::-webkit-scrollbar{display:none}.vt{flex:none}
+}
+@media (max-width:860px){
+ .map-wrap,.map-legend{display:none}
+ .mlist{display:block;list-style:none;margin:0;padding:0}
+ .ll-day{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid rgba(255,250,244,.08)}
+ .ll-day:first-child{border-top:0;padding-top:0}
+ .ll-d{font:700 12px/1.3 var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--fog)}
+ .ll-day ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ .ll-day li b{display:block;font:600 14px/1.3 var(--f);color:var(--tx)}
+ .ll-day li.ll-hero b,.ll-day li.ll-hero a{color:var(--bone)}
+ .ll-day li a{text-decoration:underline;text-decoration-color:rgba(163,177,192,.6);text-underline-offset:3px}
+ .ll-reads{display:block;margin-top:3px;font:400 12.5px/1.5 var(--f);color:var(--mut2)}
+ .map-readout{display:none}
+}
 /* anatomy */
 .anat{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,72px);margin-top:clamp(44px,5vw,72px);align-items:start}
 .frame{position:relative;border-radius:14px;overflow:visible;margin-left:26px}
@@ -201,135 +289,125 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 </div>
 </section>
 
-<section class="sec on-bone" aria-labelledby="week-h">
+<section class="sec" id="system" aria-labelledby="sys-h">
 <div class="wrap">
 <div class="split">
 <div>
-<p class="kicker" style="color:#89523B">How it flows</p>
-<h2 id="week-h" class="h2" style="color:#1F1F1F">The reports read each other.</h2>
+<p class="kicker" style="color:#A3B1C0">How it flows</p>
+<h2 id="sys-h" class="h2" style="color:#FFFAF4">The reports read each other.</h2>
 </div>
-<p class="lead">Each report writes a structured record, not just a page. The next ones read it. Functional reports keep score Monday to Thursday, the assists turn that into the CEO’s moves the same morning, and on Friday the synthesis reads the week’s reports. On Tuesday the scorecard reads them again to explain why each number moved.</p>
+<p class="lead" style="color:#E8E2D8">Each report writes a structured record, and later reports read it. Scorekeeping runs early in the week, the assists act on it the same morning, and Friday’s digest reads ten of them. The following Tuesday, the scorecard reads them again to explain why each number moved.</p>
 </div>
-<div class="flow" role="img" aria-label="Sources feed functional reports, which feed the assists, the Friday synthesis and the Tuesday scorecard">
-<div class="col">
-<div class="col-h"><b>Sources</b><span>live systems</span></div>
-<div class="node src"><b>CRM</b><small>deals, activity, history</small></div>
-<div class="node src"><b>Support desk</b><small>tickets and threads</small></div>
-<div class="node src"><b>Product usage</b><small>who uses what, and how much</small></div>
-<div class="node src"><b>The books</b><small>billing, collections, spend</small></div>
-<div class="node src"><b>Customer calls</b><small>recordings and summaries</small></div>
-<div class="node src"><b>Market feeds</b><small>trade press, competitors, macro</small></div>
-</div>
-<div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
-<div class="col">
-<div class="col-h"><b>Keep score</b><span>Mon to Thu</span></div>
-<div class="node s"><b>Market Scan</b><small>Mon · the vertical, outside in</small></div>
-<div class="node"><b>Growth Reality</b><small>Tue · demand and channel effort</small></div>
-<div class="node s"><b>Pipeline Reality</b><small>Tue · every deal, against the evidence</small></div>
-<div class="node"><b>Prospecting Reality</b><small>Tue · outbound effort and reach</small></div>
-<div class="node"><b>Support · Onboarding Reality</b><small>Wed · what customers are living</small></div>
-<div class="node"><b>Product + Engineering · Finance Reality</b><small>Thu · what shipped, what it earned</small></div>
-</div>
-<div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
-<div class="col">
-<div class="col-h"><b>Act</b><span>same morning</span></div>
-<div class="node s"><b>Sales CEO Assist</b><small>Tue · reads Pipeline Reality: the calls only the CEO can make, notes drafted</small></div>
-<div class="node"><b>AE Week Ahead</b><small>Tue · reads the pipeline and prospecting reports</small></div>
-<div class="node"><b>Support CEO Assist</b><small>Wed · reads Support and Onboarding Reality</small></div>
-</div>
-<div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
-<div class="col">
-<div class="col-h"><b>Synthesize · measure</b><span>Fri, then Tue</span></div>
-<div class="node s"><b>Voice of Market</b><small>reads the week’s calls and the support, growth and pipeline reports</small></div>
-<div class="down" aria-hidden="true">↓</div>
-<div class="node cap s"><b>Weekly CEO Digest</b><small>reads the scorekeeping and market reports plus Voice of Market, and finds what no single one can see</small></div>
-<div class="down" aria-hidden="true">↓</div>
-<div class="node cap s"><b>Executive Scorecard</b><small>Tue · reads the metrics sheet against the digest and the pipeline, growth, support, product and finance reports, and writes why each number moved</small></div>
+<div class="map-card">
+<div class="map-legend" aria-hidden="true"><span><i class="lg-in"></i>reads</span><span><i class="lg-out"></i>is read by</span><span><i class="lg-s"></i>sample edition</span></div>
+<div class="map-wrap">
+<svg class="map-svg" aria-hidden="true"><defs>
+<marker id="ah-in" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#C4886B"/></marker>
+<marker id="ah-out" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#A3B1C0"/></marker>
+</defs><g class="edges"></g></svg>
+<div class="map" role="group" aria-label="Reports by day and kind of work. Choose a report to see what it reads and what reads it.">
+<div class="mh mh-lane" style="grid-column:1;grid-row:1"></div>
+<div class="mh" style="grid-column:2;grid-row:1">Mon<small>6am</small></div>
+<div class="mh" style="grid-column:3;grid-row:1">Tue</div>
+<div class="mh" style="grid-column:4;grid-row:1">Wed</div>
+<div class="mh" style="grid-column:5;grid-row:1">Thu</div>
+<div class="mh" style="grid-column:6;grid-row:1">Fri</div>
+<div class="mh mh-next" style="grid-column:8;grid-row:1">Tue<small>next week, 8am</small></div>
+<div class="mbreak" style="grid-column:7;grid-row:1/-1" aria-hidden="true"></div>
+<div class="ml" style="grid-row:2">Signal</div>
+<div class="mrow" style="grid-row:2" aria-hidden="true"></div>
+<div class="mc" style="grid-column:2;grid-row:2"><button type="button" class="mn mn-hero" data-id="ms" aria-pressed="false"><span class="mn-name">Market Scan</span><span class="mn-tag">Sample</span></button><button type="button" class="mn mn-minor" data-id="np" aria-pressed="false"><span class="mn-name">Operating Newspaper</span></button></div>
+<div class="mc" style="grid-column:6;grid-row:2"><button type="button" class="mn mn-hero" data-id="vm" aria-pressed="false"><span class="mn-name">Voice of Market</span><span class="mn-tag">Sample</span></button></div>
+<div class="ml" style="grid-row:3">Keep score</div>
+<div class="mrow" style="grid-row:3" aria-hidden="true"></div>
+<div class="mc" style="grid-column:3;grid-row:3"><button type="button" class="mn mn-minor" data-id="gr" aria-pressed="false"><span class="mn-name">Growth Reality</span></button><button type="button" class="mn mn-hero" data-id="pr" aria-pressed="false"><span class="mn-name">Pipeline Reality</span><span class="mn-tag">Sample</span></button><button type="button" class="mn mn-minor" data-id="po" aria-pressed="false"><span class="mn-name">Prospecting Reality</span></button></div>
+<div class="mc" style="grid-column:4;grid-row:3"><button type="button" class="mn mn-minor" data-id="su" aria-pressed="false"><span class="mn-name">Support Reality</span></button><button type="button" class="mn mn-minor" data-id="on" aria-pressed="false"><span class="mn-name">Onboarding Reality</span></button></div>
+<div class="mc" style="grid-column:5;grid-row:3"><button type="button" class="mn mn-minor" data-id="pe" aria-pressed="false"><span class="mn-name">Product + Engineering Reality</span></button><button type="button" class="mn mn-minor" data-id="fi" aria-pressed="false"><span class="mn-name">Finance Reality</span></button></div>
+<div class="ml" style="grid-row:4">Act</div>
+<div class="mrow" style="grid-row:4" aria-hidden="true"></div>
+<div class="mc" style="grid-column:3;grid-row:4"><button type="button" class="mn mn-hero" data-id="sa" aria-pressed="false"><span class="mn-name">Sales CEO Assist</span><span class="mn-tag">Sample</span></button><button type="button" class="mn mn-minor" data-id="ae" aria-pressed="false"><span class="mn-name">AE Week Ahead</span></button></div>
+<div class="mc" style="grid-column:4;grid-row:4"><button type="button" class="mn mn-minor" data-id="sp" aria-pressed="false"><span class="mn-name">Support CEO Assist</span></button></div>
+<div class="ml" style="grid-row:5">Synthesize · measure</div>
+<div class="mrow" style="grid-row:5" aria-hidden="true"></div>
+<div class="mc" style="grid-column:6;grid-row:5"><button type="button" class="mn mn-cap" data-id="dg" aria-pressed="false"><span class="mn-name">Weekly CEO Digest</span><span class="mn-tag">Sample</span></button><button type="button" class="mn mn-minor" data-id="rt" aria-pressed="false"><span class="mn-name">Editorial retro</span></button></div>
+<div class="mc" style="grid-column:8;grid-row:5"><button type="button" class="mn mn-cap" data-id="sc" aria-pressed="false"><span class="mn-name">Executive Scorecard</span><span class="mn-tag">Sample</span></button></div>
 </div>
 </div>
-<span class="key"><i aria-hidden="true"></i>Sample editions below</span>
-<div class="flow-cap">
-<p><b>One record, many readers.</b> Pipeline Reality is read the same morning by the Sales CEO Assist, on Friday by Voice of Market for loss patterns, and again by the Digest.</p>
-<p><b>Inside and outside.</b> Market Scan reads the vertical our customers sell in. A separate weekly newspaper reads the wider software market for us as owners.</p>
-<p><b>Numbers with a reason.</b> The Executive Scorecard doesn’t stop at up or down. Each significant move carries an explanation written from the reports upstream, and names them.</p>
-<p><b>Sunday closes the loop.</b> An outcome diagnosis checks the quarter’s bets against what the week’s reports showed.</p>
+<ol class="mlist" aria-label="The week, day by day"><li class="ll-day"><span class="ll-d">Mon</span><ul><li class="ll-hero"><b><a href="/operating-system/market-scan">Market Scan</a></b></li><li class=""><b>Operating Newspaper</b></li></ul></li><li class="ll-day"><span class="ll-d">Tue</span><ul><li class=""><b>Growth Reality</b></li><li class="ll-hero"><b><a href="/operating-system/pipeline-reality">Pipeline Reality</a></b></li><li class=""><b>Prospecting Reality</b></li><li class="ll-hero"><b><a href="/operating-system/sales-ceo-assist">Sales CEO Assist</a></b><span class="ll-reads">reads Pipeline Reality and Prospecting Reality</span></li><li class=""><b>AE Week Ahead</b><span class="ll-reads">reads Pipeline Reality and Prospecting Reality</span></li></ul></li><li class="ll-day"><span class="ll-d">Wed</span><ul><li class=""><b>Support Reality</b></li><li class=""><b>Onboarding Reality</b></li><li class=""><b>Support CEO Assist</b><span class="ll-reads">reads Support Reality and Onboarding Reality</span></li></ul></li><li class="ll-day"><span class="ll-d">Thu</span><ul><li class=""><b>Product + Engineering Reality</b><span class="ll-reads">reads Support Reality and Pipeline Reality</span></li><li class=""><b>Finance Reality</b><span class="ll-reads">reads Pipeline Reality</span></li></ul></li><li class="ll-day"><span class="ll-d">Fri</span><ul><li class="ll-hero"><b><a href="/operating-system/voice-of-market">Voice of Market</a></b><span class="ll-reads">reads Market Scan, Operating Newspaper, Growth Reality, Pipeline Reality and Support Reality</span></li><li class="ll-hero"><b><a href="/operating-system/weekly-ceo-digest">Weekly CEO Digest</a></b><span class="ll-reads">reads Market Scan, Operating Newspaper, Growth Reality, Pipeline Reality, Prospecting Reality, Support Reality, Onboarding Reality, Product + Engineering Reality, Finance Reality and Voice of Market</span></li><li class=""><b>Editorial retro</b><span class="ll-reads">reads Weekly CEO Digest and Voice of Market</span></li></ul></li><li class="ll-day"><span class="ll-d">Tue · next week</span><ul><li class="ll-hero"><b><a href="/operating-system/executive-scorecard">Executive Scorecard</a></b><span class="ll-reads">reads Weekly CEO Digest, Growth Reality, Pipeline Reality, Support Reality, Product + Engineering Reality and Finance Reality</span></li></ul></li></ol>
+<p class="map-readout" aria-live="polite"></p>
+<p class="map-src"><b>Every report reads from</b> the CRM · the support desk · product usage · the books · customer calls · market feeds</p>
 </div>
+<div class="viewer" id="editions">
+<div class="vtabs-row">
+<p class="kicker vkick" style="color:#A3B1C0">Six sample editions, in run order</p>
+<div class="vnav"><button type="button" class="vbtn" data-step="-1" aria-label="Previous edition">←</button><button type="button" class="vbtn" data-step="1" aria-label="Next edition">→</button></div>
 </div>
-</section>
-
-<section class="sec" id="editions" aria-labelledby="eds-h">
-<div class="wrap">
-<div class="split">
-<div>
-<p class="kicker" style="color:#A3B1C0">Six sample editions</p>
-<h2 id="eds-h" class="h2" style="color:#FFFAF4">What the system actually says.</h2>
-</div>
-<p class="lead" style="color:#E8E2D8">One edition for each kind of work the system does: synthesize the week, explain the numbers, keep score, read the market from outside and from customers, and turn all of it into the CEO’s next move.</p>
-</div>
-<div class="eds">
-<a class="ed cap" href="/operating-system/weekly-ceo-digest">
-<div class="ed-shot"><img src="/operating-system/img/weekly-ceo-digest-thumb.jpg" alt="The Weekly CEO Digest sample: verdict, sources line and vital signs" loading="lazy" width="1200" height="750"></div>
-<div class="ed-body">
-<div class="ed-top"><span class="pill">Synthesis · the capstone</span><span class="mono-l" style="color:#A49E92">Friday</span></div>
-<h3>Weekly CEO Digest</h3>
-<blockquote>“The base is healthy and the risk is concentrated.”</blockquote>
-<p>Reads the week’s functional and market reports and writes one view across the business: the verdict, the vital signs, the patterns no single report can see, and a ranked action list for the CEO.</p>
-<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
-</div>
-</a>
-<a class="ed cap" href="/operating-system/executive-scorecard">
-<div class="ed-shot"><img src="/operating-system/img/executive-scorecard-thumb.jpg" alt="The Executive Scorecard sample: the week's grade and the metric that needs fixing" loading="lazy" width="1200" height="750"></div>
-<div class="ed-body">
-<div class="ed-top"><span class="pill">Measure · the numbers, reasoned</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
-<h3>Executive Scorecard</h3>
-<blockquote>“Activation fell because a well-adopted pilot converted to a rollout and left the average, which now leans on the newest pilot.”</blockquote>
-<p>Grades the weekly leading metrics and the monthly lagging ones, then reads the digest and the functional reports to say why the big movers moved, and which report says so. A second pass checks each explanation against the reports it cites.</p>
-<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
-</div>
-</a>
-<a class="ed" href="/operating-system/pipeline-reality">
-<div class="ed-shot"><img src="/operating-system/img/pipeline-reality-thumb.jpg" alt="The Sales Pipeline Reality sample: headline and pipeline verdict" loading="lazy" width="1200" height="750"></div>
-<div class="ed-body">
-<div class="ed-top"><span class="pill">Reality</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
-<h3>Sales Pipeline Reality</h3>
-<blockquote>“Talbot &amp; Greer has two buyers who want different things.”</blockquote>
-<p>Keeps score without spin: facts kept apart from inference, each deal checked against the evidence, every next move dated.</p>
-<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
-</div>
-</a>
-<a class="ed" href="/operating-system/sales-ceo-assist">
-<div class="ed-shot"><img src="/operating-system/img/sales-ceo-assist-thumb.jpg" alt="The Sales CEO Assist sample: the day's first action" loading="lazy" width="1200" height="750"></div>
-<div class="ed-body">
-<div class="ed-top"><span class="pill">Assist</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
-<h3>Sales CEO Assist</h3>
-<blockquote>“The COO sits above both divisions and is the only person who can turn two opinions into one decision.”</blockquote>
-<p>Reads Pipeline Reality and turns it into the calls only the CEO can make, with notes drafted in three tones and a rule for when to send each.</p>
-<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
-</div>
-</a>
-<a class="ed" href="/operating-system/market-scan">
-<div class="ed-shot"><img src="/operating-system/img/market-scan-thumb.jpg" alt="The Market Scan sample: front page" loading="lazy" width="1200" height="750"></div>
-<div class="ed-body">
-<div class="ed-top"><span class="pill">Signal · outside in</span><span class="mono-l" style="color:#A49E92">Monday</span></div>
+<div class="vtabs" role="tablist" aria-label="Sample editions"><button type="button" role="tab" class="vt" id="vt-ms" data-id="ms" aria-controls="vp-ms" aria-selected="false" tabindex="-1"><small>Mon</small>Market Scan</button><button type="button" role="tab" class="vt" id="vt-pr" data-id="pr" aria-controls="vp-pr" aria-selected="false" tabindex="-1"><small>Tue</small>Pipeline Reality</button><button type="button" role="tab" class="vt" id="vt-sa" data-id="sa" aria-controls="vp-sa" aria-selected="false" tabindex="-1"><small>Tue</small>Sales CEO Assist</button><button type="button" role="tab" class="vt" id="vt-vm" data-id="vm" aria-controls="vp-vm" aria-selected="false" tabindex="-1"><small>Fri</small>Voice of Market</button><button type="button" role="tab" class="vt" id="vt-dg" data-id="dg" aria-controls="vp-dg" aria-selected="true" tabindex="0"><small>Fri</small>Weekly CEO Digest</button><button type="button" role="tab" class="vt" id="vt-sc" data-id="sc" aria-controls="vp-sc" aria-selected="false" tabindex="-1"><small>Tue</small>Executive Scorecard</button></div>
+<div class="vp" role="tabpanel" id="vp-ms" aria-labelledby="vt-ms" data-id="ms" hidden>
+<a class="vp-shot" href="/operating-system/market-scan" tabindex="-1" aria-hidden="true"><img src="/operating-system/img/market-scan-thumb.jpg" alt="" loading="lazy" width="1200" height="750"></a>
+<div class="vp-body">
+<div class="vp-top"><span class="pill">Signal · outside in</span><span class="mono-l" style="color:#A49E92">Monday</span></div>
 <h3>Market Scan</h3>
 <blockquote>“Smaller, faster orders put a premium on clean, quick order entry.”</blockquote>
-<p>Reads the trade press and competitors in our customers’ vertical, takes a stance for each part of the channel, and hands each team a move for the week.</p>
-<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
+<p class="vp-desc">Reads the trade press and competitors in our customers’ vertical, takes a stance for each part of the channel, and hands each team a move for the week.</p>
+<div class="vp-rels"><p class="vrel"><b>Reads</b>Live systems and outside sources only</p><p class="vrel"><b>Read by</b>Voice of Market and Weekly CEO Digest</p></div>
+<a class="go" href="/operating-system/market-scan" aria-label="Read the Market Scan sample">Read the sample <span class="arr" aria-hidden="true">→</span></a>
 </div>
-</a>
-<a class="ed" href="/operating-system/voice-of-market">
-<div class="ed-shot"><img src="/operating-system/img/voice-of-market-thumb.jpg" alt="The Voice of Market sample: market snapshot" loading="lazy" width="1200" height="750"></div>
-<div class="ed-body">
-<div class="ed-top"><span class="pill">Signal · customers in</span><span class="mono-l" style="color:#A49E92">Friday</span></div>
+</div><div class="vp" role="tabpanel" id="vp-pr" aria-labelledby="vt-pr" data-id="pr" hidden>
+<a class="vp-shot" href="/operating-system/pipeline-reality" tabindex="-1" aria-hidden="true"><img src="/operating-system/img/pipeline-reality-thumb.jpg" alt="" loading="lazy" width="1200" height="750"></a>
+<div class="vp-body">
+<div class="vp-top"><span class="pill">Keep score</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
+<h3>Sales Pipeline Reality</h3>
+<blockquote>“Talbot &amp; Greer has two buyers who want different things.”</blockquote>
+<p class="vp-desc">Keeps score without spin: facts kept apart from inference, each deal checked against the evidence, every next move dated. Seven later reports read it.</p>
+<div class="vp-rels"><p class="vrel"><b>Reads</b>Live systems and outside sources only</p><p class="vrel"><b>Read by</b>Sales CEO Assist, AE Week Ahead, Product + Engineering Reality, Finance Reality, Voice of Market, Weekly CEO Digest and Executive Scorecard</p></div>
+<a class="go" href="/operating-system/pipeline-reality" aria-label="Read the Sales Pipeline Reality sample">Read the sample <span class="arr" aria-hidden="true">→</span></a>
+</div>
+</div><div class="vp" role="tabpanel" id="vp-sa" aria-labelledby="vt-sa" data-id="sa" hidden>
+<a class="vp-shot" href="/operating-system/sales-ceo-assist" tabindex="-1" aria-hidden="true"><img src="/operating-system/img/sales-ceo-assist-thumb.jpg" alt="" loading="lazy" width="1200" height="750"></a>
+<div class="vp-body">
+<div class="vp-top"><span class="pill">Act</span><span class="mono-l" style="color:#A49E92">Tuesday, same morning</span></div>
+<h3>Sales CEO Assist</h3>
+<blockquote>“The COO sits above both divisions and is the only person who can turn two opinions into one decision.”</blockquote>
+<p class="vp-desc">Reads Pipeline Reality and turns it into the calls only the CEO can make, with notes drafted in three tones and a rule for when to send each.</p>
+<div class="vp-rels"><p class="vrel"><b>Reads</b>Pipeline Reality and Prospecting Reality</p></div>
+<a class="go" href="/operating-system/sales-ceo-assist" aria-label="Read the Sales CEO Assist sample">Read the sample <span class="arr" aria-hidden="true">→</span></a>
+</div>
+</div><div class="vp" role="tabpanel" id="vp-vm" aria-labelledby="vt-vm" data-id="vm" hidden>
+<a class="vp-shot" href="/operating-system/voice-of-market" tabindex="-1" aria-hidden="true"><img src="/operating-system/img/voice-of-market-thumb.jpg" alt="" loading="lazy" width="1200" height="750"></a>
+<div class="vp-body">
+<div class="vp-top"><span class="pill">Signal · customers in</span><span class="mono-l" style="color:#A49E92">Friday</span></div>
 <h3>Voice of Market</h3>
 <blockquote>“Customers buy the integration, and judge us on it.”</blockquote>
-<p>Reads the week’s customer and prospect calls alongside the support, growth and pipeline reports, and shows where the sales story and customer reality agree or split.</p>
-<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
+<p class="vp-desc">Reads the week’s customer and prospect calls alongside the market, support, growth and pipeline reports, and shows where the sales story and customer reality agree or split.</p>
+<div class="vp-rels"><p class="vrel"><b>Reads</b>Market Scan, Operating Newspaper, Growth Reality, Pipeline Reality and Support Reality</p><p class="vrel"><b>Read by</b>Weekly CEO Digest and Editorial retro</p></div>
+<a class="go" href="/operating-system/voice-of-market" aria-label="Read the Voice of Market sample">Read the sample <span class="arr" aria-hidden="true">→</span></a>
 </div>
-</a>
+</div><div class="vp" role="tabpanel" id="vp-dg" aria-labelledby="vt-dg" data-id="dg">
+<a class="vp-shot" href="/operating-system/weekly-ceo-digest" tabindex="-1" aria-hidden="true"><img src="/operating-system/img/weekly-ceo-digest-thumb.jpg" alt="" loading="lazy" width="1200" height="750"></a>
+<div class="vp-body">
+<div class="vp-top"><span class="pill">Synthesize</span><span class="mono-l" style="color:#A49E92">Friday</span></div>
+<h3>Weekly CEO Digest</h3>
+<blockquote>“The base is healthy and the risk is concentrated.”</blockquote>
+<p class="vp-desc">Reads ten reports from the week and writes one view across the business: the verdict, the vital signs, the patterns no single report can see, and a ranked action list for the CEO.</p>
+<div class="vp-rels"><p class="vrel"><b>Reads</b>Market Scan, Operating Newspaper, Growth Reality, Pipeline Reality, Prospecting Reality, Support Reality, Onboarding Reality, Product + Engineering Reality, Finance Reality and Voice of Market</p><p class="vrel"><b>Read by</b>Editorial retro and Executive Scorecard</p></div>
+<a class="go" href="/operating-system/weekly-ceo-digest" aria-label="Read the Weekly CEO Digest sample">Read the sample <span class="arr" aria-hidden="true">→</span></a>
 </div>
-<p class="note">Sample editions: the system’s real format, templates and kind of reasoning, with invented names, figures and situations. None of it describes a real customer. Each sample is rendered by the system’s own templates and trimmed to a reader’s cut; the live editions are several times longer and stay private.</p>
+</div><div class="vp" role="tabpanel" id="vp-sc" aria-labelledby="vt-sc" data-id="sc" hidden>
+<a class="vp-shot" href="/operating-system/executive-scorecard" tabindex="-1" aria-hidden="true"><img src="/operating-system/img/executive-scorecard-thumb.jpg" alt="" loading="lazy" width="1200" height="750"></a>
+<div class="vp-body">
+<div class="vp-top"><span class="pill">Measure</span><span class="mono-l" style="color:#A49E92">Tuesday, 8am</span></div>
+<h3>Executive Scorecard</h3>
+<blockquote>“Activation fell because a well-adopted pilot converted to a rollout and left the average, which now leans on the newest pilot.”</blockquote>
+<p class="vp-desc">Grades the weekly leading metrics and the monthly lagging ones, then reads the digest and the functional reports to say why the big movers moved, and which report says so.</p>
+<div class="vp-rels"><p class="vrel"><b>Reads</b>Weekly CEO Digest, Growth Reality, Pipeline Reality, Support Reality, Product + Engineering Reality and Finance Reality</p></div>
+<a class="go" href="/operating-system/executive-scorecard" aria-label="Read the Executive Scorecard sample">Read the sample <span class="arr" aria-hidden="true">→</span></a>
 </div>
+</div>
+</div>
+<p class="note">Sample editions: the system’s real format, templates and kind of reasoning, with invented names, figures and situations. None of it describes a real customer. Each sample is rendered by the system’s own templates and trimmed to a reader’s cut; the live editions are several times longer and stay private. Two notes on the map: the Operating Newspaper reads the wider software market for us as owners, not our customers’ market; and on Sunday an outcome diagnosis, not shown, checks the quarter’s bets against the week’s reports.</p>
+</div>
+<script type="application/json" id="map-data">{"names":{"ms":"Market Scan","np":"Operating Newspaper","gr":"Growth Reality","pr":"Pipeline Reality","po":"Prospecting Reality","su":"Support Reality","on":"Onboarding Reality","pe":"Product + Engineering Reality","fi":"Finance Reality","sa":"Sales CEO Assist","ae":"AE Week Ahead","sp":"Support CEO Assist","vm":"Voice of Market","dg":"Weekly CEO Digest","rt":"Editorial retro","sc":"Executive Scorecard"},"reads":{"sa":["pr","po"],"ae":["pr","po"],"sp":["su","on"],"pe":["su","pr"],"fi":["pr"],"vm":["ms","np","gr","pr","su"],"dg":["ms","np","gr","pr","po","su","on","pe","fi","vm"],"rt":["dg","vm"],"sc":["dg","gr","pr","su","pe","fi"]},"days":{"ms":"Mon","np":"Mon","gr":"Tue","pr":"Tue","po":"Tue","su":"Wed","on":"Wed","pe":"Thu","fi":"Thu","sa":"Tue","ae":"Tue","sp":"Wed","vm":"Fri","dg":"Fri","rt":"Fri","sc":"Tue"},"eds":["ms","pr","sa","vm","dg","sc"]}</script>
 </section>
 
 <section class="sec on-bone" aria-labelledby="anat-h">
@@ -422,5 +500,74 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <small>© 2026 Skaling Ventures</small>
 </div>
 </footer>
+<script>
+(function(){
+document.documentElement.classList.add('js');
+var D=JSON.parse(document.getElementById('map-data').textContent);
+var map=document.querySelector('.map'),svg=document.querySelector('.map-svg g.edges'),wrap=document.querySelector('.map-wrap');
+var readout=document.querySelector('.map-readout');
+var nodes={};[].forEach.call(document.querySelectorAll('.mn'),function(b){nodes[b.dataset.id]=b;});
+var by={};Object.keys(D.reads).forEach(function(t){D.reads[t].forEach(function(s){(by[s]=by[s]||[]).push(t);});});
+var paths=[];
+function list(ids){var x=ids.map(function(i){return D.names[i];});return x.length<2?x.join(''):x.slice(0,-1).join(', ')+' and '+x[x.length-1];}
+function draw(){
+  if(!wrap||wrap.offsetParent===null)return;
+  var W=wrap.getBoundingClientRect();svg.innerHTML='';paths=[];
+  Object.keys(D.reads).forEach(function(t){D.reads[t].forEach(function(s){
+    var a=nodes[s].getBoundingClientRect(),b=nodes[t].getBoundingClientRect(),d;
+    var sameCol=Math.abs((a.left+a.right)/2-(b.left+b.right)/2)<20;
+    if(sameCol){var x1=a.left-W.left,y1=a.top+a.height/2-W.top,x2=b.left-W.left,y2=b.top+b.height/2-W.top,bx=Math.min(x1,x2)-22;
+      d='M'+x1+' '+y1+' C'+bx+' '+y1+' '+bx+' '+y2+' '+(x2-2)+' '+y2;}
+    else{var x1=a.right-W.left,y1=a.top+a.height/2-W.top,x2=b.left-W.left-2,y2=b.top+b.height/2-W.top,dx=Math.max(24,(x2-x1)*.5);
+      d='M'+x1+' '+y1+' C'+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2;}
+    var p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.dataset.s=s;p.dataset.t=t;svg.appendChild(p);paths.push(p);
+  });});
+  paint(cur);
+}
+var sel='dg',cur='dg';
+function paint(id){
+  cur=id;var rin=D.reads[id]||[],rout=by[id]||[];
+  map.classList.toggle('focus',!!id);
+  Object.keys(nodes).forEach(function(k){var n=nodes[k];
+    n.classList.toggle('sel',k===id);n.classList.toggle('rel',k===id||rin.indexOf(k)>-1||rout.indexOf(k)>-1);
+    n.classList.toggle('rel-in',rin.indexOf(k)>-1);n.classList.toggle('rel-out',rout.indexOf(k)>-1);
+    n.setAttribute('aria-pressed',k===sel?'true':'false');});
+  paths.forEach(function(p){p.classList.toggle('in',p.dataset.t===id);p.classList.toggle('out',p.dataset.s===id);
+    p.setAttribute('marker-end',p.dataset.t===id?'url(#ah-in)':(p.dataset.s===id?'url(#ah-out)':''));
+    if(p.dataset.t===id||p.dataset.s===id)p.parentNode.appendChild(p);});
+  var t='<b>'+D.names[id]+'</b> · '+D.days[id]+'. ';
+  t+=rin.length?'<span class="rd-in">Reads '+(rin.length>2?rin.length+' reports: ':'')+list(rin)+'.</span> ':'Reads live systems and outside sources only. ';
+  if(rout.length)t+='<span class="rd-out">Read by '+list(rout)+'.</span>';
+  readout.innerHTML=t;
+}
+// viewer
+var tabs=[].slice.call(document.querySelectorAll('.vt')),panels=[].slice.call(document.querySelectorAll('.vp'));
+function show(id,focusTab){
+  if(D.eds.indexOf(id)<0)return;
+  tabs.forEach(function(t){var on=t.dataset.id===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on&&focusTab)t.focus();
+    if(on&&t.parentNode.scrollWidth>t.parentNode.clientWidth)t.parentNode.scrollTo({left:t.offsetLeft-20,behavior:'smooth'});});
+  panels.forEach(function(p){p.hidden=p.dataset.id!==id;});
+}
+function choose(id,opts){sel=id;paint(id);show(id,opts&&opts.focusTab);}
+Object.keys(nodes).forEach(function(k){var n=nodes[k];
+  n.addEventListener('mouseenter',function(){paint(k);});
+  n.addEventListener('mouseleave',function(){paint(sel);});
+  n.addEventListener('focus',function(){paint(k);});
+  n.addEventListener('blur',function(){paint(sel);});
+  n.addEventListener('click',function(){sel=k;paint(k);if(D.eds.indexOf(k)>-1)show(k);});
+});
+tabs.forEach(function(t,i){
+  t.addEventListener('click',function(){choose(t.dataset.id);});
+  t.addEventListener('keydown',function(e){var j=null;if(e.key==='ArrowRight')j=(i+1)%tabs.length;if(e.key==='ArrowLeft')j=(i-1+tabs.length)%tabs.length;
+    if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;if(j!==null){e.preventDefault();choose(tabs[j].dataset.id,{focusTab:true});}});
+});
+[].forEach.call(document.querySelectorAll('.vbtn'),function(b){b.addEventListener('click',function(){
+  var i=D.eds.indexOf(tabs.filter(function(t){return t.getAttribute('aria-selected')==='true';})[0].dataset.id);
+  choose(D.eds[(i+(+b.dataset.step)+D.eds.length)%D.eds.length]);});});
+var rq;window.addEventListener('resize',function(){cancelAnimationFrame(rq);rq=requestAnimationFrame(draw);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+window.addEventListener('load',draw);draw();show(sel);
+})();
+</script>
 </body>
 </html>

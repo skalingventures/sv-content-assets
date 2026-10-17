@@ -489,7 +489,30 @@ html{scroll-behavior:auto}
 .osb-go{margin-top:auto;font:600 13px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A3B1C0}
 .osb-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 28px;margin-top:22px;padding-top:14px;border-top:1px solid rgba(128,126,122,.28)}
 .osb-fine{font:400 13px/1.6 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A49E92}
-@media (max-width:900px){.osb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.osm{margin-top:clamp(32px,4vw,48px)}
+.osm-wrap{position:relative}
+.osm-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.osm-svg path{fill:none;stroke:rgba(163,177,192,.32);stroke-width:1.2;transition:stroke .25s ease,opacity .25s ease}
+.osm-svg path.to-cap{stroke:#C4886B;stroke-width:1.5}
+.osm-wrap.hl .osm-svg path{opacity:.15}.osm-wrap.hl .osm-svg path.on{opacity:1;stroke-width:1.8}
+.osm-grid{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:auto auto;gap:18px clamp(28px,4vw,56px)}
+.osm-n{position:relative;z-index:1;display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:12px;background:#1F1F1F;border:1px solid rgba(163,177,192,.35);text-decoration:none;color:#FFFAF4;transition:border-color .3s ease,transform .5s cubic-bezier(.23,1,.32,1),opacity .25s ease}
+a.osm-n:hover,a.osm-n:focus-visible{border-color:#A3B1C0;transform:translateY(-2px)}
+.osm-n b{font:700 14px/1.2 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.osm-d{font:600 10px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#A3B1C0}
+.osm-cap{background:#FFFAF4;border-color:#FFFAF4;color:#1F1F1F}.osm-cap .osm-d{color:#89523B}
+a.osm-cap:hover{border-color:#A3B1C0}
+.osm-ghost{background:#282726;border-style:dashed;border-color:rgba(255,250,244,.18);color:#A49E92;justify-content:center}
+.osm-ghost b{color:#E8E2D8;text-transform:none;font-size:14px;letter-spacing:0}
+.osm-ghost small{font:400 12.5px/1.45 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A49E92}
+.osm-list{display:none}
+.osb-q{margin:0;max-width:40rem}
+.osb-q blockquote{margin:0;padding-left:14px;border-left:1px solid #89523B;font:400 clamp(1.05rem,1.4vw,1.2rem)/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#FFFAF4}
+.osb-q figcaption{margin-top:8px;padding-left:15px;font:400 12.5px/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A49E92}
+@media (max-width:900px){.osm-wrap{display:none}.osm-list{display:grid;gap:0;list-style:none;margin:0;padding:0}
+.osm-list li{display:flex;flex-direction:column;gap:3px;padding:12px 0;border-top:1px solid rgba(128,126,122,.28)}
+.osm-list a{font:700 14px/1.25 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em;color:#FFFAF4;text-decoration:none}
+.osm-list span{font:400 13px/1.5 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A49E92}}
 @media (max-width:760px){.osb-head{grid-template-columns:1fr}.osb-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -785,16 +808,20 @@ html{scroll-behavior:auto}
 </div>
 <p class="osb-lead">At our operating company, agents read the CRM, support desk, product usage, books, customer calls and market, and brief the leadership team before the day gets going. The reports read each other: Friday’s digest reads the week, and Tuesday’s scorecard explains the numbers. Each one takes a position and shows its sources.</p>
 </div>
-<ol class="osb-grid" aria-label="Six sample editions, in the order they run">
-<li><a class="osb-tile" href="/operating-system/market-scan"><span class="osb-k">Mon · Signal</span><b>Market Scan</b><q>Smaller, faster orders put a premium on clean, quick order entry.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/pipeline-reality"><span class="osb-k">Tue · Reality</span><b>Pipeline Reality</b><q>Talbot &amp; Greer has two buyers who want different things.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/sales-ceo-assist"><span class="osb-k">Tue · Assist</span><b>Sales CEO Assist</b><q>The COO sits above both divisions and is the only person who can turn two opinions into one decision.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/voice-of-market"><span class="osb-k">Fri · Signal</span><b>Voice of Market</b><q>Customers buy the integration, and judge us on it.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/weekly-ceo-digest"><span class="osb-k">Fri · Synthesis</span><b>Weekly CEO Digest</b><q>The base is healthy and the risk is concentrated.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-<li><a class="osb-tile" href="/operating-system/executive-scorecard"><span class="osb-k">Tue · Measure</span><b>Executive Scorecard</b><q>Pilot activation is the number to fix this week.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
-</ol>
+<div class="osm" aria-label="Six sample editions and the reports they read">
+<div class="osm-wrap"><svg class="osm-svg" aria-hidden="true"><defs><marker id="osm-ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" fill="#C4886B"/></marker><marker id="osm-ah2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" fill="rgba(163,177,192,.7)"/></marker></defs><g></g></svg>
+<div class="osm-grid"><a class="osm-n " href="/operating-system/market-scan" data-id="ms" style="grid-column:1;grid-row:1"><span class="osm-d">Mon</span><b>Market Scan</b></a><a class="osm-n " href="/operating-system/pipeline-reality" data-id="pr" style="grid-column:2;grid-row:1"><span class="osm-d">Tue</span><b>Pipeline Reality</b></a><a class="osm-n " href="/operating-system/sales-ceo-assist" data-id="sa" style="grid-column:2;grid-row:2"><span class="osm-d">Tue</span><b>Sales CEO Assist</b></a><div class="osm-n osm-ghost" data-id="more" style="grid-column:3;grid-row:1/3"><span class="osm-d">Tue – Thu</span><b>+7 more reports</b><small>growth, prospecting, support, onboarding, product, finance and a market newspaper</small></div><a class="osm-n " href="/operating-system/voice-of-market" data-id="vm" style="grid-column:4;grid-row:1"><span class="osm-d">Fri</span><b>Voice of Market</b></a><a class="osm-n osm-cap" href="/operating-system/weekly-ceo-digest" data-id="dg" style="grid-column:4;grid-row:2"><span class="osm-d">Fri</span><b>Weekly CEO Digest</b></a><a class="osm-n osm-cap" href="/operating-system/executive-scorecard" data-id="sc" style="grid-column:5;grid-row:2"><span class="osm-d">Next Tue</span><b>Executive Scorecard</b></a></div></div>
+<ul class="osm-list">
+<li><a href="/operating-system/market-scan">Market Scan</a><span>Mon · reads the market</span></li>
+<li><a href="/operating-system/pipeline-reality">Pipeline Reality</a><span>Tue · read by seven later reports</span></li>
+<li><a href="/operating-system/sales-ceo-assist">Sales CEO Assist</a><span>Tue · reads Pipeline Reality</span></li>
+<li><a href="/operating-system/voice-of-market">Voice of Market</a><span>Fri · reads Market Scan, Pipeline Reality and three more</span></li>
+<li><a href="/operating-system/weekly-ceo-digest">Weekly CEO Digest</a><span>Fri · reads ten reports</span></li>
+<li><a href="/operating-system/executive-scorecard">Executive Scorecard</a><span>Next Tue · reads the digest and five functional reports</span></li>
+</ul>
+</div>
 <div class="osb-foot">
-<span class="osb-fine">Sample editions: the real format and reasoning, with invented names, figures and situations. None describe a real customer.</span>
+<figure class="osb-q"><blockquote>“The base is healthy and the risk is concentrated.”</blockquote><figcaption>Weekly CEO Digest, after reading ten reports · sample edition, invented company</figcaption></figure>
 <a class="tlink" href="/operating-system" style="color: #A3B1C0">See how the system works <span class="arr" aria-hidden="true">→</span></a>
 </div>
 </div>
@@ -1205,6 +1232,21 @@ html{scroll-behavior:auto}
   window.addEventListener('resize', onScroll, { passive: true });
   tick();
 })();
+</script>
+<script>
+(function(){var w=document.querySelector('.osm-wrap');if(!w)return;var g=w.querySelector('svg g');
+var E=[['ms','vm'],['ms','dg'],['pr','sa'],['pr','vm'],['pr','dg'],['pr','sc'],['more','vm'],['more','dg'],['more','sc'],['vm','dg'],['dg','sc']];
+function el(id){return w.querySelector('[data-id="'+id+'"]');}
+function draw(){if(w.offsetParent===null)return;var W=w.getBoundingClientRect();g.innerHTML='';
+E.forEach(function(e){var a=el(e[0]).getBoundingClientRect(),b=el(e[1]).getBoundingClientRect(),d;
+ if(Math.abs(a.left-b.left)<8){var x=a.left-W.left,y1=a.bottom-W.top,y2=b.top-W.top-2,cx=x+(a.width*.5);d='M'+cx+' '+y1+' L'+cx+' '+y2;}
+ else{var x1=a.right-W.left,y1=a.top+a.height/2-W.top,x2=b.left-W.left-2,y2=b.top+b.height/2-W.top,dx=Math.max(18,(x2-x1)*.5);d='M'+x1+' '+y1+' C'+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2;}
+ var p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.dataset.s=e[0];p.dataset.t=e[1];
+ var cap=(e[1]==='dg'||e[1]==='sc');if(cap)p.classList.add('to-cap');p.setAttribute('marker-end',cap?'url(#osm-ah)':'url(#osm-ah2)');g.appendChild(p);});}
+[].forEach.call(w.querySelectorAll('[data-id]'),function(n){function on(){w.classList.add('hl');[].forEach.call(g.children,function(p){p.classList.toggle('on',p.dataset.s===n.dataset.id||p.dataset.t===n.dataset.id);});}
+ function off(){w.classList.remove('hl');}n.addEventListener('mouseenter',on);n.addEventListener('mouseleave',off);n.addEventListener('focus',on);n.addEventListener('blur',off);});
+var r;window.addEventListener('resize',function(){cancelAnimationFrame(r);r=requestAnimationFrame(draw);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);window.addEventListener('load',draw);draw();})();
 </script>
 </body>
 </html>
