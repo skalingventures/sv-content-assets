@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
   const isJson = String(req.headers['content-type'] || '').includes('application/json');
   const done = (status, payload) => {
     console.log('contact_outcome', JSON.stringify({ via: isJson ? 'js' : 'native', status, ok: payload.ok, error: payload.error || null }));
-    if (isJson) return res.status(status).json(payload);
+    if (isJson) return res.status(status).json(String(payload.error || '').startsWith('trap_') ? { ok: true } : payload);
     res.statusCode = 303;
     res.setHeader('Location', payload.ok ? '/thanks' : '/talk-error');
     return res.end();
