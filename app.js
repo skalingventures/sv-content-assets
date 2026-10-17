@@ -17,16 +17,15 @@
   };
   var active = 0, lastY = 0, raf = 0;
 
-  // ── Approval toggle (the one interaction on the page)
-  var btn = document.getElementById('approveBtn');
-  var stOk = document.getElementById('stOk'), stWait = document.getElementById('stWait');
-  if (btn) btn.addEventListener('click', function () {
-    var on = btn.getAttribute('aria-pressed') !== 'true';
-    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    btn.textContent = on ? 'Undo' : 'Send as rep';
-    btn.classList.toggle('btn-graphite', !on);
-    btn.classList.toggle('btn-line', on);
-    stOk.hidden = !on; stWait.hidden = on;
+  // ── Level toggle (L1 / L2 / L3) on diagram III
+  var segBtns = $$('.seg button[data-lv]');
+  var lvRows = $$('.lvls .lv');
+  segBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = +b.getAttribute('data-lv');
+      segBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      lvRows.forEach(function (r, i) { r.classList.toggle('on', i === k); });
+    });
   });
 
   function setActive(i) {
