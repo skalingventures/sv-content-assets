@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'invalid' });
   }
 
-  const key = process.env.RESEND_API_KEY;
+  const key = process.env.RESEND_API_KEY || process.env.Resend_email;
   if (!key) return res.status(503).json({ ok: false, error: 'not_configured' });
 
   const role = ROLES[roleKey];
