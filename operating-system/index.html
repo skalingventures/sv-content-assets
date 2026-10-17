@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Operating system · Skaling Ventures</title>
+<meta name="description" content="Every weekday at 6am, agents brief our operating company's leadership. See how the week runs, what a report looks like, and four editions from a real week, anonymized.">
+<link rel="canonical" href="https://www.skalingventures.com/operating-system">
+<meta name="theme-color" content="#1F1F1F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skaling Ventures">
+<meta property="og:title" content="We run on the system we write about · Skaling Ventures">
+<meta property="og:description" content="Agents brief our operating company's leadership every weekday at 6am. Four editions from a real week, anonymized.">
+<meta property="og:url" content="https://www.skalingventures.com/operating-system">
+<meta property="og:image" content="https://www.skalingventures.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@skaalywag">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:'SV Grotesk';src:local('NeueHaasDisplay-Light'),local('Neue Haas Grotesk Display Pro 45 Light');font-weight:300}
+@font-face{font-family:'SV Grotesk';src:local('NeueHaasDisplay-Roman'),local('Neue Haas Grotesk Display Pro 55 Roman');font-weight:400}
+@font-face{font-family:'SV Grotesk';src:local('NeueHaasDisplay-Mediu'),local('Neue Haas Grotesk Display Pro 65 Medium');font-weight:500 600}
+@font-face{font-family:'SV Grotesk';src:local('NeueHaasDisplay-Bold'),local('Neue Haas Grotesk Display Pro 75 Bold');font-weight:700 800}
+:root{--g:#1F1F1F;--g2:#282726;--bone:#FFFAF4;--bone2:#F2ECE2;--nev:#89523B;--fog:#A3B1C0;--ink:#3A3836;--mut:#5E5C58;--mut2:#A49E92;--tx:#E8E2D8;
+ --f:'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--g);color:var(--tx);font-family:var(--f);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:inherit}
+::selection{background:var(--nev);color:var(--bone)}
+:focus-visible{outline:2px solid var(--fog);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--bone);color:var(--g);padding:10px 14px;border-radius:8px;z-index:99}
+.skip:focus{left:12px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:clamp(20px,5vw,72px);padding-right:clamp(20px,5vw,72px)}
+.mark{display:block;background:currentColor;-webkit-mask:url(/mark.png) center/contain no-repeat;mask:url(/mark.png) center/contain no-repeat;aspect-ratio:332/181}
+.hdr{position:sticky;top:0;z-index:50;background:rgba(31,31,31,.82);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid rgba(128,126,122,.18)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand-w{white-space:nowrap;font:700 13px/.95 var(--f);letter-spacing:.01em;text-transform:uppercase;color:var(--bone)}
+.nav{display:flex;align-items:center;gap:32px}
+.nav a{white-space:nowrap;color:var(--tx);text-decoration:none;font:500 14px/1 var(--f);padding:14px 2px}
+.nav a:hover{color:var(--fog)}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 20px;border-radius:999px;font:600 14px/1 var(--f);text-decoration:none;border:1px solid rgba(255,250,244,.32);color:var(--bone)}
+.btn:hover{border-color:var(--fog);color:var(--fog)}
+.kicker{display:flex;align-items:center;gap:14px;margin:0 0 28px;font:600 12px/1 var(--f);letter-spacing:.08em;text-transform:uppercase}
+.mono-l{font:600 10.5px/1.2 var(--f);letter-spacing:.08em;text-transform:uppercase}
+.h1{margin:0;font:700 clamp(2.4rem,6vw,4.6rem)/.98 var(--f);text-transform:uppercase;letter-spacing:.005em;color:var(--bone);text-wrap:balance}
+.h2{margin:0;font:700 clamp(1.9rem,4vw,3.1rem)/1 var(--f);text-transform:uppercase;letter-spacing:.005em;text-wrap:balance}
+.lead{margin:0;font:400 clamp(1.05rem,1.4vw,1.2rem)/1.7 var(--f)}
+.split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(36px,6vw,104px);align-items:end}
+.sec{padding:clamp(80px,10vw,152px) 0;position:relative}
+.tlink{display:inline-flex;align-items:center;gap:10px;min-height:44px;font:600 15px/1.35 var(--f);text-decoration:none}
+.tlink:hover .arr{transform:translateX(4px)}
+.arr{transition:transform .3s ease}
+.hero{padding:clamp(72px,10vw,144px) 0 clamp(64px,8vw,112px);position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,250,244,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,250,244,.035) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(180deg,#000 30%,transparent)}
+.hero-mark{position:absolute;right:-60px;bottom:-30px;width:min(620px,60vw);color:rgba(163,177,192,.10);pointer-events:none}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid rgba(128,126,122,.35)}
+.fact{padding:22px 24px 0 0}
+.fact b{display:block;font:700 clamp(1.15rem,1.7vw,1.4rem)/1.15 var(--f);color:var(--bone);margin-bottom:8px}
+.fact span{font:400 14px/1.55 var(--f);color:var(--mut2)}
+/* the week */
+.on-bone{background:var(--bone2);color:var(--ink)}
+.week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:clamp(44px,5vw,72px);list-style:none;padding:0}
+.day{background:var(--bone);border:1px solid rgba(31,31,31,.10);border-radius:14px;padding:20px 18px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.day-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid rgba(31,31,31,.10);padding-bottom:12px}
+.day-h b{font:700 15px/1 var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--g)}
+.day-h span{font:500 11.5px/1 var(--f);color:var(--mut);letter-spacing:.04em}
+.day ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.day li{font:400 14px/1.35 var(--f);color:var(--ink);padding-left:14px;position:relative}
+.day li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;border:1px solid #9A948A}
+.day li.s{color:var(--g);font-weight:600}
+.day li.s::before{background:var(--nev);border-color:var(--nev)}
+.day .then{font:600 10.5px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;color:#8A847A;margin:2px 0 -2px;padding-left:14px}
+.week-foot{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;margin-top:22px;font:400 13.5px/1.6 var(--f);color:var(--mut)}
+.week-foot .key{display:inline-flex;align-items:center;gap:8px}
+.week-foot .key i{width:7px;height:7px;border-radius:50%;background:var(--nev);display:inline-block}
+/* editions */
+.eds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:clamp(48px,6vw,80px)}
+.ed{background:var(--g2);border:1px solid rgba(128,126,122,.35);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .3s ease,transform .5s cubic-bezier(.23,1,.32,1)}
+.ed:hover{border-color:rgba(163,177,192,.7);transform:translateY(-2px)}
+.ed-shot{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid rgba(128,126,122,.35);background:#1A1A1A}
+.ed-shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+.ed-body{padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;gap:14px;flex:1}
+.ed-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.pill{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;border:1px solid rgba(163,177,192,.55);font:500 10.5px/1 var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--fog)}
+.ed h3{margin:0;font:700 clamp(1.35rem,2vw,1.7rem)/1.05 var(--f);text-transform:uppercase;color:var(--bone)}
+.ed blockquote{margin:0;padding-left:16px;border-left:1px solid var(--fog);font:400 clamp(1.02rem,1.3vw,1.12rem)/1.55 var(--f);color:var(--bone)}
+.ed p{margin:0;font:400 14.5px/1.6 var(--f);color:var(--mut2)}
+.ed .go{margin-top:auto;padding-top:8px;font:600 14.5px/1 var(--f);color:var(--fog)}
+.note{margin:28px 0 0;max-width:52rem;font:400 13.5px/1.65 var(--f);color:var(--mut2);padding-top:20px;border-top:1px solid rgba(128,126,122,.35)}
+/* anatomy */
+.anat{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,72px);margin-top:clamp(44px,5vw,72px);align-items:start}
+.frame{position:relative;border-radius:14px;overflow:visible;margin-left:26px}
+.frame img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid rgba(31,31,31,.18);box-shadow:0 30px 60px -30px rgba(31,31,31,.45)}
+.pin{position:absolute;left:-8px;transform:translate(-50%,-30%);width:30px;height:30px;border-radius:50%;background:var(--nev);color:var(--bone);display:flex;align-items:center;justify-content:center;font:700 13px/1 var(--f);box-shadow:0 0 0 4px var(--bone2)}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:22px;position:sticky;top:104px}
+.legend li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:14px;align-items:start}
+.legend .n{width:30px;height:30px;border-radius:50%;border:1px solid var(--nev);color:var(--nev);display:flex;align-items:center;justify-content:center;font:700 13px/1 var(--f)}
+.legend b{display:block;font:700 15px/1.25 var(--f);color:var(--g);margin:5px 0 4px}
+.legend span{font:400 14.5px/1.6 var(--f);color:var(--ink)}
+/* loop */
+.loop{list-style:none;padding:0;margin:clamp(48px,6vw,80px) 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:s}
+.step{position:relative;padding:0 22px 0 0}
+.step .bar{height:1px;background:rgba(163,177,192,.45);margin-bottom:22px;position:relative}
+.step .bar::after{content:'';position:absolute;left:0;top:-4px;width:9px;height:9px;border-radius:50%;background:var(--g);border:1px solid var(--fog)}
+.step:last-child .bar{background:linear-gradient(90deg,rgba(163,177,192,.45),rgba(163,177,192,0))}
+.step small{display:block;font:600 10.5px/1 var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--fog);margin-bottom:10px}
+.step b{display:block;font:700 clamp(1.1rem,1.5vw,1.3rem)/1.15 var(--f);color:var(--bone);margin-bottom:10px;text-transform:uppercase}
+.step p{margin:0;font:400 14.5px/1.6 var(--f);color:var(--tx)}
+.back{display:flex;align-items:center;gap:10px;margin-top:22px;font:400 13.5px/1.6 var(--f);color:var(--mut2)}
+.back svg{flex:none}
+.limits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:clamp(56px,7vw,88px);padding-top:32px;border-top:1px solid rgba(128,126,122,.35)}
+.limits b{display:block;font:700 15px/1.3 var(--f);color:var(--bone);margin-bottom:8px}
+.limits p{margin:0;font:400 14.5px/1.6 var(--f);color:var(--mut2)}
+/* close */
+.close{background:var(--nev);color:var(--bone);padding:clamp(72px,9vw,128px) 0;position:relative;overflow:hidden}
+.close .h2{color:var(--bone)}
+.close .lead{color:rgba(255,250,244,.9);max-width:40rem;margin-top:20px}
+.close-actions{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;margin-top:36px}
+.btn-solid{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;background:var(--bone);color:var(--g);font:600 15px/1 var(--f);text-decoration:none}
+.btn-solid:hover{background:#fff}
+footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,122,.25)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding-top:40px;padding-bottom:40px}
+.foot small{font:400 12px/1.4 var(--f)}
+@media (max-width:1024px){
+ .week{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .loop{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}
+ .anat{grid-template-columns:1fr}
+ .legend{position:static}
+}
+@media (max-width:760px){
+ .nav{display:none}
+ .split{grid-template-columns:1fr;gap:28px}
+ .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .week{grid-template-columns:1fr}
+ .eds{grid-template-columns:1fr}
+ .loop{grid-template-columns:1fr}
+ .limits{grid-template-columns:1fr}
+ .frame{margin-left:12px}
+ .pin{width:24px;height:24px;font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+<div class="wrap hdr-in">
+<a class="brand" href="/" aria-label="Skaling Ventures, home"><span class="mark" style="width:46px;color:#FFFAF4" aria-hidden="true"></span><span class="brand-w">Skaling<br>Ventures</span></a>
+<nav class="nav" aria-label="Primary">
+<a href="/#approach">Approach</a>
+<a href="/#founders">For Founders</a>
+<a href="/#work">Our Work</a>
+<a href="/#thinking">Thinking</a>
+</nav>
+<a class="btn" href="/#talk">Let’s Talk <span aria-hidden="true">→</span></a>
+</div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="h1">
+<div class="hero-grid" aria-hidden="true"></div>
+<span class="mark hero-mark" aria-hidden="true"></span>
+<div class="wrap" style="position:relative">
+<p class="kicker" style="color:#A3B1C0"><a href="/#work" style="text-decoration:none;opacity:.7">Our work</a><span aria-hidden="true" style="opacity:.5">/</span>Operating system</p>
+<div class="split">
+<h1 id="h1" class="h1">We run on the system we write about.</h1>
+<p class="lead" style="color:#E8E2D8">At our operating company, agents brief the leadership team every weekday at 6am. They read the CRM, the support desk, product usage, the books and the market, then write reports that take a position, show their sources and recommend the next move. People make the calls.</p>
+</div>
+<div class="facts" role="list">
+<div class="fact" role="listitem"><b>Every weekday, 6am</b><span>Reports run in order, each feeding the next.</span></div>
+<div class="fact" role="listitem"><b>A position, not a summary</b><span>Every report opens with a verdict and the moves it implies.</span></div>
+<div class="fact" role="listitem"><b>Sources on the page</b><span>What it read, how fresh it was, and what it couldn’t see.</span></div>
+<div class="fact" role="listitem"><b>Graded every Friday</b><span>Feedback is stored and read by the next run.</span></div>
+</div>
+</div>
+</section>
+
+<section class="sec on-bone" aria-labelledby="week-h">
+<div class="wrap">
+<div class="split">
+<div>
+<p class="kicker" style="color:#89523B">The week</p>
+<h2 id="week-h" class="h2" style="color:#1F1F1F">Outside in first. Synthesis last.</h2>
+</div>
+<p class="lead">The week opens with the market, moves through revenue, customers, product and money, and ends with one digest that reads everything else. Each report knows what the others found.</p>
+</div>
+<ol class="week" aria-label="The weekly schedule">
+<li class="day"><div class="day-h"><b>Mon</b><span>6:00 am</span></div><ul><li>Market scan</li><li class="s">Operating newspaper</li></ul></li>
+<li class="day"><div class="day-h"><b>Tue</b><span>6:00 am</span></div><ul><li>Growth reality</li><li class="s">Pipeline reality</li><li>Prospecting reality</li></ul><p class="then">then</p><ul><li>AE week ahead</li><li class="s">Sales CEO assist</li></ul></li>
+<li class="day"><div class="day-h"><b>Wed</b><span>6:00 am</span></div><ul><li>Support reality</li><li>Onboarding reality</li></ul><p class="then">then</p><ul><li>Support CEO assist</li></ul></li>
+<li class="day"><div class="day-h"><b>Thu</b><span>6:00 am</span></div><ul><li>Product &amp; engineering reality</li><li>Finance reality</li></ul></li>
+<li class="day"><div class="day-h"><b>Fri</b><span>6:00 am</span></div><ul><li>Voice of market</li></ul><p class="then">then</p><ul><li class="s">Weekly CEO digest</li></ul><p class="then">then</p><ul><li>Editorial retro</li></ul></li>
+</ol>
+<div class="week-foot"><span class="key"><i aria-hidden="true"></i>Sampled below</span><span>Sunday: an outcome diagnosis checks the quarter’s bets against what the week showed.</span></div>
+</div>
+</section>
+
+<section class="sec" id="editions" aria-labelledby="eds-h">
+<div class="wrap">
+<div class="split">
+<div>
+<p class="kicker" style="color:#A3B1C0">Four editions, one real week</p>
+<h2 id="eds-h" class="h2" style="color:#FFFAF4">What the system actually says.</h2>
+</div>
+<p class="lead" style="color:#E8E2D8">One edition for each kind of work the system does: synthesize, keep score, read the market, and turn all of it into the CEO’s next move.</p>
+</div>
+<div class="eds">
+<a class="ed" href="/operating-system/weekly-ceo-digest">
+<div class="ed-shot"><img src="/operating-system/img/weekly-ceo-digest-thumb.jpg" alt="The Weekly CEO Digest reader's cut: verdict, sources line and vital signs" loading="lazy" width="1200" height="750"></div>
+<div class="ed-body">
+<div class="ed-top"><span class="pill">Synthesis</span><span class="mono-l" style="color:#A49E92">Friday · 6am</span></div>
+<h3>Weekly CEO Digest</h3>
+<blockquote>“The business is healthy where customers are, and stalled where the future gets built.”</blockquote>
+<p>One view across every function: the verdict, the vital signs, the patterns no single report can see, and a ranked action list.</p>
+<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="ed" href="/operating-system/pipeline-reality">
+<div class="ed-shot"><img src="/operating-system/img/pipeline-reality-thumb.jpg" alt="The Sales Pipeline Reality reader's cut: headline and pipeline verdict" loading="lazy" width="1200" height="750"></div>
+<div class="ed-body">
+<div class="ed-top"><span class="pill">Reality</span><span class="mono-l" style="color:#A49E92">Tuesday · 6am</span></div>
+<h3>Sales Pipeline Reality</h3>
+<blockquote>“The pipeline sat frozen all week, and two committed recovery actions never happened.”</blockquote>
+<p>Keeps score without spin: facts kept apart from inference, missed commitments named, every deal’s next move dated.</p>
+<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="ed" href="/operating-system/operating-newspaper">
+<div class="ed-shot"><img src="/operating-system/img/operating-newspaper-thumb.jpg" alt="The Operating Newspaper reader's cut: front page" loading="lazy" width="1200" height="750"></div>
+<div class="ed-body">
+<div class="ed-top"><span class="pill">Signal</span><span class="mono-l" style="color:#A49E92">Monday · 6am</span></div>
+<h3>Operating Newspaper</h3>
+<blockquote>“Cache, not egress, is now the fastest-growing cost in AI. Instrument cost per agent run before features scale.”</blockquote>
+<p>Reads the outside world for us: each story turned into a stance, a decision with options, and a change to how we run.</p>
+<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="ed" href="/operating-system/sales-ceo-assist">
+<div class="ed-shot"><img src="/operating-system/img/sales-ceo-assist-thumb.jpg" alt="The Sales CEO Assist reader's cut: the day's first action" loading="lazy" width="1200" height="750"></div>
+<div class="ed-body">
+<div class="ed-top"><span class="pill">Assist</span><span class="mono-l" style="color:#A49E92">Tuesday · 6am</span></div>
+<h3>Sales CEO Assist</h3>
+<blockquote>“The largest deal has gone quiet for eleven days. Send the time-boxed note today; recycle it if she stays silent.”</blockquote>
+<p>Turns the pipeline into the calls only the CEO can make, with drafted notes in three tones and a rule for when to send each.</p>
+<span class="go">Read the reader’s cut <span class="arr" aria-hidden="true">→</span></span>
+</div>
+</a>
+</div>
+<p class="note">A real week, October 12 to 16, 2026, anonymized and excerpted. Customer, deal and people names, every figure and the industry are changed; the structure, the verdicts and the reasoning follow the originals. Each edition is rendered by the system’s own templates and trimmed to a reader’s cut; the live editions are several times longer and stay private.</p>
+</div>
+</section>
+
+<section class="sec on-bone" aria-labelledby="anat-h">
+<div class="wrap">
+<div class="split">
+<div>
+<p class="kicker" style="color:#89523B">Anatomy of a report</p>
+<h2 id="anat-h" class="h2" style="color:#1F1F1F">Built to be argued with.</h2>
+</div>
+<p class="lead">Every report is laid out so a reader can disagree with it quickly: the claim first, then the evidence, then where the evidence came from.</p>
+</div>
+<div class="anat">
+<div class="frame">
+<img src="/operating-system/img/anatomy-digest.jpg" alt="The top of the Weekly CEO Digest, annotated: verdict, sources line, vital signs, three things that matter, and the source record" width="1440" height="2004" loading="lazy">
+<span class="pin" style="top:12.8%" aria-hidden="true">1</span>
+<span class="pin" style="top:18.7%" aria-hidden="true">2</span>
+<span class="pin" style="top:50.1%" aria-hidden="true">3</span>
+<span class="pin" style="top:63.1%" aria-hidden="true">4</span>
+<span class="pin" style="top:95.2%" aria-hidden="true">5</span>
+</div>
+<ol class="legend">
+<li><span class="n" aria-hidden="true">1</span><div><b>The verdict</b><span>It opens with a position, not a summary. If the week was bad, the first line says so.</span></div></li>
+<li><span class="n" aria-hidden="true">2</span><div><b>What it read</b><span>The time it read the data, how many sources it covered, and a flag when one of them is partial.</span></div></li>
+<li><span class="n" aria-hidden="true">3</span><div><b>Vital signs</b><span>This week against last, with the normal range where one exists, so a dip in season reads as a dip in season.</span></div></li>
+<li><span class="n" aria-hidden="true">4</span><div><b>Three things that matter</b><span>Ranked, each traced to the report it came from, each ending in what it means for the week.</span></div></li>
+<li><span class="n" aria-hidden="true">5</span><div><b>The source record</b><span>Every section opens to the structured record behind it. Nothing on the page is unsourced.</span></div></li>
+</ol>
+</div>
+</div>
+</section>
+
+<section class="sec" aria-labelledby="loop-h">
+<div class="wrap">
+<div class="split">
+<div>
+<p class="kicker" style="color:#A3B1C0">How it stays honest</p>
+<h2 id="loop-h" class="h2" style="color:#FFFAF4">The harness does the work the model can’t.</h2>
+</div>
+<p class="lead" style="color:#E8E2D8">A model writes well. Whether its report deserves trust depends on everything around it: what it may read, what it must check, and what happens when it’s wrong.</p>
+</div>
+<ol class="loop">
+<li class="step"><div class="bar"></div><small>01</small><b>Read</b><p>Agents query the live systems directly, under versioned prompts, and write a structured record rather than free text.</p></li>
+<li class="step"><div class="bar"></div><small>02</small><b>Check</b><p>Validators fail closed. A missing source or a broken contract stops the report instead of letting it guess.</p></li>
+<li class="step"><div class="bar"></div><small>03</small><b>Publish</b><p>Reports land before the workday starts, each carrying its own freshness and coverage line.</p></li>
+<li class="step"><div class="bar"></div><small>04</small><b>Grade</b><p>Every Friday an editorial retro scores the week’s reports. The CEO adds feedback of his own.</p></li>
+<li class="step"><div class="bar"></div><small>05</small><b>Remember</b><p>That feedback is stored and read by the next run, so the same miss doesn’t repeat.</p></li>
+</ol>
+<p class="back"><svg width="28" height="12" viewBox="0 0 28 12" aria-hidden="true"><path d="M27 6H2M6 1L1 6l5 5" fill="none" stroke="#A3B1C0" stroke-width="1.2"/></svg>Then Monday starts again, a little sharper. Changes to the report templates run against a fixed set of test cases before they ship.</p>
+<div class="limits">
+<div><b>It recommends. People decide.</b><p>Every action has a human owner. Drafted notes wait for a person to send them.</p></div>
+<div><b>It says what it couldn’t see.</b><p>A partial source is flagged on the page, and an empty section stays empty rather than guessed.</p></div>
+<div><b>It runs where we operate.</b><p>This runs at our current operating company. We write about what it takes in <a href="https://skalingventures.substack.com/p/the-harness-is-where-the-work-is" target="_blank" rel="noopener" style="color:#A3B1C0">The Harness Is Where the Work Is ↗</a></p></div>
+</div>
+</div>
+</section>
+
+<section class="close" aria-labelledby="close-h">
+<span class="mark" aria-hidden="true" style="position:absolute;right:-40px;bottom:-40px;width:min(520px,55vw);color:rgba(255,250,244,.08)"></span>
+<div class="wrap" style="position:relative">
+<h2 id="close-h" class="h2">Built for operators who want the truth early.</h2>
+<p class="lead">If you’ve built something durable in a specialized market and want to talk about what comes next, we’d like to hear from you.</p>
+<div class="close-actions">
+<a class="btn-solid" href="/#talk">Start a private conversation <span aria-hidden="true">→</span></a>
+<a class="tlink" href="/#work" style="color:#FFFAF4">Back to our work <span class="arr" aria-hidden="true">→</span></a>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap foot">
+<a class="brand" href="/" aria-label="Skaling Ventures, home"><span class="mark" style="width:40px;color:#FFFAF4" aria-hidden="true"></span><span class="brand-w">Skaling<br>Ventures</span></a>
+<small>© 2026 Skaling Ventures</small>
+</div>
+</footer>
+</body>
+</html>

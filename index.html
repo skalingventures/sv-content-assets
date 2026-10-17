@@ -468,6 +468,29 @@ html{scroll-behavior:auto}
 .pnl.on .lvls.st .done{animation:none}
 @media (max-width:520px){.lv .lt span{display:block;margin:4px 0 0}.lyr-h .mono-l:last-child{display:none}.lvls.st .lv:not(.on) .ms{display:none}.lvls.st .lv{grid-template-columns:28px minmax(0,1fr);gap:8px}.lyr-t{font-size:13.5px}.lvl-t{font-size:13.5px}}
 
+
+/* operating system band (section 06) */
+.osb{margin-top:clamp(56px,7vw,88px);background:#282726;border:1px solid rgba(128,126,122,.35);border-radius:14px;padding:clamp(28px,3.5vw,48px);position:relative;overflow:hidden}
+.osb::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,250,244,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,250,244,.03) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,#000,transparent 70%)}
+.osb>*{position:relative}
+.osb-head{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(24px,5vw,72px);align-items:end}
+.osb-meta{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;margin-bottom:22px}
+.osb-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;border:1px solid rgba(163,177,192,.55);font:500 10.5px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#A3B1C0}
+.osb-dot{width:6px;height:6px;border-radius:50%;background:#A3B1C0}
+.osb-h{margin:0;font:700 clamp(1.7rem,3.2vw,2.6rem)/1.02 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.005em;color:#FFFAF4;text-wrap:balance}
+.osb-lead{margin:0;font:400 1rem/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#E8E2D8}
+.osb-grid{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.osb-grid li{min-width:0;display:flex}
+.osb-tile{flex:1;display:flex;flex-direction:column;gap:12px;padding:20px 18px 18px;border-radius:12px;background:#1F1F1F;border:1px solid rgba(128,126,122,.32);text-decoration:none;color:#E8E2D8;transition:border-color .3s ease,transform .5s cubic-bezier(.23,1,.32,1)}
+.osb-tile:hover{border-color:rgba(163,177,192,.7);transform:translateY(-2px)}
+.osb-k{font:600 10.5px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#A3B1C0}
+.osb-tile b{font:700 15px/1.2 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em;color:#FFFAF4}
+.osb-tile q{quotes:'\201C' '\201D';font:400 14.5px/1.55 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#E8E2D8;padding-left:12px;border-left:1px solid #89523B}
+.osb-go{margin-top:auto;font:600 13px/1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A3B1C0}
+.osb-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 28px;margin-top:22px;padding-top:14px;border-top:1px solid rgba(128,126,122,.28)}
+.osb-fine{font:400 13px/1.6 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif;color:#A49E92}
+@media (max-width:1024px){.osb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.osb-head{grid-template-columns:1fr}.osb-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -609,6 +632,7 @@ html{scroll-behavior:auto}
 <h3 style="margin: 0 0 14px; font: 700 clamp(1.6rem, 2.6vw, 2.25rem)/1.1 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; text-transform: uppercase; color: #1F1F1F">Transform the business</h3>
 <p style="margin: 0; max-width: 27rem; font: 400 clamp(1.02rem, 1.3vw, 1.12rem)/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #3A3836">We start with the company itself: its people, its operating rhythm, how it sells and how it delivers. We keep what works and change what doesn’t, one measured bet at a time.</p>
 <a class="tlink" href="https://skalingventures.substack.com/p/the-operating-layer-trading-performance" target="_blank" rel="noopener" style="color: #89523B; margin-top: 18px; align-self: flex-start">Read: The Operating Layer <span class="arr ne" aria-hidden="true">↗</span></a>
+<a class="tlink" href="/operating-system" style="color: #89523B; margin-top: -4px; align-self: flex-start">See the system we run on <span class="arr" aria-hidden="true">→</span></a>
 </div>
 <div class="pnl on">
 <div class="sheet">
@@ -750,6 +774,27 @@ html{scroll-behavior:auto}
 <p style="margin: 0; max-width: 30rem; font: 400 1rem/1.65 'SV Grotesk','Neue Haas Grotesk Display Pro','Helvetica Neue',Helvetica,Arial,sans-serif; color: #E8E2D8">CRM and business-management software for wedding photographers. Skaling acquired and operated Pixifi, with Kjael as CEO. It is now part of the Iris Works family and continues serving the photography community.</p>
 <a class="tlink" href="https://www.pixifi.com/" target="_blank" rel="noopener" style="color: #A3B1C0; align-self: flex-start">See Pixifi <span class="arr ne" aria-hidden="true">↗</span></a>
 </article>
+</div>
+
+<!-- Operating system band: proof that we run on what we write about -->
+<div class="osb" data-reveal="1" aria-labelledby="osb-h">
+<div class="osb-head">
+<div style="min-width: 0">
+<div class="osb-meta"><span class="mono-l" style="color: #A3B1C0">The operating system</span><span class="osb-pill"><span class="osb-dot"></span>Every weekday · 6am</span></div>
+<h3 id="osb-h" class="osb-h">We run on the system we write about.</h3>
+</div>
+<p class="osb-lead">At our operating company, agents read the CRM, support desk, product usage, books and market every morning, and brief the leadership team before the day starts. Each report takes a position, shows its sources, and gets graded every Friday.</p>
+</div>
+<ul class="osb-grid" aria-label="Four editions from one real week">
+<li><a class="osb-tile" href="/operating-system/operating-newspaper"><span class="osb-k">Signal · Mon</span><b>Operating Newspaper</b><q>Cache, not egress, is now the fastest-growing cost in AI. Instrument cost per agent run before features scale.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+<li><a class="osb-tile" href="/operating-system/pipeline-reality"><span class="osb-k">Reality · Tue</span><b>Pipeline Reality</b><q>The pipeline sat frozen all week, and two committed recovery actions never happened.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+<li><a class="osb-tile" href="/operating-system/sales-ceo-assist"><span class="osb-k">Assist · Tue</span><b>Sales CEO Assist</b><q>The largest deal has gone quiet for eleven days. Send the time-boxed note today.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+<li><a class="osb-tile" href="/operating-system/weekly-ceo-digest"><span class="osb-k">Synthesis · Fri</span><b>Weekly CEO Digest</b><q>The business is healthy where customers are, and stalled where the future gets built.</q><span class="osb-go">Read <span aria-hidden="true">→</span></span></a></li>
+</ul>
+<div class="osb-foot">
+<span class="osb-fine">From a real week, anonymized: names, numbers and industry changed.</span>
+<a class="tlink" href="/operating-system" style="color: #A3B1C0">See how the system works <span class="arr" aria-hidden="true">→</span></a>
+</div>
 </div>
 
 <div class="split" data-reveal="1" style="margin-top: clamp(56px, 7vw, 88px); padding-top: 32px; border-top: 1px solid rgba(128,126,122,.35); align-items: start">
