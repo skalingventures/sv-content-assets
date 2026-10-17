@@ -78,7 +78,7 @@ a{color:inherit}
 .down{align-self:center;color:#9A948A;font:400 14px/1 var(--f);padding:2px 0 2px 14px}
 .arrow{display:flex;align-items:center;justify-content:center;color:var(--nev)}
 .arrow svg{width:22px;height:12px}
-.flow-cap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(31,31,31,.14)}
+.flow-cap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(31,31,31,.14)}
 .flow-cap p{margin:0;font:400 14px/1.6 var(--f);color:var(--ink)}
 .flow-cap b{color:var(--g)}
 .key{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font:400 13px/1.5 var(--f);color:var(--mut)}
@@ -110,6 +110,14 @@ a{color:inherit}
 .legend .n{width:30px;height:30px;border-radius:50%;border:1px solid var(--nev);color:var(--nev);display:flex;align-items:center;justify-content:center;font:700 13px/1 var(--f)}
 .legend b{display:block;font:700 15px/1.25 var(--f);color:var(--g);margin:5px 0 4px}
 .legend span{font:400 14.5px/1.6 var(--f);color:var(--ink)}
+.why{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);margin-top:clamp(64px,8vw,112px);padding-top:clamp(40px,5vw,64px);border-top:1px solid rgba(31,31,31,.14);align-items:center}
+.why-h{margin:0 0 16px;font:700 clamp(1.5rem,2.6vw,2.1rem)/1.05 var(--f);text-transform:uppercase;color:var(--g)}
+.why-txt>p:not(.kicker){margin:0;font:400 15.5px/1.65 var(--f);color:var(--ink)}
+.why ul{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:14px}
+.why li{font:400 14.5px/1.6 var(--f);color:var(--ink);padding-left:16px;border-left:1px solid var(--nev)}
+.why li b{display:block;color:var(--g);font-weight:700}
+.why-fig{margin:0}
+.why-fig img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid rgba(31,31,31,.18);box-shadow:0 30px 60px -30px rgba(31,31,31,.45)}
 /* loop */
 .loop{list-style:none;padding:0;margin:clamp(48px,6vw,80px) 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:s}
 .step{position:relative;padding:0 22px 0 0}
@@ -142,6 +150,7 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
  .ed.cap .ed-shot{flex:none;aspect-ratio:16/10;border-right:0;border-bottom:1px solid rgba(128,126,122,.35);min-height:0}
  .loop{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}
  .anat{grid-template-columns:1fr}
+ .why{grid-template-columns:1fr}
  .legend{position:static}
 }
 @media (max-width:760px){
@@ -199,9 +208,9 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <p class="kicker" style="color:#89523B">How it flows</p>
 <h2 id="week-h" class="h2" style="color:#1F1F1F">The reports read each other.</h2>
 </div>
-<p class="lead">Each report writes a structured record, not just a page. The next ones read it. Functional reports keep score Monday to Thursday, the assists turn that into the CEO’s moves the same morning, and on Friday the synthesis reads the week’s reports.</p>
+<p class="lead">Each report writes a structured record, not just a page. The next ones read it. Functional reports keep score Monday to Thursday, the assists turn that into the CEO’s moves the same morning, and on Friday the synthesis reads the week’s reports. On Tuesday the scorecard reads them again to explain why each number moved.</p>
 </div>
-<div class="flow" role="img" aria-label="Sources feed functional reports, which feed the assists and the Friday synthesis">
+<div class="flow" role="img" aria-label="Sources feed functional reports, which feed the assists, the Friday synthesis and the Tuesday scorecard">
 <div class="col">
 <div class="col-h"><b>Sources</b><span>live systems</span></div>
 <div class="node src"><b>CRM</b><small>deals, activity, history</small></div>
@@ -230,18 +239,19 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 </div>
 <div class="arrow" aria-hidden="true"><svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
 <div class="col">
-<div class="col-h"><b>Synthesize</b><span>Friday</span></div>
+<div class="col-h"><b>Synthesize · measure</b><span>Fri, then Tue</span></div>
 <div class="node s"><b>Voice of Market</b><small>reads the week’s calls and the support, growth and pipeline reports</small></div>
 <div class="down" aria-hidden="true">↓</div>
 <div class="node cap s"><b>Weekly CEO Digest</b><small>reads the scorekeeping and market reports plus Voice of Market, and finds what no single one can see</small></div>
 <div class="down" aria-hidden="true">↓</div>
-<div class="node"><b>Editorial retro</b><small>reviews the week’s reports</small></div>
+<div class="node cap s"><b>Executive Scorecard</b><small>Tue · reads the metrics sheet against the digest and the scorekeeping reports, and writes why each number moved</small></div>
 </div>
 </div>
 <span class="key"><i aria-hidden="true"></i>Sample editions below</span>
 <div class="flow-cap">
 <p><b>One record, many readers.</b> Pipeline Reality is read the same morning by the Sales CEO Assist, on Friday by Voice of Market for loss patterns, and again by the Digest.</p>
 <p><b>Inside and outside.</b> Market Scan reads the vertical our customers sell in. A separate weekly newspaper reads the wider software market for us as owners.</p>
+<p><b>Numbers with a reason.</b> The Executive Scorecard doesn’t stop at up or down. Each significant move carries an explanation written from the reports upstream, and names them.</p>
 <p><b>Sunday closes the loop.</b> An outcome diagnosis checks the quarter’s bets against what the week’s reports showed.</p>
 </div>
 </div>
@@ -251,10 +261,10 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <div class="wrap">
 <div class="split">
 <div>
-<p class="kicker" style="color:#A3B1C0">Five sample editions</p>
+<p class="kicker" style="color:#A3B1C0">Six sample editions</p>
 <h2 id="eds-h" class="h2" style="color:#FFFAF4">What the system actually says.</h2>
 </div>
-<p class="lead" style="color:#E8E2D8">One edition for each kind of work the system does: synthesize the week, keep score, read the market from outside and from customers, and turn all of it into the CEO’s next move.</p>
+<p class="lead" style="color:#E8E2D8">One edition for each kind of work the system does: synthesize the week, explain the numbers, keep score, read the market from outside and from customers, and turn all of it into the CEO’s next move.</p>
 </div>
 <div class="eds">
 <a class="ed cap" href="/operating-system/weekly-ceo-digest">
@@ -264,6 +274,16 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <h3>Weekly CEO Digest</h3>
 <blockquote>“The base is healthy and the risk is concentrated.”</blockquote>
 <p>Reads the week’s functional and market reports and writes one view across the business: the verdict, the vital signs, the patterns no single report can see, and a ranked action list for the CEO.</p>
+<span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="ed cap" href="/operating-system/executive-scorecard">
+<div class="ed-shot"><img src="/operating-system/img/executive-scorecard-thumb.jpg" alt="The Executive Scorecard sample: the week's grade and the metric that needs fixing" loading="lazy" width="1200" height="750"></div>
+<div class="ed-body">
+<div class="ed-top"><span class="pill">Measure · the numbers, reasoned</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
+<h3>Executive Scorecard</h3>
+<blockquote>“Activation fell because the newest pilot joined the average with 4 of 25 users active while single sign-on waits on the customer’s IT team.”</blockquote>
+<p>Grades every weekly metric, then reads the digest and the scorekeeping reports to say why the big movers moved, and which report says so. A check pass drops any explanation that contradicts the reports it cites.</p>
 <span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
 </div>
 </a>
@@ -282,7 +302,7 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <div class="ed-body">
 <div class="ed-top"><span class="pill">Assist</span><span class="mono-l" style="color:#A49E92">Tuesday</span></div>
 <h3>Sales CEO Assist</h3>
-<blockquote>“The COO is the only person who can turn two opinions into one decision.”</blockquote>
+<blockquote>“The COO sits above both divisions and is the only person who can turn two opinions into one decision.”</blockquote>
 <p>Reads Pipeline Reality and turns it into the calls only the CEO can make, with notes drafted in three tones and a rule for when to send each.</p>
 <span class="go">Read the sample <span class="arr" aria-hidden="true">→</span></span>
 </div>
@@ -323,13 +343,13 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 </div>
 <div class="anat">
 <div class="frame">
-<img src="/operating-system/img/anatomy-digest.jpg" alt="The top of the Weekly CEO Digest sample, annotated: verdict, sources line, vital signs, three things that matter, a citation to another report, and the source record" width="1440" height="1854" loading="lazy">
-<span class="pin" style="top:13.8%" aria-hidden="true">1</span>
+<img src="/operating-system/img/anatomy-digest.jpg" alt="The top of the Weekly CEO Digest sample, annotated: verdict, sources line, vital signs, three things that matter, a citation to another report, and the source record" width="1440" height="1886" loading="lazy">
+<span class="pin" style="top:13.9%" aria-hidden="true">1</span>
 <span class="pin" style="top:20.2%" aria-hidden="true">2</span>
-<span class="pin" style="top:52.3%" aria-hidden="true">3</span>
-<span class="pin" style="top:64.3%" aria-hidden="true">4</span>
-<span class="pin" style="top:76.2%" aria-hidden="true">5</span>
-<span class="pin" style="top:94.8%" aria-hidden="true">6</span>
+<span class="pin" style="top:51.8%" aria-hidden="true">3</span>
+<span class="pin" style="top:63.6%" aria-hidden="true">4</span>
+<span class="pin" style="top:71.0%" aria-hidden="true">5</span>
+<span class="pin" style="top:95.3%" aria-hidden="true">6</span>
 </div>
 <ol class="legend">
 <li><span class="n" aria-hidden="true">1</span><div><b>The verdict</b><span>It opens with a position, not a summary. If the week was mixed, the first line says so.</span></div></li>
@@ -339,6 +359,19 @@ footer{background:var(--g);color:var(--mut2);border-top:1px solid rgba(128,126,1
 <li><span class="n" aria-hidden="true">5</span><div><b>One report citing another</b><span>“Per Sales Pipeline Reality report, Oct 13.” The digest reads the week’s reports and says which one each claim came from.</span></div></li>
 <li><span class="n" aria-hidden="true">6</span><div><b>The source record</b><span>Every section opens to the structured record behind it. Nothing on the page is unsourced.</span></div></li>
 </ol>
+</div>
+<div class="why">
+<div class="why-txt">
+<p class="kicker" style="color:#89523B">And the numbers</p>
+<h3 class="why-h">Every big move arrives with its reason.</h3>
+<p>Most scorecards say a number went down. Ours says why, in a sentence written from the reports upstream: here, the digest and Support Reality, named and dated under the explanation.</p>
+<ul>
+<li><b>The trend</b> twelve weeks of history against the average, so one bad week reads as one.</li>
+<li><b>The why</b> written by an agent that reads the week’s reports, not the sheet alone.</li>
+<li><b>The checks</b> a lint drops claims about the wrong week; a second pass drops claims that contradict the reports they cite.</li>
+</ul>
+</div>
+<figure class="why-fig"><img src="/operating-system/img/scorecard-why.jpg" alt="One metric opened in the Executive Scorecard sample: pilot activation falling from 40 to 29 percent, with the reasoned explanation and the two reports it was reasoned from" width="1440" height="705" loading="lazy"></figure>
 </div>
 </div>
 </section>
