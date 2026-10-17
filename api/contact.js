@@ -37,10 +37,17 @@ module.exports = async (req, res) => {
   };
 
   let body = req.body;
-  if (typeof body === 'string') {
-    try { body = JSON.parse(body); } catch (e) { body = {}; }
+  if (body === undefined) {
+    body = await new Promise((resolve) => {
+      let raw = ''; req.on('data', (c) => { raw += c; if (raw.length > 20000) req.destroy(); });
+      req.on('end', () => resolve(raw)); req.on('error', () => resolve(''));
+    });
   }
-  body = body || {};
+  if (Buffer.isBuffer(body)) body = body.toString('utf8');
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch (e) { body = Object.fromEntries(new URLSearchParams(body)); }
+  }
+  body = body && typeof body === 'object' ? body : {};
 
   // Bot traps: hidden field must stay empty; humans take more than ~3s to fill the form.
   if (clean(body.website, 200)) return done(200, { ok: true, error: 'trap_honeypot' });
